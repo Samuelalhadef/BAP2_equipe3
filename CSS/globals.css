@@ -2,9 +2,9 @@
 
 :root{
     /* Colors */
-    --primary: #000000;
+    --primary: #FFFFFF;
     --secondary: #335533;
-    --background: #FFFFFF;
+    --background: #000000;
     
     /* Typography */
     --font-primary: 'Playfair Display', serif;
