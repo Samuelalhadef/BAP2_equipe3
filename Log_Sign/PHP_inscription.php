@@ -37,8 +37,8 @@ if (isset($email) && isset($mdp)){
     $sauvegarde->execute(params: ["email" => $email, "mdp" => $mdp]);
 
     if ($sauvegarde->rowCount() > 0) {
-        echo "<p>Sauvegarde effectuée</p>";
-        echo "<a href='../Log_Sign/HTML_Connexion.php'>Accéder à la page de connexion</a>";
+        header('Location: ../Log_Sign/HTML_Connexion.php');
+        exit();
     }
     else {
         echo "<p>Une erreur est survenue</p>";

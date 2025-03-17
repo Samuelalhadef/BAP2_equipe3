@@ -38,10 +38,12 @@ $req->execute();
 // Vérification des résultats
 if ($rep = $req->fetch()) {
     if (($email == ($rep['email']='admin')) && ($mdp == ($rep['mdp']='admin'))){
-        echo "<p>Connexion réussie ! <a href='../Mairie/HTML_Liste_Menu.php'>Accéder à la liste de toutes les menus pour les admins</a></p>";
+        header('Location: ../Mairie/HTML_Liste_Menu.php');
+        exit();
     }
     else{
-        echo "<p>Connexion réussie ! <a href='../Cantine_Ecole/User_Liste_Menu.php'>Accéder à la liste de toutes les menus</a></p>";
+        header('Location: ../Cantine_Ecole/HTML_User_Home.php');
+        exit();
     }
 }
 else{
