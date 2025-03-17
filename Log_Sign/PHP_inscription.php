@@ -2,8 +2,16 @@
 
 session_start();
 
-if (!isset($_POST['token']) || $_POST['token'] != $_SESSION['csrf_connexion_add']){
-    die('<p>CSRF invalide</p>');
+// Vérification du token CSRF
+if (!isset($_POST['token']) || !isset($_SESSION['csrf_connexion_add'])) {
+    $_SESSION['csrf_connexion_add'] = bin2hex(random_bytes(32));
+    header('Location: HTML_Connexion.php');
+    exit('Session expirée, veuillez réessayer');
+}
+
+if (!hash_equals($_SESSION['csrf_connexion_add'], $_POST['token'])) {
+    header('Location: HTML_Connexion.php');
+    exit('CSRF invalide');
 }
 
 // Supprime le token en session pour qu'il soit regénéré
@@ -27,7 +35,7 @@ else {
 if (isset($mail) && isset($mdp)){
 
     // Pas d'erreur => on sauvegarde la menu
-    require_once 'bdd.php';
+    require_once '../bdd.php';
 
     // Vérifier le slug (pas de caractères spéciaux ni d'espaces)
     $sauvegarde = $connexion->prepare("INSERT INTO connexion (mail, mdp)
