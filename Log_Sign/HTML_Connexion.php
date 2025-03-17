@@ -28,6 +28,6 @@ if (!isset($_SESSION['csrf_connexion_add']) || empty($_SESSION['csrf_connexion_a
         <input type="hidden" name="token" value="<?= $_SESSION['csrf_connexion_add']; ?>">
         <input type="submit" name="connexion" value="Se connecter">
         <br>
-        <p>Vous n'avez pas de compte ? <a href="HTML_Inscription.php">Inscrivez-vous-ici !</p>
+        <p>Vous n'avez pas de compte ? <a href="./Log_Sign/HTML_Inscription.php">Inscrivez-vous-ici !</p>
     </form>
 </body>

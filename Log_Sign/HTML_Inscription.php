@@ -17,7 +17,7 @@ if (!isset($_SESSION['csrf_connexion_add']) || empty($_SESSION['csrf_connexion_a
     <title>Connexion</title>
 </head>
 <body>
-    <form action =  "PHP_inscription.php" method = "POST" class="inscription">
+    <form action = "PHP_inscription.php" method = "POST" class="inscription">
         <h2>INSCRIPTION</h2>
         <label for="mail">Adresse mail</label>
         <input type="text" name="mail" id="mail" placeholder="Adresse mail" required>
