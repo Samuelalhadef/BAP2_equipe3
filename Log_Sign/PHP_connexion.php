@@ -46,7 +46,7 @@ if ($rep = $req->fetch()) {
 }
 else{
     echo "L'adresse mail et le mot de passe ne correspondent pas";
-    echo "<p><a href='./Log_Sign/HTML_Inscription.php'>inscrivez-vous !</a></p>";
+    echo "<p><a href='./HTML_Inscription.php'>Inscrivez-vous !</a></p>";
 }
 
 ?>

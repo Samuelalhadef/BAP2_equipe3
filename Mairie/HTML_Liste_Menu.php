@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="./globals.css">
     <title>Liste de toutes les menus</title>
 </head>
 <body>
@@ -26,7 +26,7 @@
         $req = $connexion->query($sql);
 
         while($rep = $req->fetch()){
-            echo "<p><a href='./HTML_Menu_read.php?menu=" . urlencode($rep['nom_aliment']) . "'>". htmlspecialchars($rep['nom_aliment']) . "</a></p><br>";
+            echo "<p><a href='./Mairie/HTML_Menu_read.php?menu=" . urlencode($rep['nom_aliment']) . "'>". htmlspecialchars($rep['nom_aliment']) . "</a></p><br>";
         }
 
         ?>

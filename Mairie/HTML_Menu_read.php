@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="./globals.css">
     <title>READ menu</title>
 </head>
 
@@ -25,7 +25,7 @@
             $getmenu = $connexion -> prepare (
                 query: 'SELECT *
                         FROM menu
-                        WHERE generique = :generique
+                        WHERE nom_aliment = :nom_aliment
                         LIMIT 1'
             );
 
@@ -35,9 +35,6 @@
                 $menu = $getmenu -> fetch();
                 echo '<h1>', $menu['id'],'</h1>';
                 echo '<h1>', $menu['nom'],'</h1>';
-                echo '<h2>', $menu['generique'],'</h2>';
-                echo '<p>', $menu['content'],'</p>';
-                echo '<h3>', $menu['prix'],"€",'</h3>';
             }
 
             ?>
