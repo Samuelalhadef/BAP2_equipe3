@@ -18,3 +18,9 @@ input{
     border-radius: var(--radius-sm);
     border: none;
 }
+
+a{
+    color: var(--primary);
+    font-weight: bold;
+    text-decoration: underline;
+}
