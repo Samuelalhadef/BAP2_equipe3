@@ -18,7 +18,7 @@ else {
 
 if (isset($nom_menu) && isset($entree) && isset($plat) && isset($dessert)){
 
-    require_once 'bdd.php';
+    require_once '../bdd.php';
 
     $sauvegarde = $connexion->prepare ("UPDATE menu
                                         SET nom_menu = :nom_menu
