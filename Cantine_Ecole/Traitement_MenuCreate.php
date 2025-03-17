@@ -2,45 +2,38 @@
 
 session_start();
 
-if (!isset($_POST['token']) || $_POST['token'] != $_SESSION['csrf_plante_add']){
+if (!isset($_POST['token']) || $_POST['token'] != $_SESSION['csrf_menu_add']){
     die('<p>CSRF invalide</p>');
 }
 
 // Supprime le token en session pour qu'il soit regénéré
-unset($_SESSION['csrf_plante_add']);
+unset($_SESSION['csrf_menu_add']);
 
-if (isset($_POST["nom"]) && !empty($_POST["nom"])){
-    $nom = htmlspecialchars($_POST["nom"]);
+if (isset($_POST["nom_aliment"]) && !empty($_POST["nom_aliment"])){
+    $nom = htmlspecialchars($_POST["nom_aliment"]);
 }
 else {
     echo "<p>Le nom de l'aliment est obligatoire</p>";
 }
 
-if (isset($_POST["content"]) && !empty($_POST["content"])){
-    $content = htmlspecialchars($_POST["content"]);
+if (isset($_POST["image_aliment"]) && !empty($_POST["image_aliment"])){
+    $content = htmlspecialchars($_POST["image_aliment"]);
 } 
 else {
-    echo "<p>Le contenu est obligatoire</p>";
+    echo "<p>L'image' est obligatoire</p>";
 }
 
-if (isset($_POST["prix"]) && !empty($_POST["prix"])){
-    $prix = htmlspecialchars($_POST["prix"]);
-}
-else {
-    echo "<p>Le prix est obligatoire</p>";
-}
-
-if (isset($nom) && isset($generique) && isset($content) && isset($prix)){
-    // Pas d'erreur => on sauvegarde la plante
+if (isset($nom_aliment) && isset($image_aliment)){
+    // Pas d'erreur => on sauvegarde le menu
 
     require_once 'bdd.php';
 
     // Vérifier le slug (pas de caractères spéciaux ni d'espaces)
 
-    $sauvegarde = $connexion->prepare ("INSERT INTO plante (nom, generique, content, prix)
-                                        VALUES (:nom, :generique, :content, :prix)");
+    $sauvegarde = $connexion->prepare ("INSERT INTO plante (nom_aliment, image_aliment)
+                                        VALUES (:nom_aliment, :image_aliment)");
 
-    $sauvegarde->execute(params: ["nom" => $nom, "content" => $content, "generique" => $generique, "prix" => $prix]);
+    $sauvegarde->execute(params: ["nom_aliment" => $nom_aliment, "image_aliment" => $image_aliment]);
 
     if ($sauvegarde->rowCount() > 0) {
         echo "<p>Plante ajoutée dans la base de donnée</p>";

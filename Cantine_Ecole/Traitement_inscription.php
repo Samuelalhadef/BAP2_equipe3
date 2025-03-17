@@ -37,7 +37,7 @@ if (isset($mail) && isset($mdp)){
 
     if ($sauvegarde->rowCount() > 0) {
         echo "<p>Sauvegarde effectuée</p>";
-        echo "<a href='HTML_Connexion.php'>Accéder à la page de connexion</a>";
+        echo "<a href='./HTML_Connexion.php'>Accéder à la page de connexion</a>";
     }
     else {
         echo "<p>Une erreur est survenue</p>";
