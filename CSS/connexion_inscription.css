@@ -1,21 +1,5 @@
 @import url("./globals.css");
 
-*{
-	margin: 0;
-	padding: 0;
-	box-sizing: border-box;
-	text-decoration: none;
-	list-style: none;
-}
-/*css de base*/
-body {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    margin: 10px;
-}
 .style{
     width: 300px;
     height: 500px;
@@ -39,16 +23,12 @@ table {
     font-family: sans-serif;
     font-size: 0.8rem;
     letter-spacing: 1px;
-  }
-
-/*texte*/
-h1, h2, h3, p, a{
-    font-family: Arial, Helvetica, sans-serif;
 }
 
 h2{
     margin-bottom: 10px;
 }
+
 label{
     margin-bottom: 5px;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
@@ -89,6 +69,7 @@ a{
     border-radius: 20px;
     background-color: rgb(78, 92, 131);
 }
+
 /*page d'inscription*/
 .inscription{
     display: flex;
