@@ -9,8 +9,8 @@ if (!isset($_POST['token']) || $_POST['token'] != $_SESSION['csrf_connexion_add'
 // Supprime le token en session pour qu'il soit regénéré
 unset($_SESSION['csrf_connexion_add']);
 
-if (isset($_POST["mail"]) && !empty($_POST["mail"])){
-    $mail = htmlspecialchars($_POST["mail"]);
+if (isset($_POST["email"]) && !empty($_POST["email"])){
+    $mail = htmlspecialchars($_POST["email"]);
 }
 else {
     echo "<p>Le mail est obligatoire</p>";
@@ -29,15 +29,15 @@ else {
 require_once 'bdd.php';
 
 // Préparation de la requête
-$sql = "SELECT mail, mdp FROM connexion WHERE mail = :mail AND mdp = :mdp";
+$sql = "SELECT mail, mdp FROM connexion WHERE email = :email AND mdp = :mdp";
 $req = $connexion->prepare($sql);
-$req->bindParam(':mail', $mail);
+$req->bindParam(':email', $mail);
 $req->bindParam(':mdp', $mdp);
 $req->execute();
 
 // Vérification des résultats
 if ($rep = $req->fetch()) {
-    if (($mail == ($rep['mail']='admin')) && ($mdp == ($rep['mdp']='admin'))){
+    if (($mail == ($rep['email']='admin')) && ($mdp == ($rep['emdp']='admin'))){
         echo "<p>Connexion réussie ! <a href='./Admin_Liste_Menu.php'>Accéder à la liste de toutes les menus pour les admins</a></p>";
     }
     else{
