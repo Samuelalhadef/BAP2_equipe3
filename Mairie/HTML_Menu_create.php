@@ -17,7 +17,7 @@ if (!isset($_SESSION['csrf_menu_add']) || empty($_SESSION['csrf_menu_add'])){
     <title>Ajouter une menu</title>
 </head>
 <body>
-<form action = "Traitement_menuCreate.php" method = "POST" class="menu">
+<form action = "PHP_menuCreate.php" method = "POST" class="menu">
         <h2>Ajouter une menu</h2>
         <label for="nom">Nom de la menu</label>
         <input type="text" name="nom" id="nom" placeholder="Nom">
