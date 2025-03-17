@@ -26,7 +26,7 @@
         $req = $connexion->query($sql);
 
         while($rep = $req->fetch()){
-            echo "<p><a href='Admin_Plante_read.php?plante=" . urlencode($rep['generique']) . "'>" . htmlspecialchars($rep['id']) . ' '. htmlspecialchars($rep['nom']) . " (" . htmlspecialchars($rep['generique']) . ")</a></p><br>";
+            echo "<p><a href='Admin_Menu_read.php?plante=" . urlencode($rep['generique']) . "'>" . htmlspecialchars($rep['id']) . ' '. htmlspecialchars($rep['nom']) . " (" . htmlspecialchars($rep['generique']) . ")</a></p><br>";
         }
 
         ?>
