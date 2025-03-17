@@ -2,32 +2,32 @@
 
 session_start();
 
-if (!isset($_POST['token']) || $_POST['token'] != $_SESSION['csrf_plante_add']){
+if (!isset($_POST['token']) || $_POST['token'] != $_SESSION['csrf_menu_add']){
     die('<p>CSRF invalide</p>');
 }
 
 // Supprime le token en session pour qu'il soit regénéré
-unset($_SESSION['csrf_plante_add']);
+unset($_SESSION['csrf_menu_add']);
 
 if (isset($_POST["id"]) && !empty($_POST["id"])){
     $id = intval($_POST["id"]);
 }
 else {
-    echo "<p>L'identifiant de la plante est obligatoire</p>";
+    echo "<p>L'identifiant de la menu est obligatoire</p>";
 }
 
 if (isset($_POST["nom"]) && !empty($_POST["nom"])){
     $nom = htmlspecialchars($_POST["nom"]);
 }
 else {
-    echo "<p>Le nom de la plante est obligatoire</p>";
+    echo "<p>Le nom de la menu est obligatoire</p>";
 }
 
 if (isset($_POST["generique"]) && !empty($_POST["generique"])){
     $generique = htmlspecialchars($_POST["generique"]);
 }
 else {
-    echo "<p>Le nom générique de la plante est obligatoire</p>";
+    echo "<p>Le nom générique de la menu est obligatoire</p>";
 }
 
 if (isset($_POST["content"]) && !empty($_POST["content"])){
@@ -48,14 +48,14 @@ if (isset($id) && isset($nom) && isset($generique) && isset($content) && isset($
 
 require_once 'bdd.php';
 
-    $sauvegarde = $connexion->prepare ("DELETE FROM plante
+    $sauvegarde = $connexion->prepare ("DELETE FROM menu
                                         WHERE generique = :generique");
 
     $sauvegarde->execute(params: ["generique" => $generique]);
 
     if ($sauvegarde->rowCount() > 0) {
-        echo "<p>Suppression des données de la plante réussie</p>";
-        echo "<a href='Admin_Liste_plantes.php'>Revenir sur la page de toutes les plantes</a>";
+        echo "<p>Suppression des données de la menu réussie</p>";
+        echo "<a href='Admin_Liste_menus.php'>Revenir sur la page de toutes les menus</a>";
     }
     else {
         echo "<p>Une erreur est survenue</p>";

@@ -19,9 +19,6 @@ if (!isset($_SESSION['csrf_connexion_add']) || empty($_SESSION['csrf_connexion_a
 <body>
     <form action = "Traitement_connexion.php" method = "POST" class="connexion">
         <h2>CONNEXION</h2>
-        <label for="pseudo">Pseudo</label>
-        <input type="text" name="pseudo" id="pseudo" placeholder="Pseudo">
-        <br>
         <label for="mail">Adresse mail</label>
         <input type="text" name="mail" id="mail" placeholder="Adresse mail">
         <br>
@@ -31,6 +28,6 @@ if (!isset($_SESSION['csrf_connexion_add']) || empty($_SESSION['csrf_connexion_a
         <input type="hidden" name="token" value="<?= $_SESSION['csrf_connexion_add']; ?>">
         <input type="submit" name="connexion" value="Se connecter">
         <br>
-        <p>Pas de compte ? <a href="HTML_Inscription.php">Inscrivez-vous-ici !</p>
+        <p>Vous n'avez pas de compte ? <a href="HTML_Inscription.php">Inscrivez-vous-ici !</p>
     </form>
 </body>

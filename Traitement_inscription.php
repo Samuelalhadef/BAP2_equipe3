@@ -26,7 +26,7 @@ else {
 
 if (isset($mail) && isset($mdp)){
 
-    // Pas d'erreur => on sauvegarde la plante
+    // Pas d'erreur => on sauvegarde la menu
     require_once 'bdd.php';
 
     // Vérifier le slug (pas de caractères spéciaux ni d'espaces)

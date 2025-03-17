@@ -1,5 +1,5 @@
 <?php
 
-// Voir le PHP dans Admin_Plante_read.php
+// Voir le PHP dans Admin_menu_read.php
 
 ?>

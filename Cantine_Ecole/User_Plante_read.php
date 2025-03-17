@@ -5,37 +5,35 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./style.css">
-    <title>READ PLANTE</title>
+    <title>READ MENU</title>
 </head>
 
 <body>
 
     <div class>
-        <p><a href="User_Liste_plantes.php">Revenir sur la liste des plantes</a></p>
+        <p><a href="User_Liste_menus.php">Revenir sur la liste des menus</a></p>
         <?php
 
-        if (!isset($_GET['plante']) || empty($_GET['plante'])){
-            die('<p>Plante introuvable</p>');
+        if (!isset($_GET['menu']) || empty($_GET['menu'])){
+            die('<p>Menu introuvable</p>');
         }
 
         // Connexion à la BDD
         require_once 'bdd.php';
 
-        $getPlante = $connexion -> prepare (
+        $getmenu = $connexion -> prepare (
             query: 'SELECT nom, generique, content, prix
-                    FROM plante
+                    FROM menu
                     WHERE generique = :generique
                     LIMIT 1'
         );
 
-        $getPlante-> execute (params: ['generique' => htmlspecialchars(string: $_GET['plante'])]);
+        $getmenu-> execute (params: ['menu' => htmlspecialchars(string: $_GET['menu'])]);
 
-        if ($getPlante->rowCount() == 1) {
-            $plante = $getPlante -> fetch();
-            echo '<h1>', $plante['nom'],'</h1>';
-            echo '<h2>', $plante['generique'],'</h2>';
-            echo '<p>', $plante['content'],'</p>';
-            echo '<h3>', $plante['prix'],"€",'</h3>';
+        if ($getMenu->rowCount() == 1) {
+            $menu = $getMenu -> fetch();
+            echo '<h1>', $menu['nom'],'</h1>';
+            echo '<h2>', $menu['generique'],'</h2>';
         }
         ?>
 

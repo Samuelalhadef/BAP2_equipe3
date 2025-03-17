@@ -8,7 +8,7 @@
 </head>
 <body>
 
-    <div class="liste_plantes">
+    <div class="liste_menus">
         <h2>Liste de toutes les menus</h2>
         <p>Cliquez sur son nom pour accéder au vote</p>
         <br>

@@ -4,12 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./style.css">
-    <title>Liste de toutes les plantes</title>
+    <title>Liste de toutes les menus</title>
 </head>
 <body>
 
-    <div class="liste_plantes">
-        <h2>Liste de toutes les plantes</h2>
+    <div class="liste_menus">
+        <h2>Liste de toutes les menus</h2>
         <p>Cliquez sur son nom pour accéder à sa description et son prix</p>
         <br>
         <?php
@@ -22,11 +22,11 @@
         require_once 'bdd.php';
 
         // Requête SQL pour sélectionner et afficher une colonne
-        $sql = "SELECT nom, generique FROM plante";
+        $sql = "SELECT nom_aliment FROM menu";
         $req = $connexion->query($sql);
 
         while($rep = $req->fetch()){
-            echo "<p><a href='User_Plante_read.php?plante=" . urlencode($rep['generique']) . "'>" . htmlspecialchars($rep['nom']) . " (" . htmlspecialchars($rep['generique']) . ")</a></p><br>";}
+            echo "<p><a href='./Cantine_Ecole/User_Menu_read.php?menu=" . urlencode($rep['nom_aliment']) . "'>" . htmlspecialchars($rep['nom']) . ")</a></p><br>";}
 
         ?>
     </div>

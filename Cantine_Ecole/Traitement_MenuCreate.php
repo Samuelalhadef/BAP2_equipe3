@@ -30,14 +30,14 @@ if (isset($nom_aliment) && isset($image_aliment)){
 
     // Vérifier le slug (pas de caractères spéciaux ni d'espaces)
 
-    $sauvegarde = $connexion->prepare ("INSERT INTO plante (nom_aliment, image_aliment)
+    $sauvegarde = $connexion->prepare ("INSERT INTO menu (nom_aliment, image_aliment)
                                         VALUES (:nom_aliment, :image_aliment)");
 
     $sauvegarde->execute(params: ["nom_aliment" => $nom_aliment, "image_aliment" => $image_aliment]);
 
     if ($sauvegarde->rowCount() > 0) {
-        echo "<p>Plante ajoutée dans la base de donnée</p>";
-        echo "<a href='Admin_Liste_plantes.php'>Revenir sur la page de toutes les plantes</a>";
+        echo "<p>menu ajoutée dans la base de donnée</p>";
+        echo "<a href='Admin_Liste_menus.php'>Revenir sur la page de toutes les menus</a>";
     }
     else {
         echo "<p>Une erreur est survenue</p>";
