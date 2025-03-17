@@ -10,10 +10,10 @@ if (!isset($_POST['token']) || $_POST['token'] != $_SESSION['csrf_connexion_add'
 unset($_SESSION['csrf_connexion_add']);
 
 if (isset($_POST["email"]) && !empty($_POST["email"])){
-    $mail = htmlspecialchars($_POST["email"]);
+    $email = htmlspecialchars($_POST["email"]);
 }
 else {
-    echo "<p>Le mail est obligatoire</p>";
+    echo "<p>L'email est obligatoire</p>";
 }
 
 if (isset($_POST["mdp"]) && !empty($_POST["mdp"])) {
@@ -26,27 +26,27 @@ else {
 
 // Si aucune erreur n'est présente, procéder à la connexion
 
-require_once 'bdd.php';
+require_once '../bdd.php';
 
 // Préparation de la requête
-$sql = "SELECT mail, mdp FROM connexion WHERE email = :email AND mdp = :mdp";
+$sql = "SELECT email, mdp FROM connexion WHERE email = :email AND mdp = :mdp";
 $req = $connexion->prepare($sql);
-$req->bindParam(':email', $mail);
+$req->bindParam(':email', $email);
 $req->bindParam(':mdp', $mdp);
 $req->execute();
 
 // Vérification des résultats
 if ($rep = $req->fetch()) {
-    if (($mail == ($rep['email']='admin')) && ($mdp == ($rep['mdp']='admin'))){
-        echo "<p>Connexion réussie ! <a href='./Admin_Liste_Menu.php'>Accéder à la liste de toutes les menus pour les admins</a></p>";
+    if (($email == ($rep['email']='admin')) && ($mdp == ($rep['mdp']='admin'))){
+        echo "<p>Connexion réussie ! <a href='../Mairie/HTML_Liste_Menu.php'>Accéder à la liste de toutes les menus pour les admins</a></p>";
     }
     else{
-        echo "<p>Connexion réussie ! <a href='/User_Liste_Menu.php'>Accéder à la liste de toutes les menus</a></p>";
+        echo "<p>Connexion réussie ! <a href='../Cantine_Ecole/User_Liste_Menu.php'>Accéder à la liste de toutes les menus</a></p>";
     }
 }
 else{
     echo "L'adresse mail et le mot de passe ne correspondent pas";
-    echo "<p><a href='./HTML_Inscription.php'>Inscrivez-vous !</a></p>";
+    echo "<p><a href='../HTML_Inscription.php'>Inscrivez-vous !</a></p>";
 }
 
 ?>

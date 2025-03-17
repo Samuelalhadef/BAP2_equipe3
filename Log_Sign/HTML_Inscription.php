@@ -2,6 +2,7 @@
 
 session_start();
 
+// Génération d'un nouveau token CSRF si non existant
 if (!isset($_SESSION['csrf_connexion_add']) || empty($_SESSION['csrf_connexion_add'])){
     $_SESSION['csrf_connexion_add'] = bin2hex(random_bytes(32));
 }
@@ -13,14 +14,14 @@ if (!isset($_SESSION['csrf_connexion_add']) || empty($_SESSION['csrf_connexion_a
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./CSS/connexion_inscription.css">
+    <link rel="stylesheet" href="../CSS/connexion_inscription.css">
     <title>Connexion</title>
 </head>
 <body>
     <form action = "PHP_Inscription.php" method = "POST" class="inscription">
         <h2>INSCRIPTION</h2>
-        <label for="mail">Adresse mail</label>
-        <input type="text" name="mail" id="mail" placeholder="Adresse mail" required>
+        <label for="email">Adresse mail</label>
+        <input type="text" name="email" id="email" placeholder="Adresse mail" required>
         <br>
         <label for="mdp">Mot de passe</label>
         <input type="password" name="mdp" id="mdp" placeholder="Mot de passe" required>
