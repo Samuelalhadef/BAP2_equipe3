@@ -9,14 +9,6 @@ if (!isset($_POST['token']) || $_POST['token'] != $_SESSION['csrf_connexion_add'
 // Supprime le token en session pour qu'il soit regénéré
 unset($_SESSION['csrf_connexion_add']);
 
-
-if (isset($_POST["pseudo"]) && !empty($_POST["pseudo"])){
-    $pseudo = htmlspecialchars($_POST["pseudo"]);
-}
-else {
-    echo "<p>Le pseudo est obligatoire</p>";
-}
-
 if (isset($_POST["mail"]) && !empty($_POST["mail"])){
     $mail = htmlspecialchars($_POST["mail"]);
 }
@@ -32,16 +24,16 @@ else {
     echo "<p>Le mot de passe est obligatoire</p>";
 }
 
-if (isset($pseudo) && isset($mail) && isset($mdp)){
+if (isset($mail) && isset($mdp)){
 
     // Pas d'erreur => on sauvegarde la plante
     require_once 'bdd.php';
 
     // Vérifier le slug (pas de caractères spéciaux ni d'espaces)
-    $sauvegarde = $connexion->prepare("INSERT INTO connexion (pseudo, mail, mdp)
-                                       VALUES (:pseudo, :mail, :mdp)");
+    $sauvegarde = $connexion->prepare("INSERT INTO connexion (mail, mdp)
+                                       VALUES (:mail, :mdp)");
 
-    $sauvegarde->execute(params: ["pseudo" => $pseudo, "mail" => $mail, "mdp" => $mdp]);
+    $sauvegarde->execute(params: ["mail" => $mail, "mdp" => $mdp]);
 
     if ($sauvegarde->rowCount() > 0) {
         echo "<p>Sauvegarde effectuée</p>";
