@@ -37,11 +37,11 @@ $req->execute();
 
 // Vérification des résultats
 if ($rep = $req->fetch()) {
-    if (($mail == ($rep['email']='admin')) && ($mdp == ($rep['emdp']='admin'))){
+    if (($mail == ($rep['email']='admin')) && ($mdp == ($rep['mdp']='admin'))){
         echo "<p>Connexion réussie ! <a href='./Admin_Liste_Menu.php'>Accéder à la liste de toutes les menus pour les admins</a></p>";
     }
     else{
-        echo "<p>Connexion réussie ! <a href='./User_Liste_Menu.php'>Accéder à la liste de toutes les menus</a></p>";
+        echo "<p>Connexion réussie ! <a href='/User_Liste_Menu.php'>Accéder à la liste de toutes les menus</a></p>";
     }
 }
 else{
