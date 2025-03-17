@@ -39,8 +39,8 @@
 
             ?>
 
-        <button><a href='Admin_menu_update.php'>Modifier</a></button>
-        <button><a href='Admin_menu_delete.php'>Supprimer</a></button>
+        <button><a href='HTML_menu_update.php'>Modifier</a></button>
+        <button><a href='HTML_menu_delete.php'>Supprimer</a></button>
     </div>
 
 </body>

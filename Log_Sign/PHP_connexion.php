@@ -38,7 +38,7 @@ $req->execute();
 // Vérification des résultats
 if ($rep = $req->fetch()) {
     if (($email == ($rep['email']='admin')) && ($mdp == ($rep['mdp']='admin'))){
-        header('Location: ../Mairie/HTML_Liste_Menu.php');
+        header('Location: ../Mairie/HTML_Admin_Home.php');
         exit();
     }
     else{

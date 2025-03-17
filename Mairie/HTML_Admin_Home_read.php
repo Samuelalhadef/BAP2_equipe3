@@ -11,7 +11,7 @@
 <body>
 
     <div class>
-        <p><a href="User_Liste_menus.php">Revenir sur la liste des menus</a></p>
+        <p><a href="_Liste_menus.php">Revenir sur la liste des menus</a></p>
         <?php
 
         if (!isset($_GET['menu']) || empty($_GET['menu'])){
