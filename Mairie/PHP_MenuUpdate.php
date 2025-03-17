@@ -9,33 +9,26 @@ if (!isset($_POST['token']) || $_POST['token'] != $_SESSION['csrf_menu_add']){
 // Supprime le token en session pour qu'il soit regénéré
 unset($_SESSION['csrf_menu_add']);
 
-if (isset($_POST["id"]) && !empty($_POST["id"])){
-    $id = intval($_POST["id"]);
+if (isset($_POST["nom_menu"]) && !empty($_POST["nom_menu"])){
+    $nom_menu = htmlspecialchars($_POST["nom_menu"]);
 }
 else {
-    echo "<p>L'identifiant de la menu est obligatoire</p>";
+    echo "<p>Le nom du menu est obligatoire</p>";
 }
 
-if (isset($_POST["nom"]) && !empty($_POST["nom"])){
-    $nom = htmlspecialchars($_POST["nom"]);
-}
-else {
-    echo "<p>Le nom de la menu est obligatoire</p>";
-}
-
-if (isset($id) && isset($nom) && isset($generique) && isset($content) && isset($prix)){
+if (isset($nom_menu) && isset($entree) && isset($plat) && isset($dessert)){
 
     require_once 'bdd.php';
 
     $sauvegarde = $connexion->prepare ("UPDATE menu
-                                        SET nom = :nom
-                                        WHERE id = :id");
+                                        SET nom_menu = :nom_menu
+                                        WHERE nom_menu = :nom_menu");
 
-    $sauvegarde->execute(params: ["id" => $id, "nom" => $nom]);
+    $sauvegarde->execute(params: ["nom_menu" => $nom_menu]);
 
     if ($sauvegarde->rowCount() > 0) {
         echo "<p>Modification des données de la menu réussie</p>";
-        echo "<a href='./HTML_Liste_menus.php'>Revenir sur la page de toutes les menus</a>";
+        echo "<a href='../Mairie/HTML_Liste_menu.php'>Revenir sur la page des menus</a>";
     }
     else {
         echo "<p>Une erreur est survenue</p>";

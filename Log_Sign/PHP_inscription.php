@@ -37,7 +37,7 @@ if (isset($email) && isset($mdp)){
     $sauvegarde->execute(params: ["email" => $email, "mdp" => $mdp]);
 
     if ($sauvegarde->rowCount() > 0) {
-        header('Location: ../Log_Sign/HTML_Connexion.php');
+        header('Location: ../Log_Sign/HTML_Log_Sign.php');
         exit();
     }
     else {

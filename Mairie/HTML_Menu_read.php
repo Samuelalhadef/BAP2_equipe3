@@ -11,7 +11,7 @@
 <body>
 
     <div>
-        <p><a href="Liste_menus.php">Revenir sur la liste des menus</a></p>
+        <p><a href="HTML_Liste_menus.php">Revenir sur la liste des menus</a></p>
         
         <?php
 

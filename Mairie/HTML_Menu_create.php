@@ -17,18 +17,18 @@ if (!isset($_SESSION['csrf_menu_add']) || empty($_SESSION['csrf_menu_add'])){
     <title>Ajouter une menu</title>
 </head>
 <body>
-<form action = "PHP_menuCreate.php" method = "POST" class="menu">
+<form action = "PHP_MenuCreate.php" method = "POST" class="menu">
         <h2>Ajouter un menu</h2>
-        <label for="nom">Nom du menu</label>
-        <input type="text" name="nom" id="nom" placeholder="Nom">
+        <label for="nom_menu">Nom du menu</label>
+        <input type="text" name="nom_menu" id="nom_menu" placeholder="Nom du menu">
         <br>
-        <label for="generique">Entrée</label>
+        <label for="entree">Entrée</label>
         <input type="text" name="entree" id="entree" placeholder="Entrée">
         <br>
-        <label for="content">Plat</label>
+        <label for="plat">Plat</label>
         <input type="text" name="plat" id="plat" placeholder="Plat">
         <br>
-        <label for="prix">Dessert</label>
+        <label for="dessert">Dessert</label>
         <input type="text" name="dessert" id="dessert" placeholder="Dessert">
         <br>
         <input type="hidden" name="token" value="<?= $_SESSION['csrf_menu_add']; ?>">

@@ -17,13 +17,13 @@ if (!isset($_SESSION['csrf_menu_add']) || empty($_SESSION['csrf_menu_add'])){
     <title>Modifier une menu</title>
 </head>
 <body>
-    <form action = "PHP_menuDelete.php" method = "POST" class="menu">
+    <form action = "PHP_MenuDelete.php" method = "POST" class="menu">
         <h2>SUPPRIMER le menu</h2>
         <label for="id">Identifiant du menu</label>
         <input type="number" name="id" id="id" placeholder="Identifiant" min='1'>
         <br>
-        <label for="nom">Nom du menu</label>
-        <input type="text" name="nom" id="nom" placeholder="Nom">
+        <label for="nom_menu">Nom du menu</label>
+        <input type="text" name="nom_menu" id="nom_menu" placeholder="Nom du menu">
         <br>
         <input type="hidden" name="token" value="<?= $_SESSION['csrf_menu_add']; ?>">
         <input type="submit" name="supprimer" value="Supprimer">

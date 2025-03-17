@@ -38,10 +38,12 @@ $req->execute();
 // Vérification des résultats
 if ($rep = $req->fetch()) {
     if (($email == ($rep['email']='admin')) && ($mdp == ($rep['mdp']='admin'))){
+        $_SESSION['email'] = $email;
         header('Location: ../Mairie/HTML_Admin_Home.php');
         exit();
     }
     else{
+        $_SESSION['email'] = $email;
         header('Location: ../Cantine_Ecole/HTML_User_Home.php');
         exit();
     }

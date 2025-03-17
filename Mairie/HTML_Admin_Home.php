@@ -9,19 +9,35 @@
 <body>
     <h1>BONJOUR,</h1>
     <?php
+        // On accède à la base de donnée
+        require_once '../bdd.php';
+        
+        // Vérifiez si l'utilisateur est connecté (par exemple via une session)
+        session_start();
+        
+        // On vérifie si l'utilisateur est connecté
+        if(isset($_SESSION['email'])) {
+            // Affichage de l'email stocké dans la session
+            echo "<p>" . htmlspecialchars($_SESSION['email']) . "</p>";
+        } else {
+            echo "<p>Vous n'êtes pas connecté ou la session a expiré.</p>";
+        }
+    ?>
+
+    <div>
+        <p>Menu du jour :</p>
+        <?php
         $servername = "localhost";
         $username = "root";
 
         //On accède à la base de donnée
         require_once '../bdd.php';
+            // Requête SQL pour sélectionner et afficher une colonne
+            $sql = "SELECT * FROM menu";
+            $req = $connexion->query($sql);
 
-        // Requête SQL pour sélectionner et afficher une colonne
-        $sql = "SELECT entree, plat, dessert FROM menu";
-        $req = $connexion->query($sql);
-
-        while($rep = $req->fetch()){
-            echo "<p><a href='../Mairie/HTML_Menu_read.php?menu=" . urlencode($rep['nom_aliment']) . "'>" . htmlspecialchars($rep['nom']) . ")</a></p><br>";}
         ?>
+    </div>
 </body>
 </html>
 
