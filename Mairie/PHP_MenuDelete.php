@@ -13,7 +13,7 @@ if (isset($_POST["id"]) && !empty($_POST["id"])){
     $id = intval($_POST["id"]);
 }
 else {
-    echo "<p>L'identifiant de la menu est obligatoire</p>";
+    echo "<p>L'identifiant de du menu est obligatoire</p>";
 }
 
 if (isset($_POST["nom"]) && !empty($_POST["nom"])){
@@ -23,39 +23,19 @@ else {
     echo "<p>Le nom de la menu est obligatoire</p>";
 }
 
-if (isset($_POST["generique"]) && !empty($_POST["generique"])){
-    $generique = htmlspecialchars($_POST["generique"]);
-}
-else {
-    echo "<p>Le nom générique de la menu est obligatoire</p>";
-}
-
-if (isset($_POST["content"]) && !empty($_POST["content"])){
-    $content = htmlspecialchars($_POST["content"]);
-} 
-else {
-    echo "<p>Le contenu est obligatoire</p>";
-}
-
-if (isset($_POST["prix"]) && !empty($_POST["prix"])){
-    $prix = intval($_POST["prix"]);
-}
-else {
-    echo "<p>Le prix est obligatoire</p>";
-}
 
 if (isset($id) && isset($nom) && isset($generique) && isset($content) && isset($prix)){
 
 require_once 'bdd.php';
 
     $sauvegarde = $connexion->prepare ("DELETE FROM menu
-                                        WHERE generique = :generique");
+                                        WHERE nom_aliment = :nom_aliment");
 
-    $sauvegarde->execute(params: ["generique" => $generique]);
+    $sauvegarde->execute(params: ["nom_aliment" => $nom_aliment]);
 
     if ($sauvegarde->rowCount() > 0) {
         echo "<p>Suppression des données de la menu réussie</p>";
-        echo "<a href='Admin_Liste_menus.php'>Revenir sur la page de toutes les menus</a>";
+        echo "<a href='HTML_Liste_menus.php'>Revenir sur la page de toutes les menus</a>";
     }
     else {
         echo "<p>Une erreur est survenue</p>";

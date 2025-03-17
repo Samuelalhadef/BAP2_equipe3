@@ -37,7 +37,7 @@ if (isset($nom_aliment) && isset($image_aliment)){
 
     if ($sauvegarde->rowCount() > 0) {
         echo "<p>menu ajoutée dans la base de donnée</p>";
-        echo "<a href='Admin_Liste_menus.php'>Revenir sur la page de toutes les menus</a>";
+        echo "<a href='./HTML_Liste_menus.php'>Revenir sur la page de toutes les menus</a>";
     }
     else {
         echo "<p>Une erreur est survenue</p>";

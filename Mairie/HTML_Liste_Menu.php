@@ -26,7 +26,7 @@
         $req = $connexion->query($sql);
 
         while($rep = $req->fetch()){
-            echo "<p><a href='./Admin_Menu_read.php?menu=" . urlencode($rep['nom_aliment']) . "'>". htmlspecialchars($rep['nom_aliment']) . "</a></p><br>";
+            echo "<p><a href='./HTML_Menu_read.php?menu=" . urlencode($rep['nom_aliment']) . "'>". htmlspecialchars($rep['nom_aliment']) . "</a></p><br>";
         }
 
         ?>
