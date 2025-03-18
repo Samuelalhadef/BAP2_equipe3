@@ -3,13 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="../home.css">
-    <title>Page d'accueil Admin</title>
+    <link rel="stylesheet" href="./home.css">
+    <title>Page d'accueil User</title>
 </head>
 <body>
+    <nav>
+        <p>Nom du projet</p>
+        <p>Date du jour</p>
+        <ul>
+            <li><a href="HTML_User_Home.php">Accueil</a></li>
+            <li><a href="HTML_User_Menu.php">Menus</a></li>
+            <li><a href="HTML_User_Vote.php">Vote</a></li>
+            <li><a href="HTML_User_Pesee.php">Pesée</a></li>
+            <li><a href="HTML_User_Logout.php">Déconnexion</a></li>
+        </ul>
+    </nav>
+
+
     <h1>BONJOUR,</h1>
     <?php
+        $servername = "localhost";
+        $username = "root";
+
         // On accède à la base de donnée
         require_once '../bdd.php';
         
@@ -29,28 +44,45 @@
     <div class="menu_recap">
         <p>Menu du jour :</p>
         <?php
-            $servername = "localhost";
-            $username = "root";
-
-            //On accède à la base de donnée
-            require_once '../bdd.php';
-            // Requête SQL pour sélectionner et afficher une colonne
-            $sql = "SELECT * FROM menu";
+            $sql = "SELECT entree, plat, dessert FROM menu ORDER BY id DESC LIMIT 1";
             $req = $connexion->query($sql);
 
-            if(isset($_SESSION['entree']) && isset($_SESSION['plat']) && isset($_SESSION['dessert'])) {
-                echo "<p>Entrée " . htmlspecialchars($_SESSION['entree']) . "</p>";
-                echo "<p>Plat " . htmlspecialchars($_SESSION['plat']) . "</p>";
-                echo "<p>Dessert " . htmlspecialchars($_SESSION['dessert']) . "</p>";
+            if ($req) {
+                $menu = $req->fetch(PDO::FETCH_ASSOC); // Récupération des données
+
+                if ($menu) {
+                    // Stocker les valeurs en session
+                    $_SESSION['entree'] = $menu['entree'];
+                    $_SESSION['plat'] = $menu['plat'];
+                    $_SESSION['dessert'] = $menu['dessert'];
+                }
+            }
+
+            if (isset($_SESSION['entree']) && isset($_SESSION['plat']) && isset($_SESSION['dessert'])) {
+                echo "<div>";
+                echo "<p>Entrée : " . htmlspecialchars($_SESSION['entree']) . "</p>";
+                echo "<p>Plat : " . htmlspecialchars($_SESSION['plat']) . "</p>";
+                echo "<p>Dessert : " . htmlspecialchars($_SESSION['dessert']) . "</p>";
+                echo "</div>";
             }
             else {
                 echo "<p>Il n'y a pas de menus dans la liste pour le moment</p>";
             }
         ?>
         <button>Gestion des menus<i class="fa-solid fa-arrow-right"></i></button>
+
+        <div class="vote_jour">
+            <h2>Vote du jour :</h2>
+        </div>
+        <div class="pesee_jour">
+            <h2>Pesée du jour :</h2>
+        </div>
     </div>
+    
+
 </body>
 </html>
+
 
 
 
