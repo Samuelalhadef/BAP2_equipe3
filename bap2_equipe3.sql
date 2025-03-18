@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Mar 17, 2025 at 10:52 AM
+-- Generation Time: Mar 18, 2025 at 07:56 AM
 -- Server version: 8.0.30
 -- PHP Version: 8.3.14
 
@@ -33,6 +33,18 @@ CREATE TABLE `connexion` (
   `mdp` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
+--
+-- Dumping data for table `connexion`
+--
+
+INSERT INTO `connexion` (`id`, `email`, `mdp`) VALUES
+(1, 'aaa', 'aaa'),
+(2, 'aa', 'aa'),
+(3, 'aa', 'aa'),
+(4, 'admin', 'admin'),
+(5, 'aaaa', 'aaaa'),
+(6, 'sophielamsova29@gmail.com', 'Fuckyou!:3');
+
 -- --------------------------------------------------------
 
 --
@@ -57,9 +69,20 @@ CREATE TABLE `donnees_journee` (
 
 CREATE TABLE `menu` (
   `id` int NOT NULL,
-  `nom_aliment` varchar(255) DEFAULT NULL,
-  `image_aliment` varchar(255) DEFAULT NULL
+  `entree` varchar(255) DEFAULT NULL,
+  `plat` varchar(255) DEFAULT NULL,
+  `dessert` varchar(255) DEFAULT NULL,
+  `nom_menu` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `menu`
+--
+
+INSERT INTO `menu` (`id`, `entree`, `plat`, `dessert`, `nom_menu`) VALUES
+(3, 'Macédoine', 'Nuggets Frites', 'Tarte au chocolat', 'Menu du 17/03'),
+(4, 'Macédoine', 'Nuggets Frites', 'Tarte au chocolat', 'Menu du 17/03'),
+(5, 'Macédoine', 'Nuggets Frites', 'Tarte au chocolat', 'Menu du 17/03');
 
 --
 -- Indexes for dumped tables
@@ -91,7 +114,7 @@ ALTER TABLE `menu`
 -- AUTO_INCREMENT for table `connexion`
 --
 ALTER TABLE `connexion`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `donnees_journee`
@@ -103,7 +126,7 @@ ALTER TABLE `donnees_journee`
 -- AUTO_INCREMENT for table `menu`
 --
 ALTER TABLE `menu`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

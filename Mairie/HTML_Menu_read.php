@@ -5,46 +5,69 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./globals.css">
-    <title>READ menu</title>
+    <title>Liste des menus</title>
 </head>
 
 <body>
 
     <div>
-        <p><a href="HTML_Liste_menus.php">Revenir sur la liste des menus</a></p>
-        
+        <h1>Liste des menus</h1>
+
         <?php
 
-            if (!isset($_GET['menu']) || empty($_GET['menu'])){
-                die('<p>menu introuvable</p>');
+            // Connexion à la BDD
+            $servername = "localhost";
+            $username = "root";
+            $password = "";
+            $dbname = "bap2_equipe3";
+
+            try {
+                $connexion = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
+                // Définir le mode d'erreur pour PDO
+                $connexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            } catch (PDOException $e) {
+                die("Erreur de connexion : " . $e->getMessage());
             }
 
-            // Connexion à la BDD
-            require_once 'bdd.php';
-
-            $getmenu = $connexion -> prepare (
-                query: 'SELECT *
-                        FROM menu
-                        WHERE nom_aliment = :nom_aliment
-                        LIMIT 1'
+            $getmenus = $connexion -> prepare (
+                'SELECT *
+                        FROM menu'
             );
 
-            $getmenu-> execute (params: ['generique' => htmlspecialchars(string: $_GET['menu'])]);
+            $getmenus->execute();
 
-            if ($getmenu->rowCount() == 1) {
-                $menu = $getmenu -> fetch();
-                echo '<h1>', $menu['id'],'</h1>';
-                echo '<h1>', $menu['nom'],'</h1>';
+            $menus = $getmenus -> fetchAll();
+
+            if (empty($menus)) {
+                echo '<p>Aucun menu disponible.</p>';
+            } else {
+                echo '<table border="1">';
+                echo '<tr>';
+                echo '<th>Id</th>';
+                echo '<th>Nom du menu</th>';
+                echo '<th>Actions</th>';
+                echo '</tr>';
+
+                foreach ($menus as $menu) {
+                    echo '<tr>';
+                    echo '<td>' . $menu['id'] . '</td>';
+                    echo '<td>' . $menu['nom_menu'] . '</td>';
+                    echo '<td>';
+                    echo '<a href="HTML_menu_details.php?id=' . $menu['id'] . '">Voir les détails</a> | ';
+                    echo '<a href="HTML_menu_delete.php?id=' . $menu['id'] . '">Supprimer</a>';
+                    echo '</td>';
+                    echo '</tr>';
+                }
+
+                echo '</table>';
             }
+
+            $connexion = null;
 
             ?>
 
-        <button><a href='HTML_menu_update.php'>Modifier</a></button>
-        <button><a href='HTML_menu_delete.php'>Supprimer</a></button>
     </div>
 
 </body>
+
 </html>
-
-
-

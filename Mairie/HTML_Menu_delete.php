@@ -1,32 +1,40 @@
 <?php
 
-session_start();
-
-if (!isset($_SESSION['csrf_menu_add']) || empty($_SESSION['csrf_menu_add'])){
-    $_SESSION['csrf_menu_add'] = bin2hex(random_bytes(32));
+if (!isset($_GET['id']) || empty($_GET['id'])){
+    die('<p>Erreur : le paramètre "id" est manquant ou vide dans l\'URL. Veuillez vérifier l\'URL et réessayer.</p>');
 }
 
-?>
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "bap2_equipe3";
 
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./globals.css">
-    <title>Modifier une menu</title>
-</head>
-<body>
-    <form action = "PHP_MenuDelete.php" method = "POST" class="menu">
-        <h2>SUPPRIMER le menu</h2>
-        <label for="id">Identifiant du menu</label>
-        <input type="number" name="id" id="id" placeholder="Identifiant" min='1'>
-        <br>
-        <label for="nom_menu">Nom du menu</label>
-        <input type="text" name="nom_menu" id="nom_menu" placeholder="Nom du menu">
-        <br>
-        <input type="hidden" name="token" value="<?= $_SESSION['csrf_menu_add']; ?>">
-        <input type="submit" name="supprimer" value="Supprimer">
-    </form>
-</body>
-</html>
+
+try {
+    $connexion = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
+    // Définir le mode d'erreur pour PDO
+    $connexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+} catch (PDOException $e) {
+    die("Erreur de connexion : " . $e->getMessage());
+}
+
+$deletemenu = $connexion -> prepare (
+    'DELETE FROM menu
+            WHERE id = :id'
+);
+
+$deletemenu->bindParam(':id', $_GET['id']);
+$deletemenu->execute();
+
+if ($deletemenu->rowCount() == 1) {
+    echo '<p>Menu supprimé avec succès.</p>';
+} else {
+    echo '<p>Erreur : le menu avec l\'id "' . $_GET['id'] . '" n\'a pas été supprimé.</p>';
+}
+
+$connexion = null;
+
+header('Location: ./HTML_Menu_read.php');
+exit;
+
+?>
