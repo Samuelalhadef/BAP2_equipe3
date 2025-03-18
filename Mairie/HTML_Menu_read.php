@@ -11,7 +11,7 @@
 <body>
 
     <div>
-        <p><a href="Liste_menus.php">Revenir sur la liste des menus</a></p>
+        <p><a href="HTML_Liste_menus.php">Revenir sur la liste des menus</a></p>
         
         <?php
 
@@ -39,8 +39,8 @@
 
             ?>
 
-        <button><a href='Admin_menu_update.php'>Modifier</a></button>
-        <button><a href='Admin_menu_delete.php'>Supprimer</a></button>
+        <button><a href='HTML_menu_update.php'>Modifier</a></button>
+        <button><a href='HTML_menu_delete.php'>Supprimer</a></button>
     </div>
 
 </body>

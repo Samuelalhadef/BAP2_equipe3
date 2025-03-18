@@ -1,26 +1,52 @@
 @import url("./globals.css");
 
 /*----- Page de connexion et d'inscription -----*/
-.connexion, .inscription{
+form{
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding: 15px;
+    padding: 40px;
+    gap: 5px;
     border-radius: 20px;
-    color: VAR(--primary);
+    color: var(--primary);
     background-color: var(--background);
 }
 
+.textbox{
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: start;
+    margin: 10px;
+}
+
+label{
+    margin-bottom: 5px;
+    font-size: 20px;
+}
+
 input{
-    margin: var(--spacing-sm);
-    padding: var(--spacing-sm);
+    padding: var(--spacing-md);
     border-radius: var(--radius-sm);
     border: none;
+}
+
+input::placeholder{
+    width: 100%;
 }
 
 a{
     color: var(--primary);
     font-weight: bold;
     text-decoration: underline;
+}
+
+button{
+    border-radius: 30px;
+}
+
+i{
+    font-size: 30px;
+    padding: 10px;
 }
