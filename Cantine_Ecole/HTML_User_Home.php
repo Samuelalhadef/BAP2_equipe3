@@ -4,12 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./style.css">
-    <title>Liste de toutes les menus</title>
+    <title>Liste de tous les menus</title>
 </head>
 <body>
 
     <div class="liste_menus">
-        <h2>Liste de toutes les menus</h2>
+        <h2>Liste de tous les menus</h2>
         <p>Cliquez sur son nom pour accéder à sa description et son prix</p>
         <br>
         <?php
