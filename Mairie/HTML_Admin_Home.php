@@ -8,19 +8,37 @@
     <title>Page d'accueil Admin</title>
 </head>
 <body>
-    <nav>
-        <p>Nom du projet</p>
-        <p>Date du jour</p>
-        <ul>
-            <li><a href="HTML_User_Home.php">Accueil</a></li>
-            <li><a href="HTML_User_Menu.php">Menus</a></li>
-            <li><a href="HTML_User_Vote.php">Vote</a></li>
-            <li><a href="HTML_User_Pesee.php">Pesée</a></li>
-            <li><a href="HTML_User_Logout.php">Déconnexion</a></li>
-        </ul>
-    </nav>
+    <header>
+        <p>Nom du projet<p>
+        <p>Date du jour<p>
+        <div>
+            <div class="off-screen-menu">
+                <ul class="off-screen-menu-item">
+                    <li><a href="#">PAGE D'ACCUEIL</a></li>
+                    <li><a href="#">GESTION DES MENUS</a></li>
+                    <li><a href="#">SYNTHESE</a></li>
+                    <li><a href="#">VOTE DU JOUR</a></li>
+                    <li><a href="#">PESEE DU JOUR</a></li>
+                </ul>
+                <ul class="off-screen-menu-plus">
+                    <li class="off-screen-menu-item-text"><a href="#">Paramètres&nbsp;&nbsp;</a><i class="fa-solid fa-gear"></i></li>
+                    <li class="off-screen-menu-item-text"><a href="#">Se déconnecter&nbsp;&nbsp;</a><i class="fa-solid fa-right-from-bracket"></i></li>
+                </ul>
+            </div>
+            <nav>
+                <p>MENU&nbsp;&nbsp;</p>
+                <div class="ham-menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </nav>
+        </div>
+    </header>
+    
+    
 
-    <div>
+    <div class="name_user_admin">
         <h1>BONJOUR,</h1>
         <?php
             $servername = "localhost";
@@ -43,9 +61,9 @@
         ?>
     </div>
 
-    <div>
+    <div class="container_profils">
         <div class="menu_recap">
-            <h3>Menu du jour :</h3>
+            <h3>MENU DU JOUR</h3>
             <?php
                 $sql = "SELECT entree, plat, dessert FROM menu ORDER BY id DESC LIMIT 1";
                 $req = $connexion->query($sql);
@@ -62,27 +80,37 @@
                 }
 
                 if (isset($_SESSION['entree']) && isset($_SESSION['plat']) && isset($_SESSION['dessert'])) {
-                    echo "<div>";
-                    echo "<p>Entrée : " . htmlspecialchars($_SESSION['entree']) . "</p>";
-                    echo "<p>Plat : " . htmlspecialchars($_SESSION['plat']) . "</p>";
-                    echo "<p>Dessert : " . htmlspecialchars($_SESSION['dessert']) . "</p>";
+                    echo "<div class='menu_container'>";
+                        echo "<div class='menu_details'>";
+                            echo "<p>Entrée :</p>";
+                            echo "<p>" . htmlspecialchars($_SESSION['entree']) . "</p>";
+                        echo "</div>";
+                        echo "<div class='menu_details'>";
+                            echo "<p>Plat :</p>";
+                            echo "<p>" . htmlspecialchars($_SESSION['plat']) . "</p>";
+                        echo "</div>";
+                        echo "<div class='menu_details'>";
+                            echo "<p>Dessert :</p>";
+                            echo "<p>" . htmlspecialchars($_SESSION['dessert']) . "</p>";
+                        echo "</div>";
                     echo "</div>";
                 }
                 else {
                     echo "<p>Il n'y a pas de menus dans la liste pour le moment</p>";
                 }
             ?>
-            <button>Gestion des menus<i class="fa-solid fa-arrow-right"></i></button>
+            <button><a href="HTML">Gestion des menus&nbsp;</a><i class="fa-solid fa-arrow-right"></i></button>
         </div>
-        <div>
-            <h3>Gestion des profils</h3>
-            <button>Détails<i class="fa-solid fa-arrow-right"></i></button>
+        <div class="gestion_profils">
+            <h3>GESTION DES PROFILS</h3>
+            <button><a href="HTML">Détails&nbsp;</a><i class="fa-solid fa-arrow-right"></i></button>
         </div>
-        <div>
-            <h3>Synthèse</h3>
-            <button>Détails<i class="fa-solid fa-arrow-right"></i></button>
+        <div class="synthese">
+            <h3>SYNTHESE</h3>
+            <button><a href="HTML">Détails&nbsp;</a><i class="fa-solid fa-arrow-right"></i></button>
         </div>
     </div>
+    <script src="../JS/nav.js"></script>
 </body>
 </html>
 
