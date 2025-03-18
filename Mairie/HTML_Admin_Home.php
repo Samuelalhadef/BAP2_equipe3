@@ -14,11 +14,10 @@
         <div>
             <div class="off-screen-menu">
                 <ul class="off-screen-menu-item">
-                    <li><a href="#">PAGE D'ACCUEIL</a></li>
-                    <li><a href="#">GESTION DES MENUS</a></li>
+                <li><a href="../Mairie/HTML_Admin_Home.php">PAGE D'ACCUEIL</a></li>
+                <li><a href="../Mairie/HTML_Liste_Menu.php">GESTION DES MENUS</a></li>
+                    <li><a href="#">GESTION DES PROFILS</a></li>
                     <li><a href="#">SYNTHESE</a></li>
-                    <li><a href="#">VOTE DU JOUR</a></li>
-                    <li><a href="#">PESEE DU JOUR</a></li>
                 </ul>
                 <ul class="off-screen-menu-plus">
                     <li class="off-screen-menu-item-text"><a href="#">Paramètres&nbsp;&nbsp;</a><i class="fa-solid fa-gear"></i></li>
@@ -36,8 +35,6 @@
         </div>
     </header>
     
-    
-
     <div class="name_user_admin">
         <h1>BONJOUR,</h1>
         <?php
@@ -99,7 +96,7 @@
                     echo "<p>Il n'y a pas de menus dans la liste pour le moment</p>";
                 }
             ?>
-            <button><a href="HTML">Gestion des menus&nbsp;</a><i class="fa-solid fa-arrow-right"></i></button>
+            <button><a href="../Mairie/HTML_Liste_Menu.php">Gestion des menus&nbsp;</a><i class="fa-solid fa-arrow-right"></i></button>
         </div>
         <div class="gestion_profils">
             <h3>GESTION DES PROFILS</h3>
