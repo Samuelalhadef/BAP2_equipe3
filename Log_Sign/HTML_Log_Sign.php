@@ -73,21 +73,24 @@ if (!isset($_SESSION['csrf_connexion_add']) || empty($_SESSION['csrf_connexion_a
         </div>
     </section>
 -->
-   
-    <form action="PHP_Connexion.php" method="POST" class="connexion">
-        <h1>CONNEXION</h1>
-        <div class="textbox">
-            <label for="mail">Votre identifiant</label>
-            <input type="text" name="email" id="email" placeholder="Adresse mail" required>
+    <section class="formulaire_CandI">
+        <form action="PHP_Connexion.php" method="POST" class="connexion">
+            <h1>CONNEXION</h1>
+            <div class="textbox">
+                <label for="mail">Votre identifiant</label>
+                <input type="text" name="email" id="email" placeholder="Adresse mail" required>
+                <br>
+                <label for="mdp">Votre mot de passe</label>
+                <input type="password" name="mdp" id="mdp" placeholder="Mot de passe" required>
+            </div>
+            <input type="hidden" name="token" value="<?php echo htmlspecialchars($_SESSION['csrf_connexion_add']); ?>">
+            <button type="submit" name="connexion"><i class="fa-solid fa-arrow-right"></i></button>
             <br>
-            <label for="mdp">Votre mot de passe</label>
-            <input type="password" name="mdp" id="mdp" placeholder="Mot de passe" required>
-        </div>
-        <input type="hidden" name="token" value="<?php echo htmlspecialchars($_SESSION['csrf_connexion_add']); ?>">
-        <button type="submit" name="connexion"><i class="fa-solid fa-arrow-right"></i></button>
-        <br>
-        <p>Pas de compte ? <a href="HTML_Inscription.php">Inscrivez-vous-ici !</a></p>
-    </form>
+            <p>Pas de compte ? <a href="HTML_Inscription.php">Inscrivez-vous-ici !</a></p>
+        </form>
+    </section>
+    
+    
 
     <script type="module" src="../JS/connexion.js"></script>
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>

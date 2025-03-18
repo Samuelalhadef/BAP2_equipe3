@@ -1,0 +1,53 @@
+@import url("./globals.css");
+
+.name_user_admin{
+    padding: 0 0 0 50px;
+    margin: 30px 0;
+}
+
+.container_profils{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 20px;
+    width: 100%;
+    padding: 0 50px;
+    height: 60vh;
+}
+
+.menu_recap, .gestion_profils, .synthese{
+    padding: 40px;
+    border: 2px solid var(--secondary);
+    border-radius: 20px;
+}
+
+.menu_recap{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.menu_container{
+    line-height: 2rem;
+}
+
+.menu_details{
+    margin: 15px 0;
+}
+
+.gestion_profils, .synthese{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 50%;
+}
+
+button{
+    display: flex;
+    justify-content: end;
+    align-items: end;
+    background: none;
+    border: none;
+    font-size: 20px;
+}

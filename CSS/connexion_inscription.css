@@ -1,6 +1,15 @@
 @import url("./globals.css");
 
 /*----- Page de connexion et d'inscription -----*/
+
+.formulaire_CandI{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
 form{
     display: flex;
     flex-direction: column;
