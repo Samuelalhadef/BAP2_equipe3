@@ -19,14 +19,15 @@ if (!isset($_SESSION['csrf_connexion_add']) || empty($_SESSION['csrf_connexion_a
 </head>
 <body>
     <section class="formulaire_CandI">
-        <form action = "PHP_Inscription.php" method = "POST" class="inscription">
+        <form action = "PHP_Inscription.php" method = "POST">
             <h2>INSCRIPTION</h2>
-            <label for="email">Adresse mail</label>
-            <input type="text" name="email" id="email" placeholder="Adresse mail" required>
-            <br>
-            <label for="mdp">Mot de passe</label>
-            <input type="password" name="mdp" id="mdp" placeholder="Mot de passe" required>
-            <br>
+            <div class="textbox">
+                <label for="mail">Votre identifiant</label>
+                <input type="text" name="email" id="email" placeholder="Adresse mail" required>
+                <br>
+                <label for="mdp">Votre mot de passe</label>
+                <input type="password" name="mdp" id="mdp" placeholder="Mot de passe" required>
+            </div>
             <input type="hidden" name="token" value="<?= $_SESSION['csrf_connexion_add']; ?>">
             <input type="submit" name="inscrire" value="S'inscrire">
         </form>
