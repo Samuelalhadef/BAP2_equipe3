@@ -16,7 +16,7 @@ form{
     justify-content: center;
     align-items: center;
     padding: 40px;
-    gap: 5px;
+    gap: 10px;
     border-radius: 20px;
     color: var(--primary);
     background-color: var(--background);
@@ -36,9 +36,10 @@ label{
 }
 
 input{
-    padding: var(--spacing-md);
-    border-radius: var(--radius-sm);
+    padding: 10px 10px;
+    border-radius: 10px;
     border: none;
+    width: 100%;;
 }
 
 input::placeholder{

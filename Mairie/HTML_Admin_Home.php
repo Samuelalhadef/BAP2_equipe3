@@ -62,39 +62,38 @@
         <div class="menu_recap">
             <h3>MENU DU JOUR</h3>
             <?php
-                $sql = "SELECT entree, plat, dessert FROM menu ORDER BY id DESC LIMIT 1";
-                $req = $connexion->query($sql);
+                // Récupération de la date du jour au format YYYY-MM-DD
+            $dateAujourdhui = date('Y-m-d');
 
-                if ($req) {
-                    $menu = $req->fetch(PDO::FETCH_ASSOC); // Récupération des données
+            // Requête SQL pour récupérer le menu correspondant à la date du jour
+            $sql = "SELECT entree, plat, dessert FROM menu WHERE date_menu = :dateAujourdhui";
+            $req = $connexion->prepare($sql);
+            $req->execute(['dateAujourdhui' => $dateAujourdhui]);
 
-                    if ($menu) {
-                        // Stocker les valeurs en session
-                        $_SESSION['entree'] = $menu['entree'];
-                        $_SESSION['plat'] = $menu['plat'];
-                        $_SESSION['dessert'] = $menu['dessert'];
-                    }
-                }
-
-                if (isset($_SESSION['entree']) && isset($_SESSION['plat']) && isset($_SESSION['dessert'])) {
-                    echo "<div class='menu_container'>";
-                        echo "<div class='menu_details'>";
-                            echo "<p>Entrée :</p>";
-                            echo "<p>" . htmlspecialchars($_SESSION['entree']) . "</p>";
-                        echo "</div>";
-                        echo "<div class='menu_details'>";
-                            echo "<p>Plat :</p>";
-                            echo "<p>" . htmlspecialchars($_SESSION['plat']) . "</p>";
-                        echo "</div>";
-                        echo "<div class='menu_details'>";
-                            echo "<p>Dessert :</p>";
-                            echo "<p>" . htmlspecialchars($_SESSION['dessert']) . "</p>";
-                        echo "</div>";
+            // Affichage du menu
+            if ($req && $menu = $req->fetch(PDO::FETCH_ASSOC)) {
+                // Stocker les valeurs en session
+                $_SESSION['entree'] = $menu['entree'];
+                $_SESSION['plat'] = $menu['plat'];
+                $_SESSION['dessert'] = $menu['dessert'];
+                
+                echo "<div class='menu_container'>";
+                    echo "<div class='menu_details'>";
+                    echo "<p>Entrée :</p>";
+                    echo "<p>" . htmlspecialchars($_SESSION['entree']) . "</p>";
                     echo "</div>";
-                }
-                else {
-                    echo "<p>Il n'y a pas de menus dans la liste pour le moment</p>";
-                }
+                    echo "<div class='menu_details'>";
+                    echo "<p>Plat :</p>";
+                    echo "<p>" . htmlspecialchars($_SESSION['plat']) . "</p>";
+                    echo "</div>";
+                    echo "<div class='menu_details'>";
+                    echo "<p>Dessert :</p>";
+                    echo "<p>" . htmlspecialchars($_SESSION['dessert']) . "</p>";
+                    echo "</div>";
+                echo "</div>";
+            } else {
+                echo "<p>Il n'y a pas de menu prévu pour aujourd'hui (" . date('d/m/Y') . ")</p>";
+            }
             ?>
             <button><a href="../Mairie/HTML_Liste_Menu.php">Gestion des menus&nbsp;</a><i class="fa-solid fa-arrow-right"></i></button>
         </div>
