@@ -84,6 +84,26 @@ INSERT INTO `menu` (`id`, `entree`, `plat`, `dessert`, `nom_menu`) VALUES
 (4, 'Macédoine', 'Nuggets Frites', 'Tarte au chocolat', 'Menu du 17/03'),
 (5, 'Macédoine', 'Nuggets Frites', 'Tarte au chocolat', 'Menu du 17/03');
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `vote`
+--
+
+CREATE TABLE vote (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    option_name VARCHAR(50) NOT NULL,
+    vote_count INT DEFAULT 0
+);
+
+-- Insert initial vote options
+INSERT INTO vote (option_name, vote_count) VALUES
+('J\'aime bien', 0),
+('J\'aime moyen', 0),
+('J\'aime pas', 0);
+
+-- --------------------------------------------------------
+
 --
 -- Indexes for dumped tables
 --
