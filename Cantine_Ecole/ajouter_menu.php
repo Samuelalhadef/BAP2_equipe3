@@ -9,12 +9,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $plat = $_POST['plat'];
     $dessert = $_POST['dessert'];
     
+    $nom_menu = "Nom par défaut"; // Assurez-vous de définir un nom pour le menu
+
     if (empty($date_menu)) {
         $error = "La date du menu est obligatoire";
     } else {
-        $query = $connexion->prepare("INSERT INTO menus (date_menu) VALUES (:date_menu)");
+        $query = $connexion->prepare("INSERT INTO menu (date_menu, nom_menu) VALUES (:date_menu, :nom_menu)");
         $result = $query->execute([
-            'date_menu' => $date_menu
+            'date_menu' => $date_menu,
+            'nom_menu' => $nom_menu
         ]);
         
         if ($result) {

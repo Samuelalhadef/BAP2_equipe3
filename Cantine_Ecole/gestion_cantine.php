@@ -8,8 +8,17 @@ session_start();
 
 require_once '../bdd.php';
 
-$query = $connexion->query("SELECT * FROM menus ORDER BY date_menu DESC");
+$query = $connexion->query("SELECT * FROM menu ORDER BY date_menu DESC");
 $menus = $query->fetchAll(PDO::FETCH_ASSOC);
+
+while ($menu = $query->fetch()) {
+    echo "<div class='menu-item'>";
+    echo "<h3>" . htmlspecialchars($menu['nom_menu']) . "</h3>";
+    echo "<p>Date: " . htmlspecialchars($menu['date_menu']) . "</p>";
+    echo "<a href='modifier_menu.php?id=" . $menu['id'] . "' class='btn btn-secondary'>Modifier</a>";
+    echo "<a href='supprimer_menu.php?id=" . $menu['id'] . "' class='btn btn-danger' onclick=\"return confirm('Êtes-vous sûr de vouloir supprimer ce menu ?')\">Supprimer</a>";
+    echo "</div>";
+}
 ?>
 
 <!DOCTYPE html>

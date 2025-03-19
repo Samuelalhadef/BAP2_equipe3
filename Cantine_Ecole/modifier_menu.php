@@ -10,7 +10,7 @@ if (!isset($_GET['id']) || empty($_GET['id'])) {
 
 $id_menu = (int)$_GET['id'];
 
-$query = $connexion->prepare("SELECT * FROM menus WHERE id = :id");
+$query = $connexion->prepare("SELECT * FROM menu WHERE id = :id");
 $query->execute(['id' => $id_menu]);
 $menu = $query->fetch(PDO::FETCH_ASSOC);
 
@@ -49,7 +49,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (empty($date_menu)) {
         $error = "La date du menu est obligatoire";
     } else {
-        $query = $connexion->prepare("UPDATE menus SET date_menu = :date_menu WHERE id = :id");
+        $query = $connexion->prepare("UPDATE menu SET date_menu = :date_menu WHERE id = :id");
         $result = $query->execute([
             'date_menu' => $date_menu,
             'id' => $id_menu
