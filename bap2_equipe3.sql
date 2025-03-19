@@ -111,8 +111,17 @@ INSERT INTO `menu` (`id`, `entree`, `plat`, `dessert`, `nom_menu`) VALUES
 (5, 'Macédoine', 'Nuggets Frites', 'Tarte au chocolat', 'Menu du 17/03');
 
 --
--- Indexes for dumped tables
---
+
+CREATE TABLE donnees_journee (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    date_jour DATE NOT NULL,
+    poids_dechets INT NOT NULL,
+    poids_pain INT NOT NULL,
+    nb_repas_prevus INT NOT NULL,
+    nb_repas_adultes INT NOT NULL,
+    nb_repas_non_consommes INT NOT NULL
+);
+
 
 --
 -- Indexes for table `connexion`
