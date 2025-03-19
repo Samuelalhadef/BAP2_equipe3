@@ -29,29 +29,29 @@ $donnees_journee = $query->fetch(PDO::FETCH_ASSOC);
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $poids_dechets = $_POST['poids_dechets'];
     $poids_pain = $_POST['poids_pain'];
-    $nb_repas_prevus = $_POST['nb_repas_prevus'];
+    $nb_repas_prevues = $_POST['nb_repas_prevues'];
     $nb_repas_adultes = $_POST['nb_repas_adultes'];
     $nb_repas_non_consommes = $_POST['nb_repas_non_consommes'];
 
     if ($donnees_journee) {
         // Mettre à jour les données existantes
-        $query = $connexion->prepare("UPDATE donnees_journee SET poids_dechets = :poids_dechets, poids_pain = :poids_pain, nb_repas_prevus = :nb_repas_prevus, nb_repas_adultes = :nb_repas_adultes, nb_repas_non_consommes = :nb_repas_non_consommes WHERE date_jour = :date_jour");
+        $query = $connexion->prepare("UPDATE donnees_journee SET poids_dechets = :poids_dechets, poids_pain = :poids_pain, nb_repas_prevues = :nb_repas_prevues, nb_repas_adultes = :nb_repas_adultes, nb_repas_non_consommes = :nb_repas_non_consommes WHERE date_jour = :date_jour");
         $query->execute([
             'poids_dechets' => $poids_dechets,
             'poids_pain' => $poids_pain,
-            'nb_repas_prevus' => $nb_repas_prevus,
+            'nb_repas_prevues' => $nb_repas_prevues,
             'nb_repas_adultes' => $nb_repas_adultes,
             'nb_repas_non_consommes' => $nb_repas_non_consommes,
             'date_jour' => $date_today
         ]);
     } else {
         // Insérer de nouvelles données
-        $query = $connexion->prepare("INSERT INTO donnees_journee (date_jour, poids_dechets, poids_pain, nb_repas_prevus, nb_repas_adultes, nb_repas_non_consommes) VALUES (:date_jour, :poids_dechets, :poids_pain, :nb_repas_prevus, :nb_repas_adultes, :nb_repas_non_consommes)");
+        $query = $connexion->prepare("INSERT INTO donnees_journee (date_jour, poids_dechets, poids_pain, nb_repas_prevues, nb_repas_adultes, nb_repas_non_consommes) VALUES (:date_jour, :poids_dechets, :poids_pain, :nb_repas_prevues, :nb_repas_adultes, :nb_repas_non_consommes)");
         $query->execute([
             'date_jour' => $date_today,
             'poids_dechets' => $poids_dechets,
             'poids_pain' => $poids_pain,
-            'nb_repas_prevus' => $nb_repas_prevus,
+            'nb_repas_prevues' => $nb_repas_prevues,
             'nb_repas_adultes' => $nb_repas_adultes,
             'nb_repas_non_consommes' => $nb_repas_non_consommes
         ]);
@@ -60,6 +60,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     header('Location: gestion_cantine.php');
     exit;
 }
+
+// Calculer les totaux mensuels
+$query = $connexion->prepare("SELECT SUM(poids_dechets) AS total_dechets, SUM(poids_pain) AS total_pain, SUM(nb_repas_prevues) AS total_repas_prevues, SUM(nb_repas_adultes) AS total_repas_adultes, SUM(nb_repas_non_consommes) AS total_repas_non_consommes FROM donnees_journee WHERE MONTH(date_jour) = MONTH(CURDATE()) AND YEAR(date_jour) = YEAR(CURDATE())");
+$query->execute();
+$totals = $query->fetch(PDO::FETCH_ASSOC);
 ?>
 
 <!DOCTYPE html>
@@ -136,6 +141,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             color: white;
         }
     </style>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const form = document.querySelector("form");
+            form.addEventListener("submit", function(event) {
+                // Effacer les champs après l'envoi du formulaire
+                form.reset();
+            });
+        });
+    </script>
 </head>
 <body>
     <div class="container">
@@ -211,8 +225,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                     <input type="number" id="poids_pain" name="poids_pain" value="<?php echo $donnees_journee['poids_pain'] ?? ''; ?>" required>
                                 </div>
                                 <div class="form-group">
-                                    <label for="nb_repas_prevus">Nombre de repas prévus</label>
-                                    <input type="number" id="nb_repas_prevus" name="nb_repas_prevus" value="<?php echo $donnees_journee['nb_repas_prevus'] ?? ''; ?>" required>
+                                    <label for="nb_repas_prevues">Nombre de repas prévus</label>
+                                    <input type="number" id="nb_repas_prevues" name="nb_repas_prevues" value="<?php echo $donnees_journee['nb_repas_prevues'] ?? ''; ?>" required>
                                 </div>
                                 <div class="form-group">
                                     <label for="nb_repas_adultes">Nombre de repas adultes</label>
@@ -225,9 +239,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                 <button type="submit" class="btn btn-primary">Enregistrer</button>
                             </form>
                         </div>
+                        <div class="form-container">
+                            <h2>Totaux Mensuels</h2>
+                            <p>Poids total des déchets : <?php echo $totals['total_dechets'] ?? 0; ?> kg</p>
+                            <p>Poids total du pain : <?php echo $totals['total_pain'] ?? 0; ?> kg</p>
+                            <p>Nombre total de repas prévus : <?php echo $totals['total_repas_prevues'] ?? 0; ?></p>
+                            <p>Nombre total de repas adultes : <?php echo $totals['total_repas_adultes'] ?? 0; ?></p>
+                            <p>Nombre total de repas non consommés : <?php echo $totals['total_repas_non_consommes'] ?? 0; ?></p>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </body>
+    </div>
+</body>
 </html> 

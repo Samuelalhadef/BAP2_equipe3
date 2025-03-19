@@ -117,7 +117,7 @@ CREATE TABLE donnees_journee (
     date_jour DATE NOT NULL,
     poids_dechets INT NOT NULL,
     poids_pain INT NOT NULL,
-    nb_repas_prevus INT NOT NULL,
+    nb_repas_prevues INT NOT NULL,
     nb_repas_adultes INT NOT NULL,
     nb_repas_non_consommes INT NOT NULL
 );
