@@ -16,3 +16,11 @@ hamMenu.addEventListener("click", function () {
     hamMenu.classList.toggle("active");
     offScreenMenu.classList.toggle("active");
 });
+
+document.getElementById("open-calendar").addEventListener("click", function() {
+    document.getElementById("date-picker").showPicker();
+});
+
+document.getElementById("date-picker").addEventListener("change", function() {
+    document.getElementById("selected-date").innerText = "Date sélectionnée : " + this.value;
+});

@@ -1,0 +1,72 @@
+@import url("./globals.css");
+
+.titre_date{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 30px;
+}
+
+.menu_all {
+    display: flex;
+    gap: 30px; /* Espacement entre les éléments */
+    overflow-x: auto; /* Active le scroll horizontal */
+    white-space: nowrap; /* Empêche les éléments de passer à la ligne */
+    padding: 10px;
+    margin: 0 20px;
+
+}
+.menu_bloc {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex: 0 0 auto;
+    width: 33%;
+    height: 60vh;
+    background: #f8f8f8;
+    padding: 15px 50px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.date_swipe{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 30px;
+}
+
+.calendar-container {
+    position: relative;
+    display: inline-block;
+    margin: 20px 0;
+}
+
+input[type="date"] {
+    appearance: none; /* Supprime le style par défaut */
+    background: white;
+    border: 2px solid #007bff;
+    border-radius: 8px;
+    padding: 10px 15px;
+    font-size: 16px;
+    cursor: pointer;
+    outline: none;
+    transition: 0.3s;
+}
+
+input[type="date"]:hover {
+    border-color: #0056b3;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+    filter: invert(30%);
+    cursor: pointer;
+    width: 20px;
+    height: 20px;
+}
+
+.calendar{
+    border: none;
+    background: none;
+    font-size: 20px ;
+}
