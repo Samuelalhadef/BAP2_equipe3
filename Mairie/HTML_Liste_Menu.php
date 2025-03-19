@@ -35,25 +35,8 @@
         </div>
     </header>
 
-    <div class="liste_menus">
-        <div class="titre_date">
-            <h2>Gestion des menus</h2>
-            <h3>Semaine du 17/03/2025 au 23/03/2025</h3>
-        </div>
-
-        <div class="date_swipe">
-            <div class="calendar-container">
-                <button class="calendar" id="open-calendar"><i class="fa-solid fa-calendar-days"></i>&nbsp;Calendrier</button>
-                <input type="date" id="date-picker" style="display: none;">
-                <p id="selected-date"></p>
-            </div>
-            
-            <div>
-                <button>Semaine précédente</button>
-                <button>Semaine suivante</button>
-            </div>
-        </div>
-        
+    <section class="liste_menus">
+        <h2>Gestion des menus</h2>
         
         <div>
             <?php
@@ -63,30 +46,137 @@
 
                 //On accède à la base de donnée
                 require_once '../bdd.php';
-
-                // Requête SQL pour sélectionner et afficher une colonne
-                $sql = "SELECT * FROM menu";
+                
+                session_start();
+                
+                // Requête SQL pour sélectionner les menus
+                $sql = "SELECT * FROM menu ORDER BY date_menu ASC";
                 $req = $connexion->query($sql);
                 
-                echo "<div class='menu_all'>";
-                    while($rep = $req->fetch()){
-                        echo "<div class='menu_bloc'>";
-                            echo "<div class='menu_details'>";
-                                echo "<p>Date</p>";
-                                echo "<p>" . htmlspecialchars($rep['nom_menu']) ."</p>";
-                                echo "<p>" . htmlspecialchars($rep['entree']) ."</p>";
-                                echo "<p>" . htmlspecialchars($rep['plat']) . "</p>";
-                                echo "<p>" . htmlspecialchars($rep['dessert']) ."</p>";
+                // Récupérer tous les menus
+                $menus = $req->fetchAll(PDO::FETCH_ASSOC);
+                
+                // Définir la semaine en cours
+                $semaineActuelle = date('W');
+                $anneeActuelle = date('Y');
+                
+                // Définir le nombre total de semaines à charger
+                $totalSemaines = 7;
+                $semainesParPage = 1;
+                $semaineDepart = $semaineActuelle;
+                $pageActuelle = 1;
+                $totalPages = ceil($totalSemaines / $semainesParPage);
+                
+                echo '<div class="calendrier-container">';
+                    echo '<div class="navigation-pagination">';
+                        echo '<div class="calendar-container">';
+                            echo '<button class="calendar" id="open-calendar">';
+                            echo '<i class="fa-solid fa-calendar-days"></i>&nbsp;Calendrier';
+                            echo '</button>';
+                            echo '<input type="date" id="date-picker" style="display: none;">';
+                            echo '<p id="selected-date"></p>';
+                        echo '</div>';
+                        echo '<div class="pagination">';
+                            echo '<button class="nav-btn" id="prev-week">Semaine précédente</button>';
+                            echo '<span id="semaine-indicator">Semaine ' . $semaineActuelle . ' - ' . $anneeActuelle . '</span>';
+                            echo '<button class="nav-btn" id="next-week">Semaine suivante</button>';
+                        echo '</div>';
+                    echo '</div>';
+
+                    // Ajout des contrôles de pagination par page
+                    echo '<div class="pagination-controls">';
+                        echo '<button id="first-page" class="page-control"><i class="fa-solid fa-angles-left"></i></button>';
+                        echo '<button id="prev-page" class="page-control"><i class="fa-solid fa-angle-left"></i></button>';
+                        
+                        // Génération des boutons numérotés pour les pages
+                        $totalPages = ceil($totalSemaines / $semainesParPage);
+                        for ($i = 1; $i <= $totalPages; $i++) {
+                            $activeClass = ($i == $pageActuelle) ? 'active' : '';
+                            echo '<button class="page-num ' . $activeClass . '" data-page="' . $i . '">' . $i . '</button>';
+                        }
+                        
+                        echo '<button id="next-page" class="page-control"><i class="fa-solid fa-angle-right"></i></button>';
+                        echo '<button id="last-page" class="page-control"><i class="fa-solid fa-angles-right"></i></button>';
+                        echo '<span id="page-range">' . (($pageActuelle-1) * $semainesParPage + 1) . '-' . min($pageActuelle * $semainesParPage, $totalSemaines) . '</span>';
+                    echo '</div>';
+                                        
+                    echo '<div class="semaines-container" id="semaines-container">';
+                        // Boucle pour toutes les semaines (passées et futures)
+                        for ($i = 0; $i < $totalSemaines; $i++) {
+                            $numSemaine = $semaineDepart + $i;
+                            $annee = $anneeActuelle;
+                            
+                            // Gérer le changement d'année
+                            if ($numSemaine <= 0) {
+                                $numSemaine = 52 + $numSemaine;
+                                $annee--;
+                            }
+                            elseif ($numSemaine > 52) {
+                                $numSemaine = $numSemaine - 52;
+                                $annee++;
+                            }
+                            
+                            // Définir une classe spéciale pour la semaine actuelle
+                            $isCurrentWeek = ($numSemaine === $semaineActuelle && $annee === $anneeActuelle) ? ' current-week' : '';
+                            
+                            echo "<div class='semaine{$isCurrentWeek}' data-semaine='{$numSemaine}' data-annee='{$annee}' data-index='{$i}'>";
+                                echo "<h3>Semaine " . $numSemaine . " - " . $annee . "</h3>";
+                                echo "<div class='jours_semaine'>";
+                                    
+                                    // Pour chaque jour de la semaine (5 jours - lundi à vendredi)
+                                    for ($jour = 1; $jour <= 5; $jour++) {
+                                        // Calculer la date pour ce jour
+                                        $date = new DateTime();
+                                        $date->setISODate($annee, $numSemaine, $jour);
+                                        $dateStr = $date->format('Y-m-d');
+                                        $jourNom = ['Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi'][$jour-1];
+                                        
+                                        // Définir une classe spéciale pour aujourd'hui
+                                        $isToday = ($dateStr === date('Y-m-d')) ? ' today' : '';
+                                        
+                                        echo "<div class='jour{$isToday}' data-date='{$dateStr}'>";
+                                            echo "<h3>{$jourNom} " . $date->format('d/m') . "</h3>";
+                                            
+                                            // Chercher un menu pour cette date
+                                            $menuTrouve = false;
+                                            foreach ($menus as $menu) {
+                                                if (isset($menu['date_menu']) && $menu['date_menu'] == $dateStr) {
+                                                    echo "<div class='menu_bloc'>";
+                                                        echo "<div class='menu_details'>";
+                                                            echo "<p>Entrée :</p>";
+                                                            echo "<p>" . htmlspecialchars($menu['entree']) ."</p>";
+                                                            echo "<p>Plat :</p>";
+                                                            echo "<p>" . htmlspecialchars($menu['plat']) . "</p>";
+                                                            echo "<p>Dessert:</p>";
+                                                            echo "<p>" . htmlspecialchars($menu['dessert']) ."</p>";
+                                                        echo "</div>";
+                                                        echo "<button><a href='../Mairie/HTML_Menu_update.php?id=" . $menu['id'] . "'>Modifier&nbsp;&nbsp;</a><i class='fa-solid fa-pencil'></i></button>";
+                                                    echo "</div>";
+                                                    $menuTrouve = true;
+                                                    break;
+                                                }
+                                            }
+                                            
+                                            if (!$menuTrouve) {
+                                                echo "<div class='menu_vide'>";
+                                                    echo "<p>Pas de menu</p>";
+                                                    echo "<button><a href='../Mairie/HTML_Menu_create.php?date=" . $dateStr . "'>Ajouter&nbsp;&nbsp;</a><i class='fa-solid fa-plus'></i></button>";
+                                                echo "</div>";
+                                            }
+                                        echo "</div>";
+                                    }
+                                echo "</div>";
                             echo "</div>";
-                            echo "<button><a href='../Mairie/HTML_Menu_update.php'>Modifier le menu&nbsp;&nbsp;</a><i class='fa-solid fa-pencil'></i></button>";
-                        echo "</div>";
-                    }
-                echo "</div>";
+                        }
+                    echo '</div>'; 
+                echo '</div>';
+                include '../JS/calendrier.php';
             ?>
         </div>
-    </div>
+    </section>
 
     <script src="../JS/nav.js"></script>
+    
 </body>
 </html>
 

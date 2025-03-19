@@ -16,7 +16,7 @@ document.addEventListener("DOMContentLoaded", function() {
     let currentIndex = <?php echo ($semainesParPage - 1); ?>; // Indice de la semaine actuelle dans l\'affichage
     
     // Position initiale (semaine actuelle au centre)
-    const initialTransform = -((pageActuelle - 1) * (100 / (totalSemaines / semainesParPage)));
+    const initialTransform = -((pageActuelle - 1) * semainesParPage * 100);
     container.style.transform = `translateX(${initialTransform}%)`;
     
     // Mise à jour de l\'indicateur de semaine
@@ -90,8 +90,8 @@ document.addEventListener("DOMContentLoaded", function() {
     
     // Fonction pour naviguer vers un index spécifique
     function navigateToIndex(index) {
-        const percentPerSemaine = 100 / totalSemaines;
-        const translateX = -(index * percentPerSemaine);
+    // Chaque semaine prend 100% de la largeur, donc déplacez de 100% par semaine
+        const translateX = -(index * 100);
         container.style.transform = `translateX(${translateX}%)`;
         updateIndicator();
     }
@@ -102,7 +102,8 @@ document.addEventListener("DOMContentLoaded", function() {
         const newIndex = (page - 1) * semainesParPage;
         currentIndex = newIndex;
         
-        const translateX = -(newIndex * (100 / totalSemaines));
+        // Chaque semaine prend 100% de la largeur
+        const translateX = -(newIndex * 100);
         container.style.transform = `translateX(${translateX}%)`;
         
         updatePaginationButtons();
@@ -194,63 +195,116 @@ document.addEventListener("DOMContentLoaded", function() {
     });
     
     datePicker.addEventListener("change", function() {
-        const selectedDate = new Date(this.value);
-        const formattedDate = formatDate(selectedDate);
+    const selectedDate = new Date(this.value);
+    const formattedDate = formatDate(selectedDate);
+    
+    // Affiche la date sélectionnée
+    selectedDateText.textContent = formattedDate;
+    
+    // Trouver directement le jour correspondant à la date
+    const selectedDayElement = document.querySelector(`.jour[data-date="${this.value}"]`);
+    
+    if (selectedDayElement) {
+        // Trouver la semaine parent qui contient ce jour
+        const parentWeek = selectedDayElement.closest(".semaine");
         
-        // Affiche la date sélectionnée
-        selectedDateText.textContent = formattedDate;
-        
-        // Trouve la semaine correspondante
-        const dayOfWeek = selectedDate.getDay(); // 0 = dimanche, 1 = lundi, etc.
-        const year = selectedDate.getFullYear();
-        
-        // Calcule le numéro de la semaine
-        const firstDayOfYear = new Date(year, 0, 1);
-        const pastDaysOfYear = (selectedDate - firstDayOfYear) / 86400000;
-        const weekNumber = Math.ceil((pastDaysOfYear + firstDayOfYear.getDay() + 1) / 7);
-        
-        // Trouve l\'index de la semaine dans notre container
-        const weeks = document.querySelectorAll(".semaine");
-        let targetIndex = -1;
-        
-        for (let i = 0; i < weeks.length; i++) {
-            const weekAttr = parseInt(weeks[i].getAttribute("data-semaine"));
-            const yearAttr = parseInt(weeks[i].getAttribute("data-annee"));
+        if (parentWeek) {
+            // Récupérer l'index de cette semaine
+            const targetIndex = parseInt(parentWeek.getAttribute("data-index"));
             
-            if (weekAttr === weekNumber && yearAttr === year) {
-                targetIndex = parseInt(weeks[i].getAttribute("data-index"));
-                break;
-            }
-        }
-        
-        // Si la semaine est trouvée, on y navigue
-        if (targetIndex !== -1) {
-            currentIndex = targetIndex;
-            navigateToIndex(currentIndex);
-            
-            // Mise à jour de la page
-            const newPage = Math.floor(currentIndex / semainesParPage) + 1;
-            if (newPage !== pageActuelle) {
+            if (!isNaN(targetIndex)) {
+                // Mettre à jour l'index courant
+                currentIndex = targetIndex;
+                
+                // Calculer la page correspondante
+                const newPage = Math.floor(targetIndex / semainesParPage) + 1;
                 pageActuelle = newPage;
+                
+                // Appliquer la translation pour afficher cette semaine
+                const translateX = -(targetIndex * 100);
+                container.style.transform = `translateX(${translateX}%)`;
+                
+                // Mettre à jour l'interface
                 updatePaginationButtons();
+                updateIndicator();
+                
+                // Surligner le jour sélectionné
+                resetDateHighlight();
+                selectedDayElement.classList.add("highlighted");
+                
+                // Faire défiler horizontalement pour afficher le jour sélectionné
+                selectedDayElement.scrollIntoView({
+                    behavior: "smooth",
+                    block: "nearest",
+                    inline: "center"
+                });
+                
+                return; // Sortir de la fonction si nous avons trouvé directement le jour
             }
-            
-            // Surligne le jour sélectionné
-            highlightSelectedDay(this.value);
-            
-            // Scroll vers le jour sélectionné
-            const selectedDayElement = document.querySelector(`.jour[data-date="${this.value}"]`);
-            if (selectedDayElement) {
-                selectedDayElement.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "center" });
-            }
-        } else {
-            alert("La date sélectionnée n\'est pas dans la plage des semaines affichées.");
         }
-    });
+    }
+    
+    // Code existant pour le calcul de la semaine si on n'a pas trouvé directement le jour
+    const year = selectedDate.getFullYear();
+    
+    // Calcule le numéro de la semaine
+    const firstDayOfYear = new Date(year, 0, 1);
+    const pastDaysOfYear = (selectedDate - firstDayOfYear) / 86400000;
+    const weekNumber = Math.ceil((pastDaysOfYear + firstDayOfYear.getDay() + 1) / 7);
+    
+    // Trouve l'index de la semaine dans notre container
+    const weeks = document.querySelectorAll(".semaine");
+    let targetIndex = -1;
+    
+    for (let i = 0; i < weeks.length; i++) {
+        const weekAttr = parseInt(weeks[i].getAttribute("data-semaine"));
+        const yearAttr = parseInt(weeks[i].getAttribute("data-annee"));
+        
+        if (weekAttr === weekNumber && yearAttr === year) {
+            targetIndex = parseInt(weeks[i].getAttribute("data-index"));
+            break;
+        }
+    }
+    
+    // Si la semaine est trouvée, on y navigue
+    if (targetIndex !== -1) {
+        currentIndex = targetIndex;
+        
+        // Calculer la page correspondante
+        const newPage = Math.floor(targetIndex / semainesParPage) + 1;
+        pageActuelle = newPage;
+        
+        // Appliquer la translation pour afficher cette semaine
+        const translateX = -(targetIndex * 100);
+        container.style.transform = `translateX(${translateX}%)`;
+        
+        // Mettre à jour l'interface
+        updatePaginationButtons();
+        updateIndicator();
+        
+        // Tenter à nouveau de trouver et surligner le jour correspondant
+        setTimeout(() => {
+            const dayElement = document.querySelector(`.jour[data-date="${this.value}"]`);
+            if (dayElement) {
+                resetDateHighlight();
+                dayElement.classList.add("highlighted");
+                dayElement.scrollIntoView({
+                    behavior: "smooth",
+                    block: "nearest",
+                    inline: "center"
+                });
+            }
+        }, 300); // Délai court pour laisser le temps à la transition de se produire
+    } else {
+        alert("La date sélectionnée n'est pas dans la plage des semaines affichées.");
+    }
+});
     
     function formatDate(date) {
-        const options = { weekday: "long", day: "numeric", month: "long", year: "numeric" };
-        return date.toLocaleDateString("fr-FR", options);
+        const day = String(date.getDate()).padStart(2, '0');
+        const month = String(date.getMonth() + 1).padStart(2, '0');
+        const year = date.getFullYear();
+        return `${day}/${month}/${year}`;
     }
     
     function resetDateHighlight() {
@@ -288,4 +342,4 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     }
 });
-</script>
+</script>   
