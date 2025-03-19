@@ -63,17 +63,43 @@ CREATE TABLE `donnees_journee` (
 
 -- --------------------------------------------------------
 
---
--- Table structure for table `menu`
---
+-- CREATE TABLE menus (
+--     id INT AUTO_INCREMENT PRIMARY KEY,
+--     nom VARCHAR(255) NOT NULL,
+--     description TEXT,
+--     date_menu DATE NOT NULL,
+--     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+-- );
 
-CREATE TABLE `menu` (
-  `id` int NOT NULL,
-  `entree` varchar(255) DEFAULT NULL,
-  `plat` varchar(255) DEFAULT NULL,
-  `dessert` varchar(255) DEFAULT NULL,
-  `nom_menu` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+-- INSERT INTO menus (nom, description, date_menu) VALUES
+-- ('Menu du jour', 'Description du menu du jour', '2023-03-20');
+
+-- UPDATE menus
+-- SET nom = 'Nouveau nom du menu', description = 'Nouvelle description'
+-- WHERE id = 1;
+
+-- CREATE TABLE `menu` (
+--   `id` int NOT NULL,
+--   `entree` varchar(255) DEFAULT NULL,
+--   `plat` varchar(255) DEFAULT NULL,
+--   `dessert` varchar(255) DEFAULT NULL,
+--   `nom_menu` varchar(255) DEFAULT NULL
+-- ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+
+CREATE TABLE menu (
+    id INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
+    nom_menu VARCHAR(255) NOT NULL,
+    date_menu DATE NOT NULL
+);
+
+CREATE TABLE aliments (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    id_menu INT NOT NULL,
+    nom VARCHAR(255) NOT NULL,
+    type ENUM('entree', 'plat', 'dessert') NOT NULL,
+    FOREIGN KEY (id_menu) REFERENCES menu(id) ON DELETE CASCADE
+);
 
 --
 -- Dumping data for table `menu`
