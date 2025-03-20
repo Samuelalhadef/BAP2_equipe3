@@ -61,7 +61,21 @@ CREATE TABLE `donnees_journee` (
   `nb_repas_non_consommes` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- --------------------------------------------------------
+CREATE TABLE vote (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    option_name VARCHAR(50) NOT NULL,
+    date_vote DATE NOT NULL,
+    choix ENUM('petite faim', 'grande faim') NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Insert initial vote options
+INSERT INTO vote (option_name, vote_count) VALUES
+('J\'aime bien', 0),
+('J\'aime moyen', 0),
+('J\'aime pas', 0);
+
+
 
 --
 -- Table structure for table `menu`
@@ -80,8 +94,17 @@ CREATE TABLE `menu` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
--- Indexes for dumped tables
---
+
+CREATE TABLE donnees_journee (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    date_jour DATE NOT NULL,
+    poids_dechets INT NOT NULL,
+    poids_pain INT NOT NULL,
+    nb_repas_prevues INT NOT NULL,
+    nb_repas_adultes INT NOT NULL,
+    nb_repas_non_consommes INT NOT NULL
+);
+
 
 --
 -- Indexes for table `connexion`
