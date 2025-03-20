@@ -32,15 +32,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['vote'])) {
         <?php endif; ?>
 
         <form method="POST" action="" class="vote-form">
-            <div class="form-group">
-                <label for="nom">Ton prénom :</label>
-                <input type="text" id="nom" name="nom" required>
-            </div>
-
-            <div class="form-group">
-                <label for="classe">Ta classe :</label>
-                <input type="text" id="classe" name="classe" required>
-            </div>
 
             <div class="vote-options">
                 <button type="submit" name="vote" value="petite" class="vote-button petite-faim">
