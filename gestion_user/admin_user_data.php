@@ -14,44 +14,47 @@
 <body>
     <h1>Gestion des utilisateurs</h1>
     <?php
-        session_start();
+    session_start();
 
-        // Vérifiez si l'utilisateur est connecté
-        if (!isset($_SESSION['email'])) {
-            header('Location: ../log_sign/login.php'); // Updated path to login.php
-            exit;
+    // Vérifiez si l'utilisateur est connecté
+    if (!isset($_SESSION['email'])) {
+        header('Location: ../log_sign/login.php'); // Updated path to login.php
+        exit;
+    }
+
+    // Vérifiez si l'utilisateur est un admin
+    if (!isset($_SESSION['is_admin']) || $_SESSION['is_admin'] !== 1) {
+        echo "<p>Accès refusé. Vous n'êtes pas autorisé à accéder à cette page.</p>";
+        exit;
+    }
+
+    // On accède à la base de donnée
+    require_once '../bdd.php';
+
+    // Requête SQL pour récupérer les données des utilisateurs
+    $sql = "SELECT menu.id, menu.entree, menu.plat, menu.garniture, menu.produit_laitier, menu.dessert, menu.divers, menu.nom_menu 
+            FROM menu";
+    $result = $connexion->query($sql);
+
+    if ($result->rowCount() > 0) {
+        echo "<table border='1'>";
+        echo "<tr><th>ID</th><th>Entrée</th><th>Plat</th><th>Garniture</th><th>Produit Laitier</th><th>Dessert</th><th>Divers</th><th>Nom du Menu</th></tr>";
+        while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
+            echo "<tr>";
+            echo "<td>" . htmlspecialchars($row['id']) . "</td>";
+            echo "<td>" . htmlspecialchars($row['entree']) . "</td>";
+            echo "<td>" . htmlspecialchars($row['plat']) . "</td>";
+            echo "<td>" . htmlspecialchars($row['garniture']) . "</td>";
+            echo "<td>" . htmlspecialchars($row['produit_laitier']) . "</td>";
+            echo "<td>" . htmlspecialchars($row['dessert']) . "</td>";
+            echo "<td>" . htmlspecialchars($row['divers']) . "</td>";
+            echo "<td>" . htmlspecialchars($row['nom_menu']) . "</td>";
+            echo "</tr>";
         }
-
-        // Vérifiez si l'utilisateur est un admin
-        if (!isset($_SESSION['is_admin']) || $_SESSION['is_admin'] !== 1) {
-            echo "<p>Accès refusé. Vous n'êtes pas autorisé à accéder à cette page.</p>";
-            exit;
-        }
-
-        // On accède à la base de donnée
-        require_once '../bdd.php';
-
-        // Requête SQL pour récupérer les données des utilisateurs
-        $sql = "SELECT connexion.email, menu.entree, menu.plat, menu.dessert 
-                FROM connexion 
-                LEFT JOIN menu ON connexion.menu_id = menu.id";
-        $result = $connexion->query($sql);
-
-        if ($result->rowCount() > 0) {
-            echo "<table border='1'>";
-            echo "<tr><th>Email</th><th>Entrée</th><th>Plat</th><th>Dessert</th></tr>";
-            while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
-                echo "<tr>";
-                echo "<td>" . htmlspecialchars($row['email']) . "</td>";
-                echo "<td>" . htmlspecialchars($row['entree']) . "</td>";
-                echo "<td>" . htmlspecialchars($row['plat']) . "</td>";
-                echo "<td>" . htmlspecialchars($row['dessert']) . "</td>";
-                echo "</tr>";
-            }
-            echo "</table>";
-        } else {
-            echo "<p>Aucune donnée utilisateur trouvée.</p>";
-        }
+        echo "</table>";
+    } else {
+        echo "<p>Aucun menu trouvé.</p>";
+    }
     ?>
 </body>
 

@@ -14,45 +14,82 @@
 <body>
     <h1>Accueil Admin - Gestion des utilisateurs</h1>
     <?php
-        session_start();
+    session_start();
 
-        // Vérifiez si l'utilisateur est connecté
-        if (!isset($_SESSION['email'])) {
-            header('Location: ../log_sign/login.php'); // Updated path to login.php
-            exit;
-        }
+    // Vérifiez si l'utilisateur est connecté
+    if (!isset($_SESSION['email'])) {
+        header('Location: ../log_sign/login.php');
+        exit;
+    }
 
-        // Vérifiez si l'utilisateur est un admin
-        if (!isset($_SESSION['is_admin']) || $_SESSION['is_admin'] !== 1) {
-            echo "<p>Accès refusé. Vous n'êtes pas autorisé à accéder à cette page.</p>";
-            exit;
-        }
+    // Vérifiez si l'utilisateur est un admin
+    if (!isset($_SESSION['is_admin']) || $_SESSION['is_admin'] !== 1) {
+        echo "<p>Accès refusé. Vous n'êtes pas autorisé à accéder à cette page.</p>";
+        exit;
+    }
 
-        // On accède à la base de donnée
-        require_once '../bdd.php'; // Ensure the correct relative path to bdd.php
+    require_once '../bdd.php';
 
-        // Requête SQL pour récupérer les données des utilisateurs
-        $sql = "SELECT connexion.id, connexion.email, menu.entree, menu.plat, menu.dessert 
-                FROM connexion 
-                LEFT JOIN menu ON menu.id = menu.id"; // Removed reference to connexion.menu_id
-        $result = $connexion->query($sql);
+    // Handle deletion
+    if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete_id'])) {
+        $deleteId = $_POST['delete_id'];
+        $deleteSql = "DELETE FROM connexion WHERE id = :id";
+        $deleteStmt = $connexion->prepare($deleteSql);
+        $deleteStmt->execute(['id' => $deleteId]);
+        echo "<p>Utilisateur avec ID $deleteId supprimé avec succès.</p>";
+    }
 
-        if ($result->rowCount() > 0) {
-            echo "<table border='1'>";
-            echo "<tr><th>ID</th><th>Email</th><th>Entrée</th><th>Plat</th><th>Dessert</th></tr>";
-            while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
-                echo "<tr>";
-                echo "<td>" . htmlspecialchars($row['id']) . "</td>";
-                echo "<td>" . htmlspecialchars($row['email']) . "</td>";
-                echo "<td>" . htmlspecialchars($row['entree']) . "</td>";
-                echo "<td>" . htmlspecialchars($row['plat']) . "</td>";
-                echo "<td>" . htmlspecialchars($row['dessert']) . "</td>";
-                echo "</tr>";
-            }
-            echo "</table>";
+    // Handle update
+    if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_id'])) {
+        $updateId = $_POST['update_id'];
+        $newEmail = $_POST['email'] ?? '';
+        $newPassword = $_POST['password'] ?? '';
+
+        if (!empty($newEmail) && !empty($newPassword)) {
+            $updateSql = "UPDATE connexion SET email = :email, mdp = :password WHERE id = :id";
+            $updateStmt = $connexion->prepare($updateSql);
+            $updateStmt->execute([
+                'email' => $newEmail,
+                'password' => $newPassword,
+                'id' => $updateId
+            ]);
+            echo "<p>Utilisateur avec ID $updateId mis à jour avec succès.</p>";
         } else {
-            echo "<p>Aucune donnée utilisateur trouvée.</p>";
+            echo "<p>Veuillez remplir tous les champs pour mettre à jour l'utilisateur.</p>";
         }
+    }
+
+    // Fetch user data
+    $sql = "SELECT id, email FROM connexion";
+    $result = $connexion->query($sql);
+
+    if ($result->rowCount() > 0) {
+        echo "<table border='1'>";
+        echo "<tr><th>ID</th><th>Email</th><th>Actions</th></tr>";
+        while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
+            echo "<tr>";
+            echo "<td>" . htmlspecialchars($row['id'] ?? '') . "</td>";
+            echo "<td>" . htmlspecialchars($row['email'] ?? '') . "</td>";
+            echo "<td>";
+            // Delete form
+            echo "<form method='POST' style='display:inline;'>";
+            echo "<input type='hidden' name='delete_id' value='" . htmlspecialchars($row['id'] ?? '') . "'>";
+            echo "<button type='submit'>Supprimer</button>";
+            echo "</form>";
+            // Update form
+            echo "<form method='POST' style='display:inline; margin-left:10px;'>";
+            echo "<input type='hidden' name='update_id' value='" . htmlspecialchars($row['id'] ?? '') . "'>";
+            echo "<input type='email' name='email' placeholder='Nouvel email' required>";
+            echo "<input type='password' name='password' placeholder='Nouveau mot de passe' required>";
+            echo "<button type='submit'>Modifier</button>";
+            echo "</form>";
+            echo "</td>";
+            echo "</tr>";
+        }
+        echo "</table>";
+    } else {
+        echo "<p>Aucun utilisateur trouvé.</p>";
+    }
     ?>
 </body>
 

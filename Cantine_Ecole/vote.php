@@ -20,32 +20,30 @@ $votes = $result->fetchAll(PDO::FETCH_ASSOC);
 
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vote - Cantine</title>
-    <link rel="stylesheet" href="../CSS/profils.css">
+    <link rel="stylesheet" href="../CSS/vote.css">
 </head>
+
 <body>
     <h1>Votez pour votre opinion sur le menu</h1>
     <form method="POST" action="">
-        <button type="submit" name="vote_option" value="J'aime bien">J'aime bien</button>
-        <button type="submit" name="vote_option" value="J'aime moyen">J'aime moyen</button>
-        <button type="submit" name="vote_option" value="J'aime pas">J'aime pas</button>
+        <button class="green" type="submit" name="vote_option" value="J'aime bien">
+            <p>J'aime bien</p>
+            <img src="../image/Group 81.png" alt="J'aime bien">
+        </button>
+        <button class="orange" type="submit" name="vote_option" value="J'aime moyen">
+            <p>J'aime moyen</p>
+            <img src="../image/Group 71.png" alt="J'aime moyen">
+        </button>
+        <button class="red" type="submit" name="vote_option" value="J'aime pas">
+            <p>J'aime pas</p>
+            <img src="../image/Group 72.png" alt="J'aime pas">
+        </button>
     </form>
-
-    <h2>Résultats des votes</h2>
-    <table border="1">
-        <tr>
-            <th>Option</th>
-            <th>Nombre de votes</th>
-        </tr>
-        <?php foreach ($votes as $vote): ?>
-        <tr>
-            <td><?php echo htmlspecialchars($vote['option_name']); ?></td>
-            <td><?php echo htmlspecialchars($vote['vote_count']); ?></td>
-        </tr>
-        <?php endforeach; ?>
-    </table>
 </body>
+
 </html>
