@@ -14,10 +14,10 @@
         <div>
             <div class="off-screen-menu">
                 <ul class="off-screen-menu-item">
-                    <li><a href="../Mairie/HTML_Admin_Home.php">PAGE D'ACCUEIL</a></li>
-                    <li><a href="../Mairie/HTML_Liste_Menu.php">GESTION DES MENUS</a></li>
-                    <li><a href="#">GESTION DES PROFILS</a></li>
-                    <li><a href="#">SYNTHESE</a></li>
+                    <li><a href="../Cantine_Ecole/HTML_User_Home.php">PAGE D'ACCUEIL</a></li>
+                    <li><a href="../Cantine_Ecole/HTML_Liste_Menu.php">GESTION DES MENUS</a></li>
+                    <li><a href="../Cantine_Ecole/HTML_Vote.php">VOTE DU JOUR</a></li>
+                    <li><a href="../Cantine_Ecole/HTML_Pesee.php">PESEE DU JOUR</a></li>
                 </ul>
                 <ul class="off-screen-menu-plus">
                     <li class="off-screen-menu-item-text"><a href="#">Paramètres&nbsp;&nbsp;</a><i class="fa-solid fa-gear"></i></li>
@@ -170,7 +170,6 @@
                                                             echo "</div>";
                                                         echo "</div>";
                                                     echo "</div>";
-                                                    echo "<button><a href='../Mairie/HTML_Menu_read.php?id=" . $menu['id'] . "'>Voir le menu&nbsp;&nbsp;</a><i class='fa-solid fa-pencil'></i></button>";
                                                     break;
                                                 }
                                             }
@@ -178,7 +177,6 @@
                                             if (!$menuTrouve) {
                                                 echo "<div class='menu_vide'>";
                                                     echo "<p>Pas de menu</p>";
-                                                    echo "<button><a href='../Mairie/HTML_Menu_create.php?date=" . $dateStr . "'>Ajouter&nbsp;&nbsp;</a><i class='fa-solid fa-plus'></i></button>";
                                                 echo "</div>";
                                             }
                                         echo "</div>";

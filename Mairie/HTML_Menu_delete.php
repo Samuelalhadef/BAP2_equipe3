@@ -23,8 +23,8 @@ if (!isset($_SESSION['csrf_menu_add']) || empty($_SESSION['csrf_menu_add'])){
         <div>
             <div class="off-screen-menu">
                 <ul class="off-screen-menu-item">
-                <li><a href="../Mairie/HTML_Admin_Home.php">PAGE D'ACCUEIL</a></li>
-                <li><a href="../Mairie/HTML_Liste_Menu.php">GESTION DES MENUS</a></li>
+                <li><a href="../Mairie/Menu/HTML_Admin_Home.php">PAGE D'ACCUEIL</a></li>
+                <li><a href="../Mairie/Menu/HTML_Liste_Menu.php">GESTION DES MENUS</a></li>
                     <li><a href="#">GESTION DES PROFILS</a></li>
                     <li><a href="#">SYNTHESE</a></li>
                 </ul>

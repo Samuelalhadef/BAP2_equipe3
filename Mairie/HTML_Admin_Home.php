@@ -16,12 +16,12 @@
                 <ul class="off-screen-menu-item">
                 <li><a href="../Mairie/HTML_Admin_Home.php">PAGE D'ACCUEIL</a></li>
                 <li><a href="../Mairie/HTML_Liste_Menu.php">GESTION DES MENUS</a></li>
-                    <li><a href="#">GESTION DES PROFILS</a></li>
-                    <li><a href="#">SYNTHESE</a></li>
+                    <li><a href="../Mairie/HTML_Gestion_profils.php">GESTION DES PROFILS</a></li>
+                    <li><a href="../Mairie/HTML_Synthese.php">SYNTHESE</a></li>
                 </ul>
                 <ul class="off-screen-menu-plus">
                     <li class="off-screen-menu-item-text"><a href="#">Paramètres&nbsp;&nbsp;</a><i class="fa-solid fa-gear"></i></li>
-                    <li class="off-screen-menu-item-text"><a href="#">Se déconnecter&nbsp;&nbsp;</a><i class="fa-solid fa-right-from-bracket"></i></li>
+                    <li class="off-screen-menu-item-text"><a href="../Log_Sign/HTML_Log_Sign.php">Se déconnecter&nbsp;&nbsp;</a><i class="fa-solid fa-right-from-bracket"></i></li>
                 </ul>
             </div>
             <nav>
@@ -66,7 +66,7 @@
             $dateAujourdhui = date('Y-m-d');
 
             // Requête SQL pour récupérer le menu correspondant à la date du jour
-            $sql = "SELECT entree, plat, dessert FROM menu WHERE date_menu = :dateAujourdhui";
+            $sql = "SELECT entree, plat, garniture, produit_laitier, dessert, divers FROM menu WHERE date_menu = :dateAujourdhui";
             $req = $connexion->prepare($sql);
             $req->execute(['dateAujourdhui' => $dateAujourdhui]);
 
@@ -75,20 +75,35 @@
                 // Stocker les valeurs en session
                 $_SESSION['entree'] = $menu['entree'];
                 $_SESSION['plat'] = $menu['plat'];
+                $_SESSION['garniture'] = $menu['garniture'];
+                $_SESSION['produit_laitier'] = $menu['produit_laitier'];
                 $_SESSION['dessert'] = $menu['dessert'];
+                $_SESSION['divers'] = $menu['divers'];
                 
                 echo "<div class='menu_container'>";
                     echo "<div class='menu_details'>";
-                    echo "<p>Entrée :</p>";
-                    echo "<p>" . htmlspecialchars($_SESSION['entree']) . "</p>";
+                        echo "<p>Entrée:&nbsp;</p>";
+                        echo "<p>" . htmlspecialchars($_SESSION['entree']) . "</p>";
                     echo "</div>";
                     echo "<div class='menu_details'>";
-                    echo "<p>Plat :</p>";
-                    echo "<p>" . htmlspecialchars($_SESSION['plat']) . "</p>";
+                        echo "<p>Plat:&nbsp;</p>";
+                        echo "<p>" . htmlspecialchars($_SESSION['plat']) . "</p>";
                     echo "</div>";
                     echo "<div class='menu_details'>";
-                    echo "<p>Dessert :</p>";
-                    echo "<p>" . htmlspecialchars($_SESSION['dessert']) . "</p>";
+                        echo "<p>Garniture:&nbsp;</p>";
+                        echo "<p>" . htmlspecialchars($_SESSION['garniture']) . "</p>";
+                    echo "</div>";
+                    echo "<div class='menu_details'>";
+                        echo "<p>Produit laitier:&nbsp;</p>";
+                        echo "<p>" . htmlspecialchars($_SESSION['produit_laitier']) . "</p>";
+                    echo "</div>";
+                    echo "<div class='menu_details'>";
+                        echo "<p>Dessert:&nbsp;</p>";
+                        echo "<p>" . htmlspecialchars($_SESSION['dessert']) . "</p>";
+                    echo "</div>";
+                    echo "<div class='menu_details'>";
+                        echo "<p>Divers:&nbsp;</p>";
+                        echo "<p>" . htmlspecialchars($_SESSION['divers']) . "</p>";
                     echo "</div>";
                 echo "</div>";
             } else {
@@ -99,11 +114,11 @@
         </div>
         <div class="gestion_profils">
             <h3>GESTION DES PROFILS</h3>
-            <button><a href="HTML">Détails&nbsp;</a><i class="fa-solid fa-arrow-right"></i></button>
+            <button><a href="../Mairie/HTML_Gestion_profils.php">Détails&nbsp;</a><i class="fa-solid fa-arrow-right"></i></button>
         </div>
         <div class="synthese">
             <h3>SYNTHESE</h3>
-            <button><a href="HTML">Détails&nbsp;</a><i class="fa-solid fa-arrow-right"></i></button>
+            <button><a href="../Mairie/HTML_synthese.php">Détails&nbsp;</a><i class="fa-solid fa-arrow-right"></i></button>
         </div>
     </div>
     <script src="../JS/nav.js"></script>

@@ -1,7 +1,7 @@
 <?php
-
 session_start();
 
+// Vérification du token CSRF
 if (!isset($_POST['token']) || $_POST['token'] != $_SESSION['csrf_menu_add']){
     die('<p>CSRF invalide</p>');
 }
@@ -9,30 +9,41 @@ if (!isset($_POST['token']) || $_POST['token'] != $_SESSION['csrf_menu_add']){
 // Supprime le token en session pour qu'il soit regénéré
 unset($_SESSION['csrf_menu_add']);
 
-if (isset($_POST["nom_menu"]) && !empty($_POST["nom_menu"])){
-    $nom_menu = htmlspecialchars($_POST["nom_menu"]);
+// Récupérer les données du formulaire
+if (!isset($_POST['id_menu']) || empty($_POST['id_menu']) || 
+    !isset($_POST['field_name']) || empty($_POST['field_name']) ||
+    !isset($_POST['field_value'])) {
+    die('<p>Données manquantes pour la modification</p>');
 }
-else {
-    echo "<p>Le nom du menu est obligatoire</p>";
+
+$id_menu = intval($_POST['id_menu']);
+$field_name = $_POST['field_name'];
+$field_value = htmlspecialchars($_POST['field_value']);
+
+// Liste des champs autorisés pour la modification
+$allowed_fields = ['entree', 'plat', 'garniture', 'produit_laitier', 'dessert', 'divers', 'date_menu', 'nom_menu'];
+
+// Vérifier si le champ est valide
+if (!in_array($field_name, $allowed_fields)) {
+    die('<p>Champ non valide pour la modification</p>');
 }
 
-if (isset($nom_menu) && isset($entree) && isset($plat) && isset($dessert)){
+require_once '../bdd.php';
 
-    require_once '../bdd.php';
+// Préparer la requête SQL pour mettre à jour uniquement le champ spécifié
+$sql = "UPDATE menu SET $field_name = :value WHERE id = :id";
+$update = $connexion->prepare($sql);
+$result = $update->execute([
+    'value' => $field_value,
+    'id' => $id_menu
+]);
 
-    $sauvegarde = $connexion->prepare ("UPDATE menu
-                                        SET nom_menu = :nom_menu
-                                        WHERE nom_menu = :nom_menu");
-
-    $sauvegarde->execute(params: ["nom_menu" => $nom_menu]);
-
-    if ($sauvegarde->rowCount() > 0) {
-        echo "<p>Modification des données de la menu réussie</p>";
-        echo "<a href='../Mairie/HTML_Liste_menu.php'>Revenir sur la page des menus</a>";
-    }
-    else {
-        echo "<p>Une erreur est survenue</p>";
-    }
+if ($update->rowCount() > 0) {
+    // Redirection vers la page de détail du menu
+    header('Location: ../Mairie/HTML_menu_read.php?id=' . $id_menu);
+    exit();
+} else {
+    header('Location: ../Mairie/HTML_menu_read.php?id=' . $id_menu);
+    exit();
 }
 ?>
-

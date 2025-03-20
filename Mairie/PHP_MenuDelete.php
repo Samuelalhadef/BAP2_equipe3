@@ -28,7 +28,7 @@ require_once '../bdd.php';
 
     if ($sauvegarde->rowCount() > 0) {
         echo "<p>Suppression des données de la menu réussie</p>";
-        echo "<a href='../Mairie/HTML_Liste_menu.php'>Revenir sur la page de tous les menus</a>";
+        echo "<a href='../Mairie/Menu/HTML_Liste_menu.php'>Revenir sur la page de tous les menus</a>";
     }
     else {
         echo "<p>Une erreur est survenue</p>";
