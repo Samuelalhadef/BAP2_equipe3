@@ -87,7 +87,7 @@ if (!isset($_SESSION['csrf_menu_add']) || empty($_SESSION['csrf_menu_add'])){
                 </div>
             </div>
             <input type="hidden" name="token" value="<?= $_SESSION['csrf_menu_add']; ?>">
-            <input type="submit" name="ajouter" value="Ajouter">
+            <input type="submit" name="ajouter" value="Sauvegarder">
         </form>
     </section>
     
