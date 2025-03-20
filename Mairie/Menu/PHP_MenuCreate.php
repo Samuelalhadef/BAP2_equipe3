@@ -68,7 +68,7 @@ else {
 if (isset($date_menu) && isset($nom_menu) && isset($entree) && isset($plat) && isset($garniture) && isset($produit_laitier) && isset($dessert) && isset($divers)){
     // Pas d'erreur => on sauvegarde le menu
 
-    require_once '../bdd.php';
+    require_once '../../bdd.php';
 
     // Vérifier le slug (pas de caractères spéciaux ni d'espaces)
 
@@ -78,7 +78,7 @@ if (isset($date_menu) && isset($nom_menu) && isset($entree) && isset($plat) && i
     $sauvegarde->execute(params: ["date_menu" => $date_menu, "nom_menu" => $nom_menu, "entree" => $entree, "plat" => $plat, "garniture" => $garniture, "produit_laitier" => $produit_laitier, "dessert" => $dessert, "divers" => $divers]);
 
     if ($sauvegarde->rowCount() > 0) {
-        header('Location: ../Mairie/HTML_Liste_Menu.php');
+        header('Location: ../../Mairie/Menu/HTML_Liste_Menu.php');
         exit();
     }
     else {

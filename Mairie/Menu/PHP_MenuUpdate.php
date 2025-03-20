@@ -28,7 +28,7 @@ if (!in_array($field_name, $allowed_fields)) {
     die('<p>Champ non valide pour la modification</p>');
 }
 
-require_once '../bdd.php';
+require_once '../../bdd.php';
 
 // Préparer la requête SQL pour mettre à jour uniquement le champ spécifié
 $sql = "UPDATE menu SET $field_name = :value WHERE id = :id";
@@ -40,10 +40,10 @@ $result = $update->execute([
 
 if ($update->rowCount() > 0) {
     // Redirection vers la page de détail du menu
-    header('Location: ../Mairie/HTML_menu_read.php?id=' . $id_menu);
+    header('Location: ../../Mairie/Menu/HTML_menu_read.php?id=' . $id_menu);
     exit();
 } else {
-    header('Location: ../Mairie/HTML_menu_read.php?id=' . $id_menu);
+    header('Location: ../../Mairie/Menu/HTML_menu_read.php?id=' . $id_menu);
     exit();
 }
 ?>

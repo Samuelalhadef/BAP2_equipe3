@@ -24,7 +24,7 @@ if (!isset($_SESSION['csrf_connexion_add']) || empty($_SESSION['csrf_connexion_a
             <h1>CONNEXION</h1>
             <div class="textbox">
                 <label for="mail">Votre identifiant</label>
-                <input type="text" name="email" id="email" placeholder="Adresse mail" required>
+                <input type="text" name="identifiant" id="identifiant" placeholder="Adresse mail" required>
                 <br>
                 <label for="mdp">Votre mot de passe</label>
                 <input type="password" name="mdp" id="mdp" placeholder="Mot de passe" required>

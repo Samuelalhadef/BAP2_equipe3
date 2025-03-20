@@ -14,10 +14,10 @@
         <div>
             <div class="off-screen-menu">
                 <ul class="off-screen-menu-item">
-                <li><a href="../Mairie/HTML_Admin_Home.php">PAGE D'ACCUEIL</a></li>
-                <li><a href="../Mairie/HTML_Liste_Menu.php">GESTION DES MENUS</a></li>
-                    <li><a href="../Mairie/HTML_Gestion_profils.php">GESTION DES PROFILS</a></li>
-                    <li><a href="../Mairie/HTML_Synthese.php">SYNTHESE</a></li>
+                    <li><a href="../../Mairie/HTML_Admin_Home.php">PAGE D'ACCUEIL</a></li>
+                    <li><a href="../Mairie/Menu/HTML_Liste_Menu.php">GESTION DES MENUS</a></li>
+                    <li><a href="../Mairie/Gestion_profils/HTML_Gestion_profils.php">GESTION DES PROFILS</a></li>
+                    <li><a href="../Mairie/Synthese/HTML_Synthese.php">SYNTHESE</a></li>
                 </ul>
                 <ul class="off-screen-menu-plus">
                     <li class="off-screen-menu-item-text"><a href="#">Paramètres&nbsp;&nbsp;</a><i class="fa-solid fa-gear"></i></li>
@@ -48,9 +48,9 @@
             session_start();
             
             // On vérifie si l'utilisateur est connecté
-            if(isset($_SESSION['email'])) {
-                // Affichage de l'email stocké dans la session
-                echo "<h2>" . htmlspecialchars($_SESSION['email']) . "</h2>";
+            if(isset($_SESSION['identifiant'])) {
+                // Affichage de l'identifiant stocké dans la session
+                echo "<h2>" . htmlspecialchars($_SESSION['identifiant']) . "</h2>";
             }
             else {
                 echo "<p>Vous n'êtes pas connecté ou la session a expiré.</p>";
@@ -110,15 +110,15 @@
                 echo "<p>Il n'y a pas de menu prévu pour aujourd'hui (" . date('d/m/Y') . ")</p>";
             }
             ?>
-            <button><a href="../Mairie/HTML_Liste_Menu.php">Gestion des menus&nbsp;</a><i class="fa-solid fa-arrow-right"></i></button>
+            <button><a href="../Mairie/Menu/HTML_Liste_Menu.php">Gestion des menus&nbsp;</a><i class="fa-solid fa-arrow-right"></i></button>
         </div>
         <div class="gestion_profils">
             <h3>GESTION DES PROFILS</h3>
-            <button><a href="../Mairie/HTML_Gestion_profils.php">Détails&nbsp;</a><i class="fa-solid fa-arrow-right"></i></button>
+            <button><a href="../Mairie/Gestion_profils/HTML_Gestion_profils.php">Détails&nbsp;</a><i class="fa-solid fa-arrow-right"></i></button>
         </div>
         <div class="synthese">
             <h3>SYNTHESE</h3>
-            <button><a href="../Mairie/HTML_synthese.php">Détails&nbsp;</a><i class="fa-solid fa-arrow-right"></i></button>
+            <button><a href="../Mairie/Synthese/HTML_synthese.php">Détails&nbsp;</a><i class="fa-solid fa-arrow-right"></i></button>
         </div>
     </div>
     <script src="../JS/nav.js"></script>
