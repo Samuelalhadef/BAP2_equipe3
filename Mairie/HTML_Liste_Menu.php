@@ -21,7 +21,7 @@
                 </ul>
                 <ul class="off-screen-menu-plus">
                     <li class="off-screen-menu-item-text"><a href="#">Paramètres&nbsp;&nbsp;</a><i class="fa-solid fa-gear"></i></li>
-                    <li class="off-screen-menu-item-text"><a href="#">Se déconnecter&nbsp;&nbsp;</a><i class="fa-solid fa-right-from-bracket"></i></li>
+                    <li class="off-screen-menu-item-text"><a href="../Log_Sign/HTML_Log_Sign.php">Se déconnecter&nbsp;&nbsp;</a><i class="fa-solid fa-right-from-bracket"></i></li>
                 </ul>
             </div>
             <nav>
@@ -143,16 +143,39 @@
                                                 if (isset($menu['date_menu']) && $menu['date_menu'] == $dateStr) {
                                                     echo "<div class='menu_bloc'>";
                                                         echo "<div class='menu_details'>";
-                                                            echo "<p>Entrée :</p>";
-                                                            echo "<p>" . htmlspecialchars($menu['entree']) ."</p>";
-                                                            echo "<p>Plat :</p>";
-                                                            echo "<p>" . htmlspecialchars($menu['plat']) . "</p>";
-                                                            echo "<p>Dessert:</p>";
-                                                            echo "<p>" . htmlspecialchars($menu['dessert']) ."</p>";
+                                                            echo "<div class='menu_details_item'>";
+                                                                echo "<p>Entrée:&nbsp;</p>";
+                                                                echo "<p>" . htmlspecialchars($menu['entree']) ."</p>";
+                                                            echo "</div>";
+                                                            echo "<div class='menu_details_item'>";
+                                                                echo "<p>Plat: &nbsp;</p>";
+                                                                echo "<p>" . htmlspecialchars($menu['plat']) . "</p>";
+                                                            echo "</div>";
+                                                            echo "<div class='menu_details_item'>";
+                                                                echo "<p>Garniture:&nbsp;</p>";
+                                                                echo "<p>" . htmlspecialchars($menu['garniture']) ."</p>";
+                                                            echo "</div>";
+                                                            echo "<div class='menu_details_item'>";
+                                                                echo "<p>Produit laitier:&nbsp;</p>";
+                                                                echo "<p>" . htmlspecialchars($menu['produit_laitier']) ."</p>";
+                                                            echo "</div>";
+                                                            echo "<div class='menu_details_item'>";
+                                                                echo "<p>Dessert:&nbsp;</p>";
+                                                                echo "<p>" . htmlspecialchars($menu['dessert']) ."</p>";
+                                                            echo "</div>";
+                                                            echo "<div class='menu_details_item'>";
+                                                                echo "<p>Divers:&nbsp;</p>";
+                                                                echo "<p>" . htmlspecialchars($menu['divers']) ."</p>";
+                                                            echo "</div>";
                                                         echo "</div>";
-                                                        echo "<button><a href='../Mairie/HTML_Menu_update.php?id=" . $menu['id'] . "'>Modifier&nbsp;&nbsp;</a><i class='fa-solid fa-pencil'></i></button>";
                                                     echo "</div>";
-                                                    $menuTrouve = true;
+                                                    echo "<button><a href='../Mairie/HTML_Menu_read.php?id=" . $menu['id'] . "'>Voir le menu&nbsp;&nbsp;</a><i class='fa-solid fa-pencil'></i></button>";
+                                                    //if ($estAdmin) {
+                                                    //    echo "<button><a href='../Mairie/HTML_Menu_read.php?id=" . $menu['id'] . "'>Voir le menu&nbsp;&nbsp;</a><i class='fa-solid fa-pencil'></i></button>";
+                                                    //}
+                                                    //else {
+                                                    //    $menuTrouve = true;
+                                                    //}
                                                     break;
                                                 }
                                             }

@@ -24,8 +24,8 @@ if (!isset($_SESSION['csrf_menu_add']) || empty($_SESSION['csrf_menu_add'])){
         <div>
             <div class="off-screen-menu">
                 <ul class="off-screen-menu-item">
-                <li><a href="../Mairie/HTML_Admin_Home.php">PAGE D'ACCUEIL</a></li>
-                <li><a href="../Mairie/HTML_Liste_Menu.php">GESTION DES MENUS</a></li>
+                <li><a href="../Mairie/Menu/HTML_Admin_Home.php">PAGE D'ACCUEIL</a></li>
+                <li><a href="../Mairie/Menu/HTML_Liste_Menu.php">GESTION DES MENUS</a></li>
                     <li><a href="#">GESTION DES PROFILS</a></li>
                     <li><a href="#">SYNTHESE</a></li>
                 </ul>
@@ -49,20 +49,42 @@ if (!isset($_SESSION['csrf_menu_add']) || empty($_SESSION['csrf_menu_add'])){
         <form action = "PHP_MenuCreate.php" method = "POST">
             <h2>AJOUTER UN MENU</h2>
             <div class="textbox">
-                <label for="date_menu">Date du menu</label>
-                <input type="date" name="date_menu" id="date_menu" required>
-                <br>
-                <label for="nom_menu">Nom du menu</label>
-                <input type="text" name="nom_menu" id="nom_menu" placeholder="Nom du menu" required>
-                <br>
-                <label for="entree">Entrée</label>
-                <input type="text" name="entree" id="entree" placeholder="Entrée" required>
-                <br>
-                <label for="plat">Plat</label>
-                <input type="text" name="plat" id="plat" placeholder="Plat" required>
-                <br>
-                <label for="dessert">Dessert</label>
-                <input type="text" name="dessert" id="dessert" placeholder="Dessert" required>
+                <div class="infos">
+                    <div class="info_to">
+                        <label for="date_menu">Date du menu</label>
+                        <input type="date" name="date_menu" id="date_menu" required>
+                    </div>
+                    <div class="info_to">
+                        <label for="entree">Entrée</label>
+                        <input type="text" name="entree" id="entree" placeholder="Entrée" required>
+                    </div>
+                    <div class="info_to">
+                        <label for="plat">Plat</label>
+                        <input type="text" name="plat" id="plat" placeholder="Plat" required>
+                    </div>
+                    <div class="info_to">
+                        <label for="garniture">Garniture</label>
+                        <input type="text" name="garniture" id="garniture" placeholder="Garniture" required>
+                    </div>
+                </div>
+                <div class="infos">
+                    <div class="info_to">
+                        <label for="nom_menu">Nom du menu</label>
+                        <input type="text" name="nom_menu" id="nom_menu" placeholder="menu_JJMMAAAA" required>
+                    </div>
+                    <div class="info_to">
+                        <label for="produit_laitier">Produit Laitier</label>
+                        <input type="text" name="produit_laitier" id="produit_laitier" placeholder="Produit laitier" required>
+                    </div>
+                    <div class="info_to">
+                        <label for="dessert">Dessert</label>
+                        <input type="text" name="dessert" id="dessert" placeholder="Dessert" required>
+                    </div>
+                    <div class="info_to">
+                        <label for="divers">Divers</label>
+                        <input type="text" name="divers" id="divers" placeholder="Divers" required>
+                    </div>
+                </div>
             </div>
             <input type="hidden" name="token" value="<?= $_SESSION['csrf_menu_add']; ?>">
             <input type="submit" name="ajouter" value="Ajouter">

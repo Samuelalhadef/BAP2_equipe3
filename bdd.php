@@ -7,4 +7,6 @@ catch (Exception $e){
     die("Erreur SQL :" . $e->getMessage());
 }
 
+//charset utf-8 à mettre
+
 ?>

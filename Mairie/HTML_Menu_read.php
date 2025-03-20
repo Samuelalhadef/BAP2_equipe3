@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="../CSS/crud.css">
-    <title>READ menu</title>
+    <title>Lire le menu</title>
 </head>
 
 <body>
@@ -36,42 +36,78 @@
             </nav>
         </div>
     </header>
+    <p><a href="../Mairie/HTML_Liste_menu.php">Revenir sur la liste des menus</a></p>
 
-    <div>
-        <p><a href="HTML_Liste_menus.php">Revenir sur la liste des menus</a></p>
-        
+    <div class="elements_all">
         <?php
+        // Vérifier si le paramètre "id" est bien présent
+        if (!isset($_GET['id']) || empty($_GET['id'])) {
+            die('<p>Menu introuvable (paramètre manquant)</p>');
+        }
 
-            if (!isset($_GET['menu']) || empty($_GET['menu'])){
-                die('<p>menu introuvable</p>');
-            }
+        require_once '../bdd.php';
 
-            // Connexion à la BDD
-            require_once 'bdd.php';
+        // Récupérer et sécuriser l'ID du menu
+        $id_menu = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
 
-            $getmenu = $connexion -> prepare (
-                query: 'SELECT entree, plat, dessert
-                        FROM menu
-                        WHERE nom_menu = :nom_menu
-                        LIMIT 1'
-            );
+        if (!$id_menu) {
+            die('<p>ID du menu invalide</p>');
+        }
 
-            $getmenu-> execute (params: ['generique' => htmlspecialchars(string: $_GET['menu'])]);
+        // Préparer la requête SQL
+        $getmenu = $connexion->prepare(
+            'SELECT * FROM menu WHERE id = :id LIMIT 1'
+        );
 
-            if ($getmenu->rowCount() == 1) {
-                $menu = $getmenu -> fetch();
-                echo '<h1>', $menu['nom_menu'],'</h1>';
-            }
+        // Exécuter la requête avec l'ID assaini
+        $getmenu->execute(['id' => $id_menu]);
 
-            ?>
-
-        <button><a href='HTML_menu_update.php'>Modifier</a></button>
-        <button><a href='HTML_menu_delete.php'>Supprimer</a></button>
+        if ($getmenu->rowCount() === 1) {
+            $menu = $getmenu->fetch(PDO::FETCH_ASSOC);
+            echo '<div class="elements">';
+                echo '<div class="element">';
+                    echo '<h3>Entrée:</h3>';
+                    echo '<p>' . htmlspecialchars($menu['entree']) . '</p>';
+                    echo '<button><a href="../Mairie/HTML_menu_update.php?id=' . $id_menu . '&field=entree">Modifier<i class="fa-solid fa-pencil"></i></a></button>';
+                echo '</div>';
+                echo '<div class="element">';
+                    echo '<h3>Plat:</h3>';
+                    echo '<p>' . htmlspecialchars($menu['plat']) . '</p>';
+                    echo '<button><a href="../Mairie/HTML_menu_update.php?id=' . $id_menu . '&field=plat">Modifier<i class="fa-solid fa-pencil"></i></a></button>';
+                echo '</div>';
+                echo '<div class="element">';
+                    echo '<h3>Garniture:</h3>';
+                    echo '<p>' . htmlspecialchars($menu['garniture']) . '</p>';
+                    echo '<button><a href="../Mairie/HTML_menu_update.php?id=' . $id_menu . '&field=garniture">Modifier<i class="fa-solid fa-pencil"></i></a></button>';
+                echo '</div>';
+            echo '</div>';
+            
+            echo '<div class="elements">';
+                echo '<div class="element">';
+                    echo '<h3>Produit laitier:</h3>';
+                    echo '<p>' . htmlspecialchars($menu['produit_laitier']) . '</p>';
+                    echo '<button><a href="../Mairie/HTML_menu_update.php?id=' . $id_menu . '&field=produit_laitier">Modifier<i class="fa-solid fa-pencil"></i></a></button>';
+                echo '</div>';
+                echo '<div class="element">';
+                    echo '<h3>Dessert:</h3>';
+                    echo '<p>' . htmlspecialchars($menu['dessert']) . '</p>';
+                    echo '<button><a href="../../Mairie/HTML_menu_update.php?id=' . $id_menu . '&field=dessert">Modifier<i class="fa-solid fa-pencil"></i></a></button>';
+                echo '</div>';
+                echo '<div class="element">';
+                    echo '<h3>Divers:</h3>';
+                    echo '<p>' . htmlspecialchars($menu['divers']) . '</p>';
+                    echo '<button><a href="../Mairie/HTML_menu_update.php?id=' . $id_menu . '&field=divers">Modifier<i class="fa-solid fa-pencil"></i></a></button>';
+                echo '</div>';
+            echo '</div>';
+        }
+        else {
+            echo '<p>Menu introuvable en base de données</p>';
+        }
+        ?>
     </div>
     
     <script src="../JS/nav.js"></script>
 </body>
 </html>
-
 
 

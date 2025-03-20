@@ -66,7 +66,7 @@
             $dateAujourdhui = date('Y-m-d');
 
             // Requête SQL pour récupérer le menu correspondant à la date du jour
-            $sql = "SELECT entree, plat, dessert FROM menu WHERE date_menu = :dateAujourdhui";
+            $sql = "SELECT entree, plat, garniture, produit_laitier, dessert, divers FROM menu WHERE date_menu = :dateAujourdhui";
             $req = $connexion->prepare($sql);
             $req->execute(['dateAujourdhui' => $dateAujourdhui]);
 
@@ -75,27 +75,42 @@
                 // Stocker les valeurs en session
                 $_SESSION['entree'] = $menu['entree'];
                 $_SESSION['plat'] = $menu['plat'];
+                $_SESSION['garniture'] = $menu['garniture'];
+                $_SESSION['produit_laitier'] = $menu['produit_laitier'];
                 $_SESSION['dessert'] = $menu['dessert'];
+                $_SESSION['divers'] = $menu['divers'];
                 
                 echo "<div class='menu_container'>";
                     echo "<div class='menu_details'>";
-                    echo "<p>Entrée :</p>";
-                    echo "<p>" . htmlspecialchars($_SESSION['entree']) . "</p>";
+                        echo "<p>Entrée:&nbsp;</p>";
+                        echo "<p>" . htmlspecialchars($_SESSION['entree']) . "</p>";
                     echo "</div>";
                     echo "<div class='menu_details'>";
-                    echo "<p>Plat :</p>";
-                    echo "<p>" . htmlspecialchars($_SESSION['plat']) . "</p>";
+                        echo "<p>Plat:&nbsp;</p>";
+                        echo "<p>" . htmlspecialchars($_SESSION['plat']) . "</p>";
                     echo "</div>";
                     echo "<div class='menu_details'>";
-                    echo "<p>Dessert :</p>";
-                    echo "<p>" . htmlspecialchars($_SESSION['dessert']) . "</p>";
+                        echo "<p>Garniture:&nbsp;</p>";
+                        echo "<p>" . htmlspecialchars($_SESSION['garniture']) . "</p>";
+                    echo "</div>";
+                    echo "<div class='menu_details'>";
+                        echo "<p>Produit laitier:&nbsp;</p>";
+                        echo "<p>" . htmlspecialchars($_SESSION['produit_laitier']) . "</p>";
+                    echo "</div>";
+                    echo "<div class='menu_details'>";
+                        echo "<p>Dessert:&nbsp;</p>";
+                        echo "<p>" . htmlspecialchars($_SESSION['dessert']) . "</p>";
+                    echo "</div>";
+                    echo "<div class='menu_details'>";
+                        echo "<p>Divers:&nbsp;</p>";
+                        echo "<p>" . htmlspecialchars($_SESSION['divers']) . "</p>";
                     echo "</div>";
                 echo "</div>";
             } else {
                 echo "<p>Il n'y a pas de menu prévu pour aujourd'hui (" . date('d/m/Y') . ")</p>";
             }
             ?>
-            <button><a href="../Mairie/HTML_Liste_Menu.php">Gestion des menus&nbsp;</a><i class="fa-solid fa-arrow-right"></i></button>
+            <button><a href="../Mairie/Menu/HTML_Liste_Menu.php">Gestion des menus&nbsp;</a><i class="fa-solid fa-arrow-right"></i></button>
         </div>
         <div class="gestion_profils">
             <h3>GESTION DES PROFILS</h3>

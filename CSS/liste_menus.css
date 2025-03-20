@@ -79,6 +79,25 @@
     border-radius: 3px;
 }
 
+button{
+    display: flex;
+    justify-content: end;
+    align-items: end;
+    background: none;
+    border: none;
+    font-size: 20px;
+}
+
+.menu_details{
+    display: flex;
+    flex-direction: column ;
+    gap: 20px;
+}
+
+.menu_details_item{
+    display: flex;
+}
+
 .menu_vide {
     margin-top: 10px;
     padding: 10px;
@@ -164,13 +183,4 @@
 .jour.highlighted {
     border: 2px solid #000000;
     background-color: rgba(0, 0, 0, 0.05);
-}
-
-button{
-    display: flex;
-    justify-content: end;
-    align-items: end;
-    background: none;
-    border: none;
-    font-size: 20px;
 }

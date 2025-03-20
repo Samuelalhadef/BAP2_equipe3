@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Mar 18, 2025 at 07:56 AM
+-- Generation Time: Mar 19, 2025 at 02:14 PM
 -- Server version: 8.0.30
 -- PHP Version: 8.3.14
 
@@ -43,7 +43,7 @@ INSERT INTO `connexion` (`id`, `email`, `mdp`) VALUES
 (3, 'aa', 'aa'),
 (4, 'admin', 'admin'),
 (5, 'aaaa', 'aaaa'),
-(6, 'sophielamsova29@gmail.com', 'Fuckyou!:3');
+(7, 'test@gmail.com', 'test');
 
 -- --------------------------------------------------------
 
@@ -63,52 +63,21 @@ CREATE TABLE `donnees_journee` (
 
 -- --------------------------------------------------------
 
--- CREATE TABLE menus (
---     id INT AUTO_INCREMENT PRIMARY KEY,
---     nom VARCHAR(255) NOT NULL,
---     description TEXT,
---     date_menu DATE NOT NULL,
---     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
--- );
-
--- INSERT INTO menus (nom, description, date_menu) VALUES
--- ('Menu du jour', 'Description du menu du jour', '2023-03-20');
-
--- UPDATE menus
--- SET nom = 'Nouveau nom du menu', description = 'Nouvelle description'
--- WHERE id = 1;
-
--- CREATE TABLE `menu` (
---   `id` int NOT NULL,
---   `entree` varchar(255) DEFAULT NULL,
---   `plat` varchar(255) DEFAULT NULL,
---   `dessert` varchar(255) DEFAULT NULL,
---   `nom_menu` varchar(255) DEFAULT NULL
--- ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
-
-CREATE TABLE menu (
-    id INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
-    nom_menu VARCHAR(255) NOT NULL,
-    date_menu DATE NOT NULL
-);
-
-CREATE TABLE aliments (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    id_menu INT NOT NULL,
-    nom VARCHAR(255) NOT NULL,
-    type ENUM('entree', 'plat', 'dessert') NOT NULL,
-    FOREIGN KEY (id_menu) REFERENCES menu(id) ON DELETE CASCADE
-);
-
 --
--- Dumping data for table `menu`
+-- Table structure for table `menu`
 --
 
-INSERT INTO `menu` (`id`, `entree`, `plat`, `dessert`, `nom_menu`) VALUES
-(3, 'Macédoine', 'Nuggets Frites', 'Tarte au chocolat', 'Menu du 17/03'),
-(4, 'Macédoine', 'Nuggets Frites', 'Tarte au chocolat', 'Menu du 17/03'),
-(5, 'Macédoine', 'Nuggets Frites', 'Tarte au chocolat', 'Menu du 17/03');
+CREATE TABLE `menu` (
+  `id` int NOT NULL,
+  `entree` varchar(50) NOT NULL,
+  `plat` varchar(50) NOT NULL,
+  `garniture` varchar(50) NOT NULL,
+  `produit_laitier` varchar(50) NOT NULL,
+  `dessert` varchar(50) NOT NULL,
+  `divers` varchar(50) NOT NULL,
+  `date_menu` date DEFAULT NULL,
+  `nom_menu` varchar(50) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Indexes for dumped tables
@@ -140,7 +109,7 @@ ALTER TABLE `menu`
 -- AUTO_INCREMENT for table `connexion`
 --
 ALTER TABLE `connexion`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `donnees_journee`
@@ -152,7 +121,7 @@ ALTER TABLE `donnees_journee`
 -- AUTO_INCREMENT for table `menu`
 --
 ALTER TABLE `menu`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
