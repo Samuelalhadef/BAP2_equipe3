@@ -91,7 +91,7 @@ i{
     justify-content: center;
 }
 
-.element button{
+.element button, .back{
     display: flex;
     justify-content: end;
     align-items: center;

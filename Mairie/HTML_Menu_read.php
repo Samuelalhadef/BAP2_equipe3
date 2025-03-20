@@ -36,7 +36,7 @@
             </nav>
         </div>
     </header>
-    <p><a href="../Mairie/HTML_Liste_menu.php">Revenir sur la liste des menus</a></p>
+    <button class="back"><a href="../Mairie/HTML_Liste_menu.php"><i class="fa-solid fa-arrow-left"></i>Revenir sur la liste des menus</a></button>
 
     <div class="elements_all">
         <?php

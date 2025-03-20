@@ -113,7 +113,7 @@
                 echo "<p>Il n'y a pas de menu prévu pour aujourd'hui (" . date('d/m/Y') . ")</p>";
             }
             ?>
-            <button><a href="../Mairie/HTML_Liste_Menu.php">Gestion des menus&nbsp;</a><i class="fa-solid fa-arrow-right"></i></button>
+            <button><a href="../Cantine_Ecole/HTML_Liste_Menu.php">Gestion des menus&nbsp;</a><i class="fa-solid fa-arrow-right"></i></button>
         </div>
 
         <div class="gestion_vote">

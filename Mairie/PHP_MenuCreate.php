@@ -78,7 +78,7 @@ if (isset($date_menu) && isset($nom_menu) && isset($entree) && isset($plat) && i
     $sauvegarde->execute(params: ["date_menu" => $date_menu, "nom_menu" => $nom_menu, "entree" => $entree, "plat" => $plat, "garniture" => $garniture, "produit_laitier" => $produit_laitier, "dessert" => $dessert, "divers" => $divers]);
 
     if ($sauvegarde->rowCount() > 0) {
-        header('Location: ../Mairie/Menu/HTML_Liste_Menu.php');
+        header('Location: ../Mairie/HTML_Liste_Menu.php');
         exit();
     }
     else {

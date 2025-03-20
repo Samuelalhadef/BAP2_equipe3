@@ -16,12 +16,12 @@
                 <ul class="off-screen-menu-item">
                 <li><a href="../Mairie/HTML_Admin_Home.php">PAGE D'ACCUEIL</a></li>
                 <li><a href="../Mairie/HTML_Liste_Menu.php">GESTION DES MENUS</a></li>
-                    <li><a href="#">GESTION DES PROFILS</a></li>
-                    <li><a href="#">SYNTHESE</a></li>
+                    <li><a href="../Mairie/HTML_Gestion_profils.php">GESTION DES PROFILS</a></li>
+                    <li><a href="../Mairie/HTML_Synthese.php">SYNTHESE</a></li>
                 </ul>
                 <ul class="off-screen-menu-plus">
                     <li class="off-screen-menu-item-text"><a href="#">Paramètres&nbsp;&nbsp;</a><i class="fa-solid fa-gear"></i></li>
-                    <li class="off-screen-menu-item-text"><a href="#">Se déconnecter&nbsp;&nbsp;</a><i class="fa-solid fa-right-from-bracket"></i></li>
+                    <li class="off-screen-menu-item-text"><a href="../Log_Sign/HTML_Log_Sign.php">Se déconnecter&nbsp;&nbsp;</a><i class="fa-solid fa-right-from-bracket"></i></li>
                 </ul>
             </div>
             <nav>
@@ -110,15 +110,15 @@
                 echo "<p>Il n'y a pas de menu prévu pour aujourd'hui (" . date('d/m/Y') . ")</p>";
             }
             ?>
-            <button><a href="../Mairie/Menu/HTML_Liste_Menu.php">Gestion des menus&nbsp;</a><i class="fa-solid fa-arrow-right"></i></button>
+            <button><a href="../Mairie/HTML_Liste_Menu.php">Gestion des menus&nbsp;</a><i class="fa-solid fa-arrow-right"></i></button>
         </div>
         <div class="gestion_profils">
             <h3>GESTION DES PROFILS</h3>
-            <button><a href="HTML">Détails&nbsp;</a><i class="fa-solid fa-arrow-right"></i></button>
+            <button><a href="../Mairie/HTML_Gestion_profils.php">Détails&nbsp;</a><i class="fa-solid fa-arrow-right"></i></button>
         </div>
         <div class="synthese">
             <h3>SYNTHESE</h3>
-            <button><a href="HTML">Détails&nbsp;</a><i class="fa-solid fa-arrow-right"></i></button>
+            <button><a href="../Mairie/HTML_synthese.php">Détails&nbsp;</a><i class="fa-solid fa-arrow-right"></i></button>
         </div>
     </div>
     <script src="../JS/nav.js"></script>
