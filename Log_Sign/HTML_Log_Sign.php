@@ -20,7 +20,7 @@ if (!isset($_SESSION['csrf_connexion_add']) || empty($_SESSION['csrf_connexion_a
 </head>
 <body>
     <section class="formulaire_CandI">
-        <form action="PHP_Connexion.php" method="POST">
+        <form action="PHP_connexion.php" method="POST">
             <h1>CONNEXION</h1>
             <div class="textbox">
                 <label for="mail">Votre identifiant</label>
@@ -32,7 +32,7 @@ if (!isset($_SESSION['csrf_connexion_add']) || empty($_SESSION['csrf_connexion_a
             <input type="hidden" name="token" value="<?php echo htmlspecialchars($_SESSION['csrf_connexion_add']); ?>">
             <button type="submit" name="connexion"><i class="fa-solid fa-arrow-right"></i></button>
             <br>
-            <p>Pas de compte ? <a href="HTML_Inscription.php">Inscrivez-vous-ici !</a></p>
+            <p>Pas de compte ? <a href="../Log_Sign/HTML_Inscription.php">Inscrivez-vous-ici !</a></p>
         </form>
     </section>
 </body>
