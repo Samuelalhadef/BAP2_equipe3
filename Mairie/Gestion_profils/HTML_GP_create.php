@@ -2,8 +2,8 @@
 
 session_start();
 
-if (!isset($_SESSION['csrf_menu_add']) || empty($_SESSION['csrf_menu_add'])){
-    $_SESSION['csrf_menu_add'] = bin2hex(random_bytes(32));
+if (!isset($_SESSION['csrf_gestionprofils_add']) || empty($_SESSION['csrf_gestionprofils_add'])){
+    $_SESSION['csrf_gestionprofils_add'] = bin2hex(random_bytes(32));
 }
 
 ?>
@@ -76,15 +76,15 @@ if (!isset($_SESSION['csrf_menu_add']) || empty($_SESSION['csrf_menu_add'])){
                     </div>
                     <div class="info_to">
                         <label for="garniture">Mot de passe</label>
-                        <input type="text" name="garniture" id="garniture" placeholder="Garniture" required>
+                        <input type="text" name="mdp" id="mdp" placeholder="Mot de passe" required>
                     </div>
                     <div class="info_to">
                         <label for="nom_menu">Commentaire</label>
-                        <textarea type="text" name="commentaire" id="commentaire" placeholder="Ajouter un commentaire"></textarea>
+                        <textarea type="text" name="commentaire" id="commentaire" placeholder="Ajouter un commentaire" cols="5" rows="10" required></textarea>
                     </div>
                 </div>
             </div>
-            <input type="hidden" name="token" value="<?= $_SESSION['csrf_menu_add']; ?>">
+            <input type="hidden" name="token" value="<?= $_SESSION['csrf_gestionprofils_add']; ?>">
             <input type="submit" name="ajouter" value="Sauvegarder">
         </form>
     </section>
