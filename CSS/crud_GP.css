@@ -1,0 +1,58 @@
+@import url("./globals.css");
+
+.crud_GP{
+    padding: 0 50px;
+}
+
+.textbox{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 60vh;
+}
+
+.infos{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.infos2{
+    display: flex;
+    flex-direction: row;
+}
+
+.info_to{
+    display: flex;
+    flex-direction: column;
+    padding: 0 10px;
+    width: 100%;
+}
+
+label{
+    margin-bottom: 15px;
+    font-size: 20px;
+}
+
+input{
+    padding: 10px 10px;
+    border-radius: 10px;
+    width: 100%;
+    height: 10vh;
+}
+
+input::placeholder{
+    width: 100%;
+}
+
+a{
+    color: var(--secondary);
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+button{
+    border-radius: 30px;
+}

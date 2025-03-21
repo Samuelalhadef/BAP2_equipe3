@@ -35,7 +35,7 @@
         </div>
     </header>
     
-    <div class="name_user_admin">
+    <section class="name_user_admin">
         <h1>BONJOUR,</h1>
         <?php
             $servername = "localhost";
@@ -56,9 +56,9 @@
                 echo "<p>Vous n'êtes pas connecté ou la session a expiré.</p>";
             }
         ?>
-    </div>
+    </section>
 
-    <div class="container_profils">
+    <section class="container_profils">
         <div class="menu_recap">
             <h3>MENU DU JOUR</h3>
             <?php
@@ -120,7 +120,7 @@
             <h3>SYNTHESE</h3>
             <button><a href="../Mairie/Synthese/HTML_synthese.php">Détails&nbsp;</a><i class="fa-solid fa-arrow-right"></i></button>
         </div>
-    </div>
+        </section>
     <script src="../JS/nav.js"></script>
 </body>
 </html>
