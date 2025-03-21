@@ -29,21 +29,24 @@ $votes = $result->fetchAll(PDO::FETCH_ASSOC);
 </head>
 
 <body>
-    <h1>Votez pour votre opinion sur le menu</h1>
-    <form method="POST" action="">
-        <button class="green" type="submit" name="vote_option" value="J'aime bien">
-            <p>J'aime bien</p>
-            <img src="../image/Group 81.png" alt="J'aime bien">
-        </button>
-        <button class="orange" type="submit" name="vote_option" value="J'aime moyen">
-            <p>J'aime moyen</p>
-            <img src="../image/Group 71.png" alt="J'aime moyen">
-        </button>
-        <button class="red" type="submit" name="vote_option" value="J'aime pas">
+    <section class="section-vote">
+        <h1>Votez pour votre opinion sur le menu</h1>
+        <div class="vote-container2">
+            <form class="vote-form" method="POST" action="">
+            <button class="green" type="submit" name="vote_option" value="J'aime bien">
+                <p>J'aime bien</p>
+                <img src="../image/Group 81.png" alt="J'aime bien">
+            </button>
+            <button class="orange" type="submit" name="vote_option" value="J'aime moyen">
+                <p>J'aime moyen</p>
+                <img src="../image/Group 71.png" alt="J'aime moyen">
+            </button>
+            <button class="red" type="submit" name="vote_option" value="J'aime pas">
             <p>J'aime pas</p>
-            <img src="../image/Group 72.png" alt="J'aime pas">
-        </button>
-    </form>
+                <img src="../image/Group 72.png" alt="J'aime pas">
+            </button>
+        </form>
+    </section>
 </body>
 
 </html>
