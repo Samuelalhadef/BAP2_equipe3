@@ -8,14 +8,16 @@
     display: flex;
     flex-direction: row;
     justify-content: center;
-    align-items: center;
+    align-items: start;
     width: 100%;
     height: 60vh;
+    margin: 20px 0 30px 0;
 }
 
 .infos{
     display: flex;
     flex-direction: column;
+    justify-content: start;
     width: 100%;
 }
 
@@ -27,12 +29,12 @@
 .info_to{
     display: flex;
     flex-direction: column;
-    padding: 0 10px;
+    padding: 15px 10px;
     width: 100%;
 }
 
 label{
-    margin-bottom: 15px;
+    margin-bottom: 5px;
     font-size: 20px;
 }
 
@@ -40,7 +42,9 @@ input{
     padding: 10px 10px;
     border-radius: 10px;
     width: 100%;
-    height: 10vh;
+    height: 8vh;
+    border: 3px solid black;
+    font-size: 18px;
 }
 
 input::placeholder{
@@ -55,4 +59,14 @@ a{
 
 button{
     border-radius: 30px;
+}
+
+textarea{
+    padding: 10px 10px;
+    border-radius: 10px;
+    border: 3px solid black;
+    width: 100%;
+    height: 20vh;
+    font-family: var(--font-family);
+    font-size: 18px;
 }

@@ -59,7 +59,7 @@
 </head>
 <body>
     <header>
-        <p>Nom du projet<p>
+        <p>EcoMiam<p>
         <p>Date du jour<p>
         <div>
             <div class="off-screen-menu">

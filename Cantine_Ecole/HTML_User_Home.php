@@ -9,7 +9,7 @@
 </head>
 <body>
     <header>
-        <p>Nom du projet<p>
+        <p>EcoMiam<p>
         <p>Date du jour<p>
         <div>
             <div class="off-screen-menu">
@@ -51,9 +51,9 @@
             session_start();
             
             // On vérifie si l'utilisateur est connecté
-            if(isset($_SESSION['email'])) {
-                // Affichage de l'email stocké dans la session
-                echo "<h2>" . htmlspecialchars($_SESSION['email']) . "</h2>";
+            if(isset($_SESSION['identifiant'])) {
+                // Affichage de l'identifiant stocké dans la session
+                echo "<h2>" . htmlspecialchars($_SESSION['identifiant']) . "</h2>";
             }
             else {
                 echo "<p>Vous n'êtes pas connecté ou la session a expiré.</p>";

@@ -19,7 +19,7 @@ if (!isset($_SESSION['csrf_gestionprofils_add']) || empty($_SESSION['csrf_gestio
 </head>
 <body>
     <header>
-        <p>Nom du projet<p>
+        <p>EcoMiam<p>
         <p>Date du jour<p>
         <div>
             <div class="off-screen-menu">
