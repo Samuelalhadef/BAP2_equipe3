@@ -1,6 +1,6 @@
 body {
-    font-family: 'Roboto', sans-serif;
-    background-color: #f0f4f8;
+    font-family: 'Verdana', sans-serif;
+    background-color: #eaf2f8;
     margin: 0;
     padding: 0;
     display: flex;
@@ -11,9 +11,9 @@ body {
 }
 
 h1 {
-    font-size: 28px;
-    color: #2c3e50;
-    margin-bottom: 20px;
+    font-size: 30px;
+    color: #34495e;
+    margin-bottom: 25px;
     text-align: center;
 }
 
@@ -21,13 +21,13 @@ h1 {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 30px;
+    gap: 25px;
     width: 100%;
     max-width: 800px;
-    padding: 20px;
+    padding: 30px;
     background-color: #ffffff;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 15px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
 }
 
 .vote-options {
@@ -45,16 +45,16 @@ h1 {
     justify-content: center;
     width: 180px;
     height: 220px;
-    border-radius: 15px;
-    background: linear-gradient(145deg, #e6e9ef, #ffffff);
-    box-shadow: 6px 6px 12px #d1d4d8, -6px -6px 12px #ffffff;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border-radius: 20px;
+    background-color: #ffffff;
+    border: 2px solid #dcdde1;
+    transition: transform 0.3s ease, border-color 0.3s ease;
     cursor: pointer;
 }
 
 .vote-card:hover {
-    transform: translateY(-10px);
-    box-shadow: 8px 8px 16px #c9ccd1, -8px -8px 16px #ffffff;
+    transform: translateY(-5px);
+    border-color: #3498db;
 }
 
 .vote-button {
@@ -71,10 +71,10 @@ h1 {
 }
 
 .vote-button p {
-    font-size: 16px;
+    font-size: 18px;
     font-weight: bold;
-    color: #34495e;
-    margin-bottom: 10px;
+    color: #2c3e50;
+    margin-bottom: 15px;
 }
 
 .vote-button img {
@@ -83,26 +83,26 @@ h1 {
 }
 
 .green {
-    background-color: #d4edda;
+    background-color: #a8e6cf;
 }
 
 .orange {
-    background-color: #ffe8cc;
+    background-color: #ffd3b6;
 }
 
 .red {
-    background-color: #f8d7da;
+    background-color: #ffaaa5;
 }
 
 .back-link {
     margin-top: 20px;
     text-decoration: none;
-    color: #3498db;
+    color: #e74c3c;
     font-size: 16px;
     font-weight: bold;
 }
 
 .back-link:hover {
     text-decoration: underline;
-    color: #2980b9;
+    color: #c0392b;
 }
