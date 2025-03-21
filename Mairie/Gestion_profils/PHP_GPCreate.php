@@ -56,7 +56,7 @@ if (isset($_POST["mdp"]) && !empty($_POST["mdp"])){
 
 // Validation du mot de passe
 if (isset($_POST["commentaire"]) && !empty($_POST["commentaire"])){
-    $mdp = htmlspecialchars($_POST["commentaire"]);
+    $commentaire = htmlspecialchars($_POST["commentaire"]);
 } else {
     $errors[] = "Le commentaire est obligatoire";
 }

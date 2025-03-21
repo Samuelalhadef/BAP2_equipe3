@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Mar 19, 2025 at 02:14 PM
+-- Generation Time: Mar 21, 2025 at 09:13 AM
 -- Server version: 8.0.30
 -- PHP Version: 8.3.14
 
@@ -29,21 +29,17 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `connexion` (
   `id` int NOT NULL,
-  `email` varchar(255) DEFAULT NULL,
-  `mdp` varchar(255) DEFAULT NULL
+  `identifiant` varchar(50) NOT NULL,
+  `mdp` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `connexion`
 --
 
-INSERT INTO `connexion` (`id`, `email`, `mdp`) VALUES
-(1, 'aaa', 'aaa'),
-(2, 'aa', 'aa'),
-(3, 'aa', 'aa'),
-(4, 'admin', 'admin'),
-(5, 'aaaa', 'aaaa'),
-(7, 'test@gmail.com', 'test');
+INSERT INTO `connexion` (`id`, `identifiant`, `mdp`) VALUES
+(1, 'aaaa', 'aaaa'),
+(2, 'admin', 'admin');
 
 -- --------------------------------------------------------
 
@@ -61,21 +57,24 @@ CREATE TABLE `donnees_journee` (
   `nb_repas_non_consommes` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
-CREATE TABLE vote (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    option_name VARCHAR(50) NOT NULL,
-    date_vote DATE NOT NULL,
-    choix ENUM('petite faim', 'grande faim') NOT NULL,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-);
+-- --------------------------------------------------------
 
--- Insert initial vote options
-INSERT INTO vote (option_name, vote_count) VALUES
-('J\'aime bien', 0),
-('J\'aime moyen', 0),
-('J\'aime pas', 0);
+--
+-- Table structure for table `gestionprofils`
+--
 
+CREATE TABLE `gestionprofils` (
+  `id` int NOT NULL,
+  `nom` varchar(100) NOT NULL,
+  `adresse` varchar(255) DEFAULT NULL,
+  `identifiant` varchar(50) DEFAULT NULL,
+  `mdp` varchar(255) DEFAULT NULL,
+  `commentaire` text,
+  `code_postal` int NOT NULL,
+  `ville` varchar(50) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
+-- --------------------------------------------------------
 
 --
 -- Table structure for table `menu`
@@ -94,29 +93,43 @@ CREATE TABLE `menu` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
+-- Dumping data for table `menu`
+--
 
-CREATE TABLE donnees_journee (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    date_jour DATE NOT NULL,
-    poids_dechets INT NOT NULL,
-    poids_pain INT NOT NULL,
-    nb_repas_prevues INT NOT NULL,
-    nb_repas_adultes INT NOT NULL,
-    nb_repas_non_consommes INT NOT NULL
-);
+INSERT INTO `menu` (`id`, `entree`, `plat`, `garniture`, `produit_laitier`, `dessert`, `divers`, `date_menu`, `nom_menu`) VALUES
+(1, 'dsdc', 'Nuggets Frites', 'Aucun', 'Yaourt', 'Tarte au chocolat', 'pain', '2025-03-19', 'menu_19032025'),
+(2, 'Salade César', 'Lasagnes', 'Aucun', 'Yaourt', 'tarte a la fraise', 'Pain à l&#039;ail', '2025-03-20', 'menu_20032025'),
+(3, 'salade de pâtes', 'pizza 4 fromages', 'frites', 'fromages', 'tiramisu', 'pain', '2025-03-21', 'menu_21032025'),
+(4, 'ghyjklm', 'Nuggets Frites', 'frites', 'fromages', 'Tarte au chocolat', 'pain', '2025-03-25', 'menu_25032025'),
+(5, 'Macédoine', 'Nuggets Frites', 'Aucun', 'Yaourt', 'Tarte au chocolat', 'pain', '2025-03-25', 'menu_25032025'),
+(6, 'Macédoine', 'dfg', 'Aucun', 'Yaourt', 'Crumble à la pomme', 'pain a l&#039;ail', '2025-03-17', 'menu_17032025'),
+(7, 'Macédoine', 'dfg', 'Aucun', 'Yaourt', 'Crumble à la pomme', 'pain a l&#039;ail', '2025-03-17', 'menu_17032025');
 
+--
+-- Indexes for dumped tables
+--
 
 --
 -- Indexes for table `connexion`
 --
 ALTER TABLE `connexion`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `identifiant` (`identifiant`),
+  ADD KEY `idx_mot_de_passe` (`mdp`);
 
 --
 -- Indexes for table `donnees_journee`
 --
 ALTER TABLE `donnees_journee`
   ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `gestionprofils`
+--
+ALTER TABLE `gestionprofils`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `identifiant` (`identifiant`),
+  ADD KEY `fk_mot_de_passe` (`mdp`);
 
 --
 -- Indexes for table `menu`
@@ -132,7 +145,7 @@ ALTER TABLE `menu`
 -- AUTO_INCREMENT for table `connexion`
 --
 ALTER TABLE `connexion`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `donnees_journee`
@@ -141,10 +154,27 @@ ALTER TABLE `donnees_journee`
   MODIFY `id` int NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT for table `gestionprofils`
+--
+ALTER TABLE `gestionprofils`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT for table `menu`
 --
 ALTER TABLE `menu`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `gestionprofils`
+--
+ALTER TABLE `gestionprofils`
+  ADD CONSTRAINT `fk_mot_de_passe` FOREIGN KEY (`mdp`) REFERENCES `connexion` (`mdp`),
+  ADD CONSTRAINT `gestionprofils_ibfk_1` FOREIGN KEY (`identifiant`) REFERENCES `connexion` (`identifiant`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

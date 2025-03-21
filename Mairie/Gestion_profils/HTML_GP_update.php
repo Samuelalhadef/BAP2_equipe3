@@ -96,7 +96,7 @@ if (!$profil) {
                     </div>
                     <div class="info_to">
                         <label for="nom_menu">Commentaire</label>
-                        <textarea type="text" name="commentaire" id="commentaire" value="<?= htmlspecialchars($profil['commentaire']); ?>" cols="5" rows="10" required></textarea>
+                        <textarea name="commentaire" id="commentaire" cols="5" rows="10" required><?= htmlspecialchars($profil['commentaire']); ?></textarea>
                     </div>
                 </div>
             </div>

@@ -2,8 +2,8 @@
 
 session_start();
 
-if (!isset($_SESSION['csrf_menu_add']) || empty($_SESSION['csrf_menu_add'])){
-    $_SESSION['csrf_menu_add'] = bin2hex(random_bytes(32));
+if (!isset($_SESSION['csrf_gestionprofils_add']) || empty($_SESSION['csrf_gestionprofils_add'])){
+    $_SESSION['csrf_gestionprofils_add'] = bin2hex(random_bytes(32));
 }
 
 ?>
@@ -13,8 +13,8 @@ if (!isset($_SESSION['csrf_menu_add']) || empty($_SESSION['csrf_menu_add'])){
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../CSS/crud_menu.css">
-    <title>Modifier une menu</title>
+    <link rel="stylesheet" href="../../CSS/crud_GP.css">
+    <title></title>
 </head>
 <body>
     <header>

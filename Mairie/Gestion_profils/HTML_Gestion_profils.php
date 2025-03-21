@@ -72,8 +72,7 @@
 
                         echo "<div class='profile-actions'>";
                             echo "<button class='edit'><a href='../../Mairie/Gestion_profils/HTML_GP_update.php?id=" . $rep['id'] . "' class='edit-btn'>Modifier&nbsp;<i class='fa-solid fa-pencil'></i></a></button>";
-                            echo "<button class='delete'><a href='../../Mairie/Gestion_profils/HTML_GP_delete.php?id=" . $rep['id'] . "' class='delete-btn' onclick='return confirm(\"Êtes-vous sûr de vouloir supprimer ce profil?\")'>Supprimer&nbsp;<i class='fa-solid fa-trash'></i></a></button>";
-                        echo "</div>";
+                            echo "<button class='delete' onclick='openDeleteModal(" . $rep['id'] . ")'>Supprimer&nbsp;<i class='fa-solid fa-trash'></i></button>";                          echo "</div>";
                     echo "</div>";
                 }
                 echo "</div>";
@@ -83,6 +82,84 @@
             ?>
         </div>
     </section>
+    <!-- Modal de confirmation de suppression -->
+    <div id="deleteModal" class="modal">
+        <div class="modal-content">
+            <h3>Confirmation de suppression</h3>
+            <p>Êtes-vous sûr de vouloir supprimer ce profil ?</p>
+            <p>Cette action est irréversible.</p>
+            <div class="modal-buttons">
+                <button class="cancel-delete" onclick="closeDeleteModal()">Annuler</button>
+                <button class="confirm-delete" id="confirmDelete">Supprimer</button>
+            </div>
+        </div>
+    </div>
+<style>
+    /* Style pour le modal de confirmation */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5);
+}
+
+.modal-content {
+    background-color: #fff;
+    margin: 15% auto;
+    padding: 20px;
+    border-radius: 5px;
+    width: 80%;
+    max-width: 400px;
+    text-align: center;
+}
+
+.modal-buttons {
+    margin-top: 20px;
+}
+
+.modal-buttons button {
+    margin: 0 10px;
+    padding: 8px 16px;
+    border-radius: 4px;
+}
+
+.confirm-delete {
+    background-color: #d9534f;
+    color: white;
+    border: none;
+}
+
+.cancel-delete {
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+}
+</style>
+    <script>
+        let profileIdToDelete = null;
+
+        function openDeleteModal(id) {
+            profileIdToDelete = id;
+            document.getElementById('deleteModal').style.display = 'block';
+            document.getElementById('confirmDelete').onclick = function() {
+                window.location.href = '../../Mairie/Gestion_profils/PHP_GPDelete.php?id=' + profileIdToDelete;
+            };
+        }
+
+        function closeDeleteModal() {
+            document.getElementById('deleteModal').style.display = 'none';
+        }
+
+        // Fermer le modal si l'utilisateur clique en dehors
+        window.onclick = function(event) {
+            if (event.target == document.getElementById('deleteModal')) {
+                closeDeleteModal();
+            }
+        }
+    </script>
     <script src="../../JS/nav.js"></script>
 </body>
 </html>

@@ -42,30 +42,36 @@ $params = [
 
 // Vérification et gestion du mot de passe
 if (!empty($_POST['mdp'])) {
-    $mdp = password_hash(trim($_POST['mdp']), PASSWORD_BCRYPT);
-
+    $mdp = trim($_POST['mdp']); // Mot de passe non haché pour la concordance des clés étrangères
+    $mdp_hashed = password_hash($mdp, PASSWORD_BCRYPT);
+    
     // Vérifier si l'identifiant existe déjà dans `connexion`
     $sql_check = "SELECT COUNT(*) FROM connexion WHERE identifiant = :identifiant";
     $check = $connexion->prepare($sql_check);
     $check->execute(['identifiant' => $identifiant]);
-
+    
     if ($check->fetchColumn() == 0) {
-        // Insérer l'identifiant et le mot de passe s'ils n'existent pas
+        // Insérer l'identifiant et le mot de passe non haché dans connexion
         $sql_insert = "INSERT INTO connexion (identifiant, mdp) VALUES (:identifiant, :mdp)";
         $insert = $connexion->prepare($sql_insert);
         $insert->execute(['identifiant' => $identifiant, 'mdp' => $mdp]);
+    } else {
+        // Mettre à jour le mot de passe dans la table connexion
+        $sql_update_conn = "UPDATE connexion SET mdp = :mdp WHERE identifiant = :identifiant";
+        $update_conn = $connexion->prepare($sql_update_conn);
+        $update_conn->execute(['identifiant' => $identifiant, 'mdp' => $mdp]);
     }
-
-    // Ajouter le mot de passe à la mise à jour
+    
+    // Ajouter le mot de passe à la mise à jour de gestionprofils
     $sql = "UPDATE gestionprofils SET 
-            nom = :nom, adresse = :adresse, code_postal = :code_postal, ville = :ville, 
-            identifiant = :identifiant, mdp = :mdp, commentaire = :commentaire 
+            nom = :nom, adresse = :adresse, code_postal = :code_postal, ville = :ville,
+            identifiant = :identifiant, mdp = :mdp, commentaire = :commentaire
             WHERE id = :id";
-    $params['mdp'] = $mdp;
+    $params['mdp'] = $mdp; // Utiliser le même mot de passe non haché
 } else {
     $sql = "UPDATE gestionprofils SET 
-            nom = :nom, adresse = :adresse, code_postal = :code_postal, ville = :ville, 
-            identifiant = :identifiant, commentaire = :commentaire 
+            nom = :nom, adresse = :adresse, code_postal = :code_postal, ville = :ville,
+            identifiant = :identifiant, commentaire = :commentaire
             WHERE id = :id";
 }
 

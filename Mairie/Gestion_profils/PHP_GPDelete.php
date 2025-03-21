@@ -1,38 +1,48 @@
 <?php
-
 session_start();
+require_once '../../bdd.php';
 
-if (!isset($_POST['token']) || $_POST['token'] != $_SESSION['csrf_menu_add']){
-    die('<p>CSRF invalide</p>');
+// Vérification de la présence d'un ID
+if (!isset($_GET['id']) || empty($_GET['id'])) {
+    die('<p>Identifiant manquant</p>');
 }
 
-// Supprime le token en session pour qu'il soit regénéré
-unset($_SESSION['csrf_menu_add']);
+$id_gestionprofils = intval($_GET['id']);
 
-if (isset($_POST["nom"]) && !empty($_POST["nom"])){
-    $nom = htmlspecialchars($_POST["nom"]);
-}
-else {
-    echo "<p>Le nom du menu est obligatoire</p>";
-}
+// Vérification que le profil existe
+$verify = $connexion->prepare("SELECT id, identifiant FROM gestionprofils WHERE id = :id");
+$verify->execute(['id' => $id_gestionprofils]);
+$profil = $verify->fetch(PDO::FETCH_ASSOC);
 
-
-if (isset($nom_menu) && isset($entree) && isset($plat) && isset($dessert)){
-
-require_once '../bdd.php';
-
-    $sauvegarde = $connexion->prepare ("DELETE FROM menu
-                                        WHERE nom_menu = :nom_menu");
-
-    $sauvegarde->execute(params: ["nom_menu" => $nom_menu]);
-
-    if ($sauvegarde->rowCount() > 0) {
-        echo "<p>Suppression des données de la menu réussie</p>";
-        echo "<a href='../Mairie/Menu/HTML_Liste_menu.php'>Revenir sur la page de tous les menus</a>";
-    }
-    else {
-        echo "<p>Une erreur est survenue</p>";
-    }
+if (!$profil) {
+    die('<p>Profil non trouvé</p>');
 }
 
+// Récupération de l'identifiant pour supprimer aussi dans la table connexion
+$identifiant = $profil['identifiant'];
+
+try {
+    // Démarrer une transaction pour garantir l'intégrité des données
+    $connexion->beginTransaction();
+    
+    // Supprimer les dépendances dans la table gestionprofils
+    $delete_dependances = $connexion->prepare("DELETE FROM gestionprofils WHERE identifiant = :identifiant");
+    $delete_dependances->execute(['identifiant' => $identifiant]);
+    
+    // Supprimer d'abord les références dans la table connexion
+    $delete_connexion = $connexion->prepare("DELETE FROM connexion WHERE identifiant = :identifiant");
+    $delete_connexion->execute(['identifiant' => $identifiant]);
+    
+    // Valider la transaction
+    $connexion->commit();
+    
+    // Rediriger vers la liste des profils avec un message de succès
+    header('Location: ../../Mairie/Gestion_profils/HTML_Gestion_profils.php?deleted=1');
+    exit();
+    
+} catch (PDOException $e) {
+    // En cas d'erreur, annuler la transaction
+    $connexion->rollBack();
+    die('<p>Erreur lors de la suppression: ' . $e->getMessage() . '</p>');
+}
 ?>
