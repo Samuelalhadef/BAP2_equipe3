@@ -49,7 +49,7 @@
 //                echo '<h3>Produit laitier:</h3>';
 //                echo '<p>' . htmlspecialchars($menu['produit_laitier']) . '</p>';
 //                echo '<div class="line">';
-//                    echo '<button><a href="../../Mairie/Menu/HTML_menu_update.php?id=' . $id_menu . '&field=produit_laitier">Modifier<i class="fa-solid fa-pencil"></i></a></button>';
+//                    
 //                    echo '<button class="vote-button" data-type="produit_laitier" data-value="' . htmlspecialchars($menu['produit_laitier']) . '">Voter pour ce produit laitier</button>';
 //                echo '</div>';
 //            echo '</div>';

@@ -9,8 +9,8 @@
 </head>
 <body>
     <header>
-        <p>EcoMiam<p>
-        <p>Date du jour<p>
+        <p>EcoMiam</p>
+        <p id="date"></p>
         <div>
             <div class="off-screen-menu">
                 <ul class="off-screen-menu-item">
@@ -177,7 +177,7 @@
                                             
                                             if (!$menuTrouve) {
                                                 echo "<div class='menu_vide'>";
-                                                    echo "<p>Pas de menu</p>";
+                                                    echo "<p>Pas de menu pour ce jour</p>";
                                                     echo "<button><a href='../../Mairie/Menu/HTML_Menu_create.php?date=" . $dateStr . "'>Ajouter&nbsp;&nbsp;</a><i class='fa-solid fa-plus'></i></button>";
                                                 echo "</div>";
                                             }

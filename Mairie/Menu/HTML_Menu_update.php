@@ -59,8 +59,8 @@
 </head>
 <body>
     <header>
-        <p>EcoMiam<p>
-        <p>Date du jour<p>
+        <p>EcoMiam</p>
+        <p id="date"></p>
         <div>
             <div class="off-screen-menu">
                 <ul class="off-screen-menu-item">

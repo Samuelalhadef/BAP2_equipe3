@@ -1,13 +1,21 @@
-//document.addEventListener("DOMContentLoaded", function () {
-//    const toggleButton = document.querySelector(".menu-toggle");
-//    const menu = document.querySelector(".nav-menu");
-//
-//    toggleButton.addEventListener("click", function () {
-//        const isExpanded = toggleButton.getAttribute("aria-expanded") === "true";
-//        toggleButton.setAttribute("aria-expanded", !isExpanded);
-//        menu.classList.toggle("active");
-//    });
-//});
+document.addEventListener('DOMContentLoaded', function() {
+    // Obtenir la date actuelle
+    const today = new Date();
+
+    // Tableaux des jours de la semaine et des mois
+    const daysOfWeek = ['DIMANCHE', 'LUNDI', 'MARDI', 'MERCREDI', 'JEUDI', 'VENDREDI', 'SAMEDI'];
+    const monthsOfYear = ['JANVIER', 'FÉVRIER', 'MARS', 'AVRIL', 'MAI', 'JUIN', 'JUILLET', 'AOÛT', 'SEPTEMBRE', 'OCTOBRE', 'NOVEMBRE', 'DÉCEMBRE'];
+
+    // Obtenir le jour de la semaine et le mois
+    const dayOfWeek = daysOfWeek[today.getDay()];
+    const day = today.getDate();
+    const month = monthsOfYear[today.getMonth()];
+    const year = today.getFullYear();
+
+    const formattedDate = `${dayOfWeek} ${day} ${month} ${year}`;
+
+    document.getElementById('date').textContent = formattedDate;
+});
 
 const hamMenu = document.querySelector('.ham-menu');
 const offScreenMenu = document.querySelector('.off-screen-menu');
@@ -24,3 +32,4 @@ document.getElementById("open-calendar").addEventListener("click", function() {
 document.getElementById("date-picker").addEventListener("change", function() {
     document.getElementById("selected-date").innerText = "Date sélectionnée : " + this.value;
 });
+

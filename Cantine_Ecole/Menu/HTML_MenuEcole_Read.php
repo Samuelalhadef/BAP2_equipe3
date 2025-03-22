@@ -11,15 +11,16 @@
 
 <body>
     <header>
-        <p>EcoMiam<p>
-        <p>Date du jour<p>
+        <p>EcoMiam</p>
+        <p id="date"></p>
         <div>
             <div class="off-screen-menu">
                 <ul class="off-screen-menu-item">
-                    <li><a href="../Cantine_Ecole/HTML_User_Home.php">PAGE D'ACCUEIL</a></li>
-                    <li><a href="../Cantine_Ecole/HTML_Liste_Menu.php">GESTION DES MENUS</a></li>
-                    <li><a href="../Cantine_Ecole/HTML_Vote.php">VOTE DU JOUR</a></li>
-                    <li><a href="../Cantine_Ecole/HTML_Pesee.php">PESEE DU JOUR</a></li>
+                    <li><a href="../../Cantine_Ecole/HTML_User_Home.php">PAGE D'ACCUEIL</a></li>
+                    <li><a href="../../Cantine_Ecole/Menu/HTML_ListeEcole_Menu.php">GESTION DES MENUS</a></li>
+                    <li><a href="../../Cantine_Ecole/Vote/HTML_Vote.php">VOTE DU JOUR</a></li>
+                    <li><a href="../../Cantine_Ecole/Pesee/HTML_Pesee.php">PESEE DU JOUR</a></li>
+                    <li><a href="../../Cantine_Ecole/Synthese/HTML_Synthese.php">SYNTHESE</a></li>
                 </ul>
                 <ul class="off-screen-menu-plus">
                     <li class="off-screen-menu-item-text"><a href="#">Paramètres&nbsp;&nbsp;</a><i class="fa-solid fa-gear"></i></li>
@@ -37,7 +38,7 @@
         </div>
     </header>
 
-    <button class="back"><a href="../../Mairie/Menu/HTML_Liste_menu.php"><i class="fa-solid fa-arrow-left"></i>Revenir sur la liste des menus</a></button>
+    <button class="back"><a href="../../Cantine_Ecole/Menu/HTML_ListeEcole_menu.php"><i class="fa-solid fa-arrow-left"></i>Revenir sur la liste des menus</a></button>
 
     <div class="elements_all">
         
@@ -65,26 +66,17 @@
             echo '<div class="element">';
                 echo '<h3>Entrée:</h3>';
                 echo '<p>' . htmlspecialchars($menu['entree']) . '</p>';
-                echo '<div class="line">';
-                    echo '<button><a href="../../Mairie/Menu/HTML_menu_update.php?id=' . $id_menu . '&field=entree">Modifier<i class="fa-solid fa-pencil"></i></a></button>';
-                    echo '<button class="vote-button" data-type="entree" data-value="' . htmlspecialchars($menu['entree']) . '">Ajouter au vote cette entrée</button>';
-                echo '</div>';
+                echo '<button class="vote-button" data-type="entree" data-value="' . htmlspecialchars($menu['entree']) . '">Ajouter au vote cette entrée</button>';
             echo '</div>';
             echo '<div class="element">';
                 echo '<h3>Plat:</h3>';
                 echo '<p>' . htmlspecialchars($menu['plat']) . '</p>';
-                echo '<div class="line">';
-                    echo '<button><a href="../../Mairie/Menu/HTML_menu_update.php?id=' . $id_menu . '&field=plat">Modifier<i class="fa-solid fa-pencil"></i></a></button>';
-                    echo '<button class="vote-button" data-type="plat" data-value="' . htmlspecialchars($menu['plat']) . '">Ajouter au vote ce plat</button>';
-                echo '</div>';
+                echo '<button class="vote-button" data-type="plat" data-value="' . htmlspecialchars($menu['plat']) . '">Ajouter au vote ce plat</button>';
             echo '</div>';
             echo '<div class="element">';
                 echo '<h3>Garniture:</h3>';
                 echo '<p>' . htmlspecialchars($menu['garniture']) . '</p>';
-                echo '<div class="line">';
-                    echo '<button><a href="../../Mairie/Menu/HTML_menu_update.php?id=' . $id_menu . '&field=garniture">Modifier<i class="fa-solid fa-pencil"></i></a></button>';
-                    echo '<button class="vote-button" data-type="garniture" data-value="' . htmlspecialchars($menu['garniture']) . '">Ajouter au vote cette garniture</button>';
-                echo '</div>';
+                echo '<button class="vote-button" data-type="garniture" data-value="' . htmlspecialchars($menu['garniture']) . '">Ajouter au vote cette garniture</button>';
             echo '</div>';
         echo '</div>';
         
@@ -92,26 +84,17 @@
             echo '<div class="element">';
                 echo '<h3>Produit laitier:</h3>';
                 echo '<p>' . htmlspecialchars($menu['produit_laitier']) . '</p>';
-                echo '<div class="line">';
-                    echo '<button><a href="../../Mairie/Menu/HTML_menu_update.php?id=' . $id_menu . '&field=produit_laitier">Modifier<i class="fa-solid fa-pencil"></i></a></button>';
-                    echo '<button class="vote-button" data-type="produit_laitier" data-value="' . htmlspecialchars($menu['produit_laitier']) . '">Ajouter au vote ce produit laitier</button>';
-                echo '</div>';
+                echo '<button class="vote-button" data-type="produit_laitier" data-value="' . htmlspecialchars($menu['produit_laitier']) . '">Ajouter au vote ce produit laitier</button>';
             echo '</div>';
             echo '<div class="element">';
                 echo '<h3>Dessert:</h3>';
                 echo '<p>' . htmlspecialchars($menu['dessert']) . '</p>';
-                echo '<div class="line">';
-                    echo '<button><a href="../../Mairie/Menu/HTML_menu_update.php?id=' . $id_menu . '&field=dessert">Modifier<i class="fa-solid fa-pencil"></i></a></button>';
-                    echo '<button class="vote-button" data-type="dessert" data-value="' . htmlspecialchars($menu['dessert']) . '">Ajouter au vote ce dessert</button>';
-                echo '</div>';
+                echo '<button class="vote-button" data-type="dessert" data-value="' . htmlspecialchars($menu['dessert']) . '">Ajouter au vote ce dessert</button>';
             echo '</div>';
             echo '<div class="element">';
                 echo '<h3>Divers:</h3>';
                 echo '<p>' . htmlspecialchars($menu['divers']) . '</p>';
-                echo '<div class="line">';
-                    echo '<button><a href="../../Mairie/Menu/HTML_menu_update.php?id=' . $id_menu . '&field=divers">Modifier<i class="fa-solid fa-pencil"></i></a></button>';
-                    echo '<button class="vote-button" data-type="divers" data-value="' . htmlspecialchars($menu['divers']) . '">Ajouter au vote divers</button>';
-                echo '</div>';
+                echo '<button class="vote-button" data-type="divers" data-value="' . htmlspecialchars($menu['divers']) . '">Ajouter au vote divers</button>';
             echo '</div>';
         echo '</div>';
         
@@ -140,5 +123,5 @@ echo '<button id="openVotePopup" class="open-popup-btn">Voter pour le menu</butt
 
 
 <?php
-            //include 'PHP_MenuRead.php'; 
-        ?>
+    //include 'PHP_MenuRead.php'; 
+?>
