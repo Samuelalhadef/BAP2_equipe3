@@ -167,7 +167,7 @@
                 echo "<p>Pas de vote prévu pour aujourd'hui</p>";
             }
             ?>
-            <button><a href="../../Cantine_Ecole/Vote/HTML_Vote.php">Détails&nbsp;</a><i class="fa-solid fa-arrow-right"></i></button>
+            <button><a href="../../Cantine_Ecole/Vote/HTML_Interface_vote.php">Détails&nbsp;</a><i class="fa-solid fa-arrow-right"></i></button>
         </div>
         <div class="pesee">
             <h3>PESEE DU JOUR</h3>

@@ -39,7 +39,7 @@
 
     <button class="back"><a href="../../Mairie/Menu/HTML_Liste_menu.php"><i class="fa-solid fa-arrow-left"></i>Revenir sur la liste des menus</a></button>
 
-    <div class="elements_all">
+    <section class="elements_all">
         <?php
         // Vérifier si le paramètre "id" est bien présent
         if (!isset($_GET['id']) || empty($_GET['id'])) {
@@ -105,7 +105,7 @@
             echo '<p>Menu introuvable en base de données</p>';
         }
         ?>
-    </div>
+    </section>
     
     <script src="../../JS/nav.js"></script>
     <script src="../../JS/enregistrement.js"></script>
