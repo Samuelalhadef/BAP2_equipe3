@@ -69,7 +69,10 @@
                 echo '<div class="element">';
                     echo '<h3>Entrée:</h3>';
                     echo '<p>' . htmlspecialchars($menu['entree']) . '</p>';
-                    echo '<button><a href="../../Mairie/Menu/HTML_menu_update.php?id=' . $id_menu . '&field=entree">Modifier<i class="fa-solid fa-pencil"></i></a></button>';
+                    echo '<div class="line">';
+                        echo '<button id="saveButton">Récupérer et Enregistrer</button>';
+                        echo '<button><a href="../../Mairie/Menu/HTML_menu_update.php?id=' . $id_menu . '&field=entree">Modifier<i class="fa-solid fa-pencil"></i></a></button>';
+                    echo '</div>';
                 echo '</div>';
                 echo '<div class="element">';
                     echo '<h3>Plat:</h3>';
@@ -108,6 +111,7 @@
     </div>
     
     <script src="../../JS/nav.js"></script>
+    <script src="../../JS/enregistrement.js"></script>
 </body>
 </html>
 

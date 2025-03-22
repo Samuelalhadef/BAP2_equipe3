@@ -99,3 +99,89 @@ i{
     border: none;
     font-size: 20px;
 }
+
+.line{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.vote-button {
+    background-color: #f0f0f0;
+    border: 1px solid #ddd;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 4px;
+    margin-top: 10px;
+}
+.vote-button:hover {
+    background-color: #e0e0e0;
+}
+.vote-button.selected {
+    background-color: #4CAF50;
+    color: white;
+}
+.vote-section {
+    margin-top: 30px;
+    padding: 15px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    text-align: center;
+}
+#voteStatus {
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+/* Style de la popup */
+.popup {
+    display: none; /* Cachée par défaut */
+    position: fixed;
+    z-index: 10;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 400px;
+    background: white;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    padding: 20px;
+}
+
+/* Contenu de la popup */
+.popup-content {
+    position: relative;
+    text-align: center;
+}
+
+/* Bouton fermer */
+.close-popup {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+/* Bouton voter */
+.vote-btn {
+    margin-top: 15px;
+    padding: 8px 15px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+/* Bouton d'ouverture */
+.open-popup-btn {
+    margin-top: 15px;
+    padding: 10px 20px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
