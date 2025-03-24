@@ -66,7 +66,7 @@
                             
                             echo "<div class='menu_container'>";                    
                                 echo "<div class='menu_item'>";
-                                    echo "<p> Aujourd'hui, on vote pour:&nbsp;" . htmlspecialchars($_SESSION['valeur_element']) . "</p>";
+                                    echo "<p class='phrase_vote'> Aujourd'hui, on vote pour:&nbsp;<strong>" . htmlspecialchars($_SESSION['valeur_element']) . "</strong></p>";
                                 echo "</div>";
                             echo "</div>";
                         }
@@ -76,7 +76,7 @@
                         ?>
                 </div>
                 <div class="launch">
-                    <p>Lancer de vote</p>
+                    <a href="../../Cantine_Ecole/Vote/HTML_Vote_Faim.php">Lancer de vote</a>
                 </div>
             </div>
 

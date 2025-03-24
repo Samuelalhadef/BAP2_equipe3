@@ -84,27 +84,27 @@
                 $_SESSION['divers'] = $menu['divers'];
                 
                 echo "<div class='menu_container'>";
-                    echo "<div class='menu_details'>";
+                    echo "<div class='menu_item'>";
                         echo "<p>Entrée:&nbsp;</p>";
                         echo "<p>" . htmlspecialchars($_SESSION['entree']) . "</p>";
                     echo "</div>";
-                    echo "<div class='menu_details'>";
+                    echo "<div class='menu_item'>";
                         echo "<p>Plat:&nbsp;</p>";
                         echo "<p>" . htmlspecialchars($_SESSION['plat']) . "</p>";
                     echo "</div>";
-                    echo "<div class='menu_details'>";
+                    echo "<div class='menu_item'>";
                         echo "<p>Garniture:&nbsp;</p>";
                         echo "<p>" . htmlspecialchars($_SESSION['garniture']) . "</p>";
                     echo "</div>";
-                    echo "<div class='menu_details'>";
+                    echo "<div class='menu_item'>";
                         echo "<p>Produit laitier:&nbsp;</p>";
                         echo "<p>" . htmlspecialchars($_SESSION['produit_laitier']) . "</p>";
                     echo "</div>";
-                    echo "<div class='menu_details'>";
+                    echo "<div class='menu_item'>";
                         echo "<p>Dessert:&nbsp;</p>";
                         echo "<p>" . htmlspecialchars($_SESSION['dessert']) . "</p>";
                     echo "</div>";
-                    echo "<div class='menu_details'>";
+                    echo "<div class='menu_item'>";
                         echo "<p>Divers:&nbsp;</p>";
                         echo "<p>" . htmlspecialchars($_SESSION['divers']) . "</p>";
                     echo "</div>";
@@ -140,9 +140,7 @@
                     
                     echo "<div class='menu_container'>";                    
                         echo "<div>";
-                            echo "<p>Elément au vote du jour:&nbsp;</p>";
-                            echo "<br>";
-                            echo "<p>" . htmlspecialchars($_SESSION['valeur_element']) . "</p>";
+                            echo "<p><strong>" . htmlspecialchars($_SESSION['valeur_element']) . "</strong></p>";
                         echo "</div>";
                     echo "</div>";
                 } else {
