@@ -9,7 +9,7 @@
 </head>
 <body>
     <header>
-        <a href="../../Mairie/HTML_Admin_Home.php"><img class="logo" src="../images/logo.png"></a>
+        <a href="../../Mairie/HTML_Admin_Home.php"><img class="logo" src="../../images/logo.png"></a>
         <p id="date"></p>
         <div>
             <div class="off-screen-menu">
