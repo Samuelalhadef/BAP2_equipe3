@@ -64,7 +64,42 @@
 
 /*---------------------------------------- VOTE FAIM ----------------------------------------*/
 
+.vote_faim, .vote_like{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 0 50px;
+    margin-top: 30px;
+}
 
+.faim, .like{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    gap: 30px;
+    margin: 30px 50px;
+}
 
+.faim_item, .like_item{
+    border: 2px solid black;
+    border-radius: 20px;
+}
 
+.faim_item a, .like_item a{
+    color: black;
+}
+
+.faim_item h3, .like_item h3{
+    margin-top: 30px;
+    padding: 0 20px;
+}
+
+img{
+    width: 100%;
+    height: 450px;
+    object-fit: cover;
+    border-radius: 20px;
+}
 
