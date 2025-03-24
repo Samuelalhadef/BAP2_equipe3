@@ -140,9 +140,7 @@
                     
                     echo "<div class='menu_container'>";                    
                         echo "<div>";
-                            echo "<p>Elément au vote du jour:&nbsp;</p>";
-                            echo "<br>";
-                            echo "<p>" . htmlspecialchars($_SESSION['valeur_element']) . "</p>";
+                            echo "<p><strong>" . htmlspecialchars($_SESSION['valeur_element']) . "</strong></p>";
                         echo "</div>";
                     echo "</div>";
                 } else {

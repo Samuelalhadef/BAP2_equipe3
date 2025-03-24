@@ -34,10 +34,15 @@
 
 .element_today{
     width: 75%;
+    display: flex;
+    align-items: center;
 }
 
 .launch{
     width: 25%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .vote_percent{
@@ -52,3 +57,14 @@
     border-top: 2px solid black;
 
 }
+
+.phrase_vote{
+    font-size: 25px;
+}
+
+/*---------------------------------------- VOTE FAIM ----------------------------------------*/
+
+
+
+
+
