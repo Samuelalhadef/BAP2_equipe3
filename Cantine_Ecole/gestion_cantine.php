@@ -6,7 +6,7 @@ session_start();
 //     exit();
 // }
 
-require_once '../../bdd.php';
+require_once '../bdd.php';
 
 $query = $connexion->query("SELECT * FROM menu ORDER BY date_menu DESC");
 $menus = $query->fetchAll(PDO::FETCH_ASSOC);

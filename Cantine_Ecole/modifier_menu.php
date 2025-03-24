@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-require_once '../../bdd.php';
+require_once '../bdd.php';
 
 if (!isset($_GET['id']) || empty($_GET['id'])) {
     header('Location: gestion_cantine.php');

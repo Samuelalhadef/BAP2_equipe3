@@ -105,6 +105,22 @@ CREATE TABLE `vote` (
   `aime_pas` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `donnees_journee`
+--
+
+CREATE TABLE donnees_journee (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    date_jour DATE NOT NULL,
+    poids_dechets FLOAT,
+    poids_pain FLOAT,
+    nb_repas_prevues INT,
+    nb_repas_adultes INT,
+    nb_repas_non_consommes INT
+);
 --
 -- Indexes for dumped tables
 --

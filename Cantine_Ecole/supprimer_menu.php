@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once '../../bdd.php';
+require_once '../bdd.php';
 
 if (isset($_GET['id'])) {
     $menu_id = $_GET['id'];
