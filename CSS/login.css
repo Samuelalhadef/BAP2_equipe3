@@ -1,0 +1,59 @@
+@import url("./globals.css");
+
+/*----- Page de connexion et d'inscription -----*/
+
+section{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: var(--background);
+}
+
+form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+}
+
+.textbox{
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: start;
+    gap: 30px;
+}
+
+.textbox_item{
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.textbox_item label{
+    font-size: 25px;
+    padding: 0 10px;
+}
+
+.textbox_item input{
+    width: 400px;
+    padding: 20px 10px;
+    border: 2px solid black;
+    border-radius: 20px;
+    font-size: 18px;
+}
+
+button{
+    display: flex;
+    align-items: center;
+    border-radius: 20px;
+    padding: 0 20px;
+    font-size: 16px;
+}
+
+i{
+    font-size: 25px;
+    padding: 10px;
+}

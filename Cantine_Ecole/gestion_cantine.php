@@ -2,11 +2,11 @@
 session_start();
 
 // if (!isset($_SESSION['user_type']) || $_SESSION['user_type'] !== 'ecole') {
-//     header('Location: ../HTML_Connexion.php');
+//     header('Location: ../../HTML_Connexion.php');
 //     exit();
 // }
 
-require_once '../bdd.php';
+require_once '../../bdd.php';
 
 $query = $connexion->query("SELECT * FROM menu ORDER BY date_menu DESC");
 $menus = $query->fetchAll(PDO::FETCH_ASSOC);
@@ -73,7 +73,7 @@ $totals = $query->fetch(PDO::FETCH_ASSOC);
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Administration - Cantine</title>
-        <link rel="stylesheet" href="../style.css">
+        <link rel="stylesheet" href="../../style.css">
         <style>
             .menu-item {
                 background: white;

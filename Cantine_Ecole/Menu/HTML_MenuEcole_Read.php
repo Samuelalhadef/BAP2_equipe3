@@ -11,7 +11,7 @@
 
 <body>
     <header>
-        <p>EcoMiam</p>
+        <a class="logo" href="../../Cantine_Ecole/HTML_User_Home.php">EcoMiam</a>
         <p id="date"></p>
         <div>
             <div class="off-screen-menu">
@@ -24,7 +24,7 @@
                 </ul>
                 <ul class="off-screen-menu-plus">
                     <li class="off-screen-menu-item-text"><a href="#">Paramètres&nbsp;&nbsp;</a><i class="fa-solid fa-gear"></i></li>
-                    <li class="off-screen-menu-item-text"><a href="../Log_Sign/HTML_Log_Sign.php">Se déconnecter&nbsp;&nbsp;</a><i class="fa-solid fa-right-from-bracket"></i></li>
+                    <li class="off-screen-menu-item-text"><a href="../../Login/HTML_Login.php">Se déconnecter&nbsp;&nbsp;</a><i class="fa-solid fa-right-from-bracket"></i></li>
                 </ul>
             </div>
             <nav>
@@ -38,90 +38,77 @@
         </div>
     </header>
 
-    <button class="back"><a href="../../Cantine_Ecole/Menu/HTML_ListeEcole_menu.php"><i class="fa-solid fa-arrow-left"></i>Revenir sur la liste des menus</a></button>
+    <section class="crud_menu">
+        <button class="back"><a href="../../Cantine_Ecole/Menu/HTML_ListeEcole_menu.php"><i class="fa-solid fa-arrow-left"></i>&nbsp;Revenir sur la liste des menus</a></button>
 
-    <div class="elements_all">
-        
-
-<?php
-    // Vérifier si le paramètre "id" est bien présent
-    if (!isset($_GET['id']) || empty($_GET['id'])) {
-        die('<p>Menu introuvable (paramètre manquant)</p>');
-    }
-    require_once '../../bdd.php';
-    // Récupérer et sécuriser l'ID du menu
-    $id_menu = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
-    if (!$id_menu) {
-        die('<p>ID du menu invalide</p>');
-    }
-    // Préparer la requête SQL
-    $getmenu = $connexion->prepare(
-        'SELECT * FROM menu WHERE id = :id LIMIT 1'
-    );
-    // Exécuter la requête avec l'ID assaini
-    $getmenu->execute(['id' => $id_menu]);
-    if ($getmenu->rowCount() === 1) {
-        $menu = $getmenu->fetch(PDO::FETCH_ASSOC);
-        echo '<div class="elements">';
-            echo '<div class="element">';
-                echo '<h3>Entrée:</h3>';
-                echo '<p>' . htmlspecialchars($menu['entree']) . '</p>';
-                echo '<button class="vote-button" data-type="entree" data-value="' . htmlspecialchars($menu['entree']) . '">Ajouter au vote cette entrée</button>';
-            echo '</div>';
-            echo '<div class="element">';
-                echo '<h3>Plat:</h3>';
-                echo '<p>' . htmlspecialchars($menu['plat']) . '</p>';
-                echo '<button class="vote-button" data-type="plat" data-value="' . htmlspecialchars($menu['plat']) . '">Ajouter au vote ce plat</button>';
-            echo '</div>';
-            echo '<div class="element">';
-                echo '<h3>Garniture:</h3>';
-                echo '<p>' . htmlspecialchars($menu['garniture']) . '</p>';
-                echo '<button class="vote-button" data-type="garniture" data-value="' . htmlspecialchars($menu['garniture']) . '">Ajouter au vote cette garniture</button>';
+        <?php
+            // Vérifier si le paramètre "id" est bien présent
+            if (!isset($_GET['id']) || empty($_GET['id'])) {
+                die('<p>Menu introuvable (paramètre manquant)</p>');
+            }
+            require_once '../../bdd.php';
+            // Récupérer et sécuriser l'ID du menu
+            $id_menu = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
+            if (!$id_menu) {
+                die('<p>ID du menu invalide</p>');
+            }
+            // Préparer la requête SQL
+            $getmenu = $connexion->prepare(
+                'SELECT * FROM menu WHERE id = :id LIMIT 1'
+            );
+            // Exécuter la requête avec l'ID assaini
+            $getmenu->execute(['id' => $id_menu]);
+            if ($getmenu->rowCount() === 1) {
+                $menu = $getmenu->fetch(PDO::FETCH_ASSOC);
+                echo '<div class="elements">';
+                    echo '<div class="element">';
+                        echo '<h3>Entrée:</h3>';
+                        echo '<p>' . htmlspecialchars($menu['entree']) . '</p>';
+                    echo '</div>';
+                    echo '<div class="element">';
+                        echo '<h3>Plat:</h3>';
+                        echo '<p>' . htmlspecialchars($menu['plat']) . '</p>';
+                    echo '</div>';
+                    echo '<div class="element">';
+                        echo '<h3>Garniture:</h3>';
+                        echo '<p>' . htmlspecialchars($menu['garniture']) . '</p>';
+                    echo '</div>';
+                echo '</div>';
+                
+                echo '<div class="elements">';
+                    echo '<div class="element">';
+                        echo '<h3>Produit laitier:</h3>';
+                        echo '<p>' . htmlspecialchars($menu['produit_laitier']) . '</p>';
+                    echo '</div>';
+                    echo '<div class="element">';
+                        echo '<h3>Dessert:</h3>';
+                        echo '<p>' . htmlspecialchars($menu['dessert']) . '</p>';
+                    echo '</div>';
+                    echo '<div class="element">';
+                        echo '<h3>Divers:</h3>';
+                        echo '<p>' . htmlspecialchars($menu['divers']) . '</p>';
+                    echo '</div>';
+                echo '</div>';
+                
+                echo '<div id="votePopup" class="popup">';
+            echo '<div class="popup-content">';
+                echo '<span class="close-popup">&times;</span>';
+                echo '<h2>Votre vote pour le menu du jour</h2>';
+                echo '<div id="selectedVote">Aucun élément sélectionné</div>';
+                echo '<button id="submitVote" class="vote-btn">Enregistrer mon vote</button>';
+                echo '<div id="voteStatus"></div>';
             echo '</div>';
         echo '</div>';
-        
-        echo '<div class="elements">';
-            echo '<div class="element">';
-                echo '<h3>Produit laitier:</h3>';
-                echo '<p>' . htmlspecialchars($menu['produit_laitier']) . '</p>';
-                echo '<button class="vote-button" data-type="produit_laitier" data-value="' . htmlspecialchars($menu['produit_laitier']) . '">Ajouter au vote ce produit laitier</button>';
-            echo '</div>';
-            echo '<div class="element">';
-                echo '<h3>Dessert:</h3>';
-                echo '<p>' . htmlspecialchars($menu['dessert']) . '</p>';
-                echo '<button class="vote-button" data-type="dessert" data-value="' . htmlspecialchars($menu['dessert']) . '">Ajouter au vote ce dessert</button>';
-            echo '</div>';
-            echo '<div class="element">';
-                echo '<h3>Divers:</h3>';
-                echo '<p>' . htmlspecialchars($menu['divers']) . '</p>';
-                echo '<button class="vote-button" data-type="divers" data-value="' . htmlspecialchars($menu['divers']) . '">Ajouter au vote divers</button>';
-            echo '</div>';
-        echo '</div>';
-        
-        echo '<div id="votePopup" class="popup">';
-    echo '<div class="popup-content">';
-        echo '<span class="close-popup">&times;</span>';
-        echo '<h2>Votre vote pour le menu du jour</h2>';
-        echo '<div id="selectedVote">Aucun élément sélectionné</div>';
-        echo '<button id="submitVote" class="vote-btn">Enregistrer mon vote</button>';
-        echo '<div id="voteStatus"></div>';
-    echo '</div>';
-echo '</div>';
 
-echo '<button id="openVotePopup" class="open-popup-btn">Voter pour le menu</button>';
-    }
-    else {
-        echo '<p>Menu introuvable en base de données</p>';
-    }
-?>
-    </div>
+        echo '<button id="openVotePopup" class="open-popup-btn">Voter pour le menu</button>';
+            }
+            else {
+                echo '<p>Menu introuvable en base de données</p>';
+            }
+        ?>
+    </section>
     
     <script src="../../JS/nav.js"></script>
     <script src="../../JS/enregistrement.js"></script>
 </body>
 </html>
-
-
-<?php
-    //include 'PHP_MenuRead.php'; 
-?>

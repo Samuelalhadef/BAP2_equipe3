@@ -9,7 +9,7 @@
 </head>
 <body>
     <header>
-        <p>EcoMiam</p>
+        <a class="logo" href="../../Cantine_Ecole/HTML_User_Home.php">EcoMiam</a>
         <p id="date"></p>
         <div>
             <div class="off-screen-menu">
@@ -22,7 +22,7 @@
                 </ul>
                 <ul class="off-screen-menu-plus">
                     <li class="off-screen-menu-item-text"><a href="#">Paramètres&nbsp;&nbsp;</a><i class="fa-solid fa-gear"></i></li>
-                    <li class="off-screen-menu-item-text"><a href="../Log_Sign/HTML_Log_Sign.php">Se déconnecter&nbsp;&nbsp;</a><i class="fa-solid fa-right-from-bracket"></i></li>
+                    <li class="off-screen-menu-item-text"><a href="../../Login/HTML_Login.php">Se déconnecter&nbsp;&nbsp;</a><i class="fa-solid fa-right-from-bracket"></i></li>
                 </ul>
             </div>
             <nav>
@@ -37,8 +37,55 @@
     </header>
 
 
-    <section>
+    <section class="interface_vote">
+        <h1>Vote du <span id="date"></span></h1>
+        <div class="content_vote">
+            <div class="vote_item">
+                <div class="element_today">
+                    <?php
+                        $servername = "localhost";
+                        $username = "root";
 
+                        // On accède à la base de donnée
+                        require_once '../../bdd.php';
+                        
+                        // Vérifiez si l'utilisateur est connecté (par exemple via une session)
+                        session_start();
+                        // Récupération de la date du jour au format YYYY-MM-DD
+                        $dateAujourdhui = date('Y-m-d');
+
+                        // Requête SQL pour récupérer le menu correspondant à la date du jour
+                        $sql = "SELECT valeur_element FROM menu WHERE date_menu = :dateAujourdhui";
+                        $req = $connexion->prepare($sql);
+                        $req->execute(['dateAujourdhui' => $dateAujourdhui]);
+
+                        // Affichage du menu
+                        if ($req && $menu = $req->fetch(PDO::FETCH_ASSOC)) {
+                            // Stocker les valeurs en session
+                            $_SESSION['valeur_element'] = $menu['valeur_element'];
+                            
+                            echo "<div class='menu_container'>";                    
+                                echo "<div class='menu_item'>";
+                                    echo "<p> Aujourd'hui, on vote pour:&nbsp;" . htmlspecialchars($_SESSION['valeur_element']) . "</p>";
+                                echo "</div>";
+                            echo "</div>";
+                        }
+                        else {
+                            echo "<p>Pas d'élément à voter pour aujourd'hui</p>";
+                        }
+                        ?>
+                </div>
+                <div class="launch">
+                    <p>Lancer de vote</p>
+                </div>
+            </div>
+
+            <div class="vote_percent">
+                <p>J'aime bien</p>
+                <p>J'aime moyennement</p>
+                <p>J'aime pas</p>
+            </div>
+    </div>
 
     </section>
 

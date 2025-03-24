@@ -1,11 +1,7 @@
 @import url("./globals.css");
 
-.crud{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: 80vh;
+.crud_menu{
+    padding: 0 50px;
 }
 
 form{
@@ -13,57 +9,55 @@ form{
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: 50%;
-    padding: 10px;
     gap: 2px;
-    border-radius: 20px;
-    color: var(--primary);
-    background-color: var(--background);
 }
 
 .textbox{
     display: flex;
     flex-direction: row;
     gap: 60px;
-    margin: 30px 0;
+    margin: 10px 0;
+    width: 100%;
 }
 
 .infos{
     display: flex;
     flex-direction: column;
+    width: 100%;
     gap: 20px;
 }
 
-label{
+.info_to label{
     margin-bottom: 15px;
     font-size: 20px;
 }
 
-input{
-    padding: 10px 10px;
+.info_to input{
+    padding: 10px;
+    border: 2px solid black;
+    font-size: 15px;
+    margin-top: 10px;
     border-radius: 10px;
-    border: none;
     width: 100%;
-}
-
-input::placeholder{
-    width: 100%;
-}
-
-a{
-    color: var(--secondary);
-    font-weight: bold;
-    text-decoration: underline;
 }
 
 button{
+    font-size: 20px;
+    padding: 10px 20px;
     border-radius: 30px;
 }
 
-i{
-    font-size: 30px;
-    padding: 10px;
+.choix{
+    margin: 30px 0;
 }
+
+.back{
+    padding: 0 35px;
+}
+
+
+
+/*------------------------------------------ CRUD READ ------------------------------------------*/
 
 .elements{
     display: flex;
@@ -100,88 +94,49 @@ i{
     font-size: 20px;
 }
 
-.line{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-}
-
-.vote-button {
-    background-color: #f0f0f0;
-    border: 1px solid #ddd;
-    padding: 5px 10px;
-    cursor: pointer;
-    border-radius: 4px;
-    margin-top: 10px;
-}
-.vote-button:hover {
-    background-color: #e0e0e0;
-}
-.vote-button.selected {
-    background-color: #4CAF50;
-    color: white;
-}
-.vote-section {
-    margin-top: 30px;
-    padding: 15px;
-    background-color: #f9f9f9;
-    border-radius: 8px;
-    text-align: center;
-}
-#voteStatus {
-    margin-top: 10px;
-    font-weight: bold;
-}
-
-/* Style de la popup */
-.popup {
-    display: none; /* Cachée par défaut */
-    position: fixed;
-    z-index: 10;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    width: 400px;
-    background: white;
-    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2);
-    border-radius: 10px;
-    padding: 20px;
-}
-
-/* Contenu de la popup */
-.popup-content {
-    position: relative;
-    text-align: center;
-}
-
-/* Bouton fermer */
-.close-popup {
-    position: absolute;
-    top: 10px;
-    right: 15px;
-    font-size: 20px;
-    cursor: pointer;
-}
-
-/* Bouton voter */
-.vote-btn {
-    margin-top: 15px;
-    padding: 8px 15px;
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-}
-
-/* Bouton d'ouverture */
-.open-popup-btn {
-    margin-top: 15px;
+.back a{
+    color: black;
+    border: 2px solid black;
+    border-radius: 20px;
     padding: 10px 20px;
-    background-color: #007BFF;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
+    margin-bottom: 20px;
+}
+
+.element button a{
+    color: black;
+    border: 2px solid black;
+    border-radius: 20px;
+    padding: 10px 20px;
+}
+
+/*------------------------------------------ CRUD UPDATE ------------------------------------------*/
+
+.update{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 80vh;
+    border: 2px solid black;
+    border-radius: 20px;
+}
+
+.update .textbox{
+    width: 50%;
+}
+
+.update .textbox label{
+    font-size: 25px;
+}
+
+.update .textbox input{
+    padding: 10px;
+    border: 2px solid black;
+    font-size: 20px;
+    border-radius: 10px;
+    width: 100%;
+}
+
+.update button{
+    margin-top: 20px;
 }

@@ -2,7 +2,7 @@
 // session_start();
 
 // if (!isset($_SESSION['user_type']) || $_SESSION['user_type'] !== 'ecole') {
-//     header('Location: ../HTML_Connexion.php');
+//     header('Location: ../../HTML_Connexion.php');
 //     exit();
 // }
 ?>
@@ -13,7 +13,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Menu Cantine</title>
-    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="../../style.css">
 </head>
 <body>
     <div class="menu-container">
@@ -32,7 +32,7 @@
             </a>
         </div>
         
-        <a href="../dashboard_ecole.php" class="back-link">← Retour au tableau de bord principal</a>
+        <a href="../../dashboard_ecole.php" class="back-link">← Retour au tableau de bord principal</a>
     </div>
 </body>
 </html> 

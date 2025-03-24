@@ -11,19 +11,19 @@
 
 <body>
     <header>
-        <p>EcoMiam</p>
+        <a class="logo" href="../../Mairie/HTML_Admin_Home.php">EcoMiam</a>
         <p id="date"></p>
         <div>
             <div class="off-screen-menu">
                 <ul class="off-screen-menu-item">
                     <li><a href="../../Mairie/HTML_Admin_Home.php">PAGE D'ACCUEIL</a></li>
-                    <li><a href="../Mairie/Menu/HTML_Liste_Menu.php">GESTION DES MENUS</a></li>
-                    <li><a href="../Mairie/Gestion_profils/HTML_Gestion_profils.php">GESTION DES PROFILS</a></li>
-                    <li><a href="../Mairie/Synthese/HTML_Synthese.php">SYNTHESE</a></li>
+                    <li><a href="../../Mairie/Menu/HTML_Liste_Menu.php">GESTION DES MENUS</a></li>
+                    <li><a href="../../Mairie/Users/HTML_Users.php">GESTION DES PROFILS</a></li>
+                    <li><a href="../../Mairie/Synthese/HTML_Synthese.php">SYNTHESE</a></li>
                 </ul>
                 <ul class="off-screen-menu-plus">
                     <li class="off-screen-menu-item-text"><a href="#">Paramètres&nbsp;&nbsp;</a><i class="fa-solid fa-gear"></i></li>
-                    <li class="off-screen-menu-item-text"><a href="../Log_Sign/HTML_Log_Sign.php">Se déconnecter&nbsp;&nbsp;</a><i class="fa-solid fa-right-from-bracket"></i></li>
+                    <li class="off-screen-menu-item-text"><a href="../../Login/HTML_Login.php">Se déconnecter&nbsp;&nbsp;</a><i class="fa-solid fa-right-from-bracket"></i></li>
                 </ul>
             </div>
             <nav>
@@ -37,9 +37,8 @@
         </div>
     </header>
 
-    <button class="back"><a href="../../Mairie/Menu/HTML_Liste_menu.php"><i class="fa-solid fa-arrow-left"></i>Revenir sur la liste des menus</a></button>
-
-    <section class="elements_all">
+    <section class="crud_menu">
+        <button class="back"><a href="../../Mairie/Menu/HTML_Liste_menu.php"><i class="fa-solid fa-arrow-left"></i>&nbsp;Revenir sur la liste des menus</a></button>
         <?php
         // Vérifier si le paramètre "id" est bien présent
         if (!isset($_GET['id']) || empty($_GET['id'])) {
@@ -69,17 +68,17 @@
                 echo '<div class="element">';
                     echo '<h3>Entrée:</h3>';
                     echo '<p>' . htmlspecialchars($menu['entree']) . '</p>';
-                    echo '<button><a href="../../Mairie/Menu/HTML_menu_update.php?id=' . $id_menu . '&field=entree">Modifier<i class="fa-solid fa-pencil"></i></a></button>';
+                    echo '<button><a href="../../Mairie/Menu/HTML_menu_update.php?id=' . $id_menu . '&field=entree">Modifier&nbsp;<i class="fa-solid fa-pencil"></i></a></button>';
                 echo '</div>';
                 echo '<div class="element">';
                     echo '<h3>Plat:</h3>';
                     echo '<p>' . htmlspecialchars($menu['plat']) . '</p>';
-                    echo '<button><a href="../../Mairie/Menu/HTML_menu_update.php?id=' . $id_menu . '&field=plat">Modifier<i class="fa-solid fa-pencil"></i></a></button>';
+                    echo '<button><a href="../../Mairie/Menu/HTML_menu_update.php?id=' . $id_menu . '&field=plat">Modifier&nbsp;<i class="fa-solid fa-pencil"></i></a></button>';
                 echo '</div>';
                 echo '<div class="element">';
                     echo '<h3>Garniture:</h3>';
                     echo '<p>' . htmlspecialchars($menu['garniture']) . '</p>';
-                    echo '<button><a href="../../Mairie/Menu/HTML_menu_update.php?id=' . $id_menu . '&field=garniture">Modifier<i class="fa-solid fa-pencil"></i></a></button>';
+                    echo '<button><a href="../../Mairie/Menu/HTML_menu_update.php?id=' . $id_menu . '&field=garniture">Modifier&nbsp;<i class="fa-solid fa-pencil"></i></a></button>';
                 echo '</div>';
             echo '</div>';
             
@@ -87,17 +86,17 @@
                 echo '<div class="element">';
                     echo '<h3>Produit laitier:</h3>';
                     echo '<p>' . htmlspecialchars($menu['produit_laitier']) . '</p>';
-                    echo '<button><a href="../../Mairie/Menu/HTML_menu_update.php?id=' . $id_menu . '&field=produit_laitier">Modifier<i class="fa-solid fa-pencil"></i></a></button>';
+                    echo '<button><a href="../../Mairie/Menu/HTML_menu_update.php?id=' . $id_menu . '&field=produit_laitier">Modifier&nbsp;<i class="fa-solid fa-pencil"></i></a></button>';
                 echo '</div>';
                 echo '<div class="element">';
                     echo '<h3>Dessert:</h3>';
                     echo '<p>' . htmlspecialchars($menu['dessert']) . '</p>';
-                    echo '<button><a href="../../Mairie/Menu/HTML_menu_update.php?id=' . $id_menu . '&field=dessert">Modifier<i class="fa-solid fa-pencil"></i></a></button>';
+                    echo '<button><a href="../../Mairie/Menu/HTML_menu_update.php?id=' . $id_menu . '&field=dessert">Modifier&nbsp;<i class="fa-solid fa-pencil"></i></a></button>';
                 echo '</div>';
                 echo '<div class="element">';
                     echo '<h3>Divers:</h3>';
                     echo '<p>' . htmlspecialchars($menu['divers']) . '</p>';
-                    echo '<button><a href="../../Mairie/Menu/HTML_menu_update.php?id=' . $id_menu . '&field=divers">Modifier<i class="fa-solid fa-pencil"></i></a></button>';
+                    echo '<button><a href="../../Mairie/Menu/HTML_menu_update.php?id=' . $id_menu . '&field=divers">Modifier&nbsp;<i class="fa-solid fa-pencil"></i></a></button>';
                 echo '</div>';
             echo '</div>';
         }

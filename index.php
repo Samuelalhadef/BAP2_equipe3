@@ -1,4 +1,4 @@
 <?php
-header('Location: /Log_Sign/HTML_Log_Sign.php');
+header('Location: /Login/HTML_Login.php');
 exit;
 ?>

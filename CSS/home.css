@@ -1,0 +1,62 @@
+@import url("./globals.css");
+
+.accueil{
+    padding: 0 0 0 50px;
+    margin: 30px 0;
+}
+
+.content_accueil{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 20px;
+    width: 100%;
+    padding: 0 50px;
+    height: 60vh;
+}
+
+.content_menu, .users, .synthese, .gestion_vote, .pesee{
+    padding: 40px;
+    border: 2px solid black;
+    border-radius: 20px;
+    background-color: #F5F5F3;
+}
+
+.content_menu{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.menu{
+    line-height: 2rem;
+}
+
+.menu_details{
+    display: flex;
+    margin: 15px 0;
+}
+
+.users, .synthese, .gestion_vote, .pesee{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 50%;
+}
+
+button{
+    display: flex;
+    justify-content: end;
+    align-items: end;
+    background: none;
+    border: none;
+    font-size: 20px;
+}
+
+button a{
+    border: 2px solid black;
+    padding: 10px 20px;
+    border-radius: 20px;
+    color: black;
+}

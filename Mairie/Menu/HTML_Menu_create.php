@@ -1,11 +1,9 @@
 <?php
-
 session_start();
 
-if (!isset($_SESSION['csrf_menu_add']) || empty($_SESSION['csrf_menu_add'])){
+if (!isset($_SESSION['csrf_menu_add']) || empty($_SESSION['csrf_menu_add'])) {
     $_SESSION['csrf_menu_add'] = bin2hex(random_bytes(32));
 }
-
 ?>
 
 <!DOCTYPE html>
@@ -19,19 +17,19 @@ if (!isset($_SESSION['csrf_menu_add']) || empty($_SESSION['csrf_menu_add'])){
 </head>
 <body>
     <header>
-        <p>EcoMiam</p>
+        <a class="logo" href="../../Mairie/HTML_Admin_Home.php">EcoMiam</a>
         <p id="date"></p>
         <div>
             <div class="off-screen-menu">
                 <ul class="off-screen-menu-item">
                     <li><a href="../../Mairie/HTML_Admin_Home.php">PAGE D'ACCUEIL</a></li>
-                    <li><a href="../Mairie/Menu/HTML_Liste_Menu.php">GESTION DES MENUS</a></li>
-                    <li><a href="../Mairie/Gestion_profils/HTML_Gestion_profils.php">GESTION DES PROFILS</a></li>
-                    <li><a href="../Mairie/Synthese/HTML_Synthese.php">SYNTHESE</a></li>
+                    <li><a href="../../Mairie/Menu/HTML_Liste_Menu.php">GESTION DES MENUS</a></li>
+                    <li><a href="../../Mairie/Users/HTML_Users.php">GESTION DES PROFILS</a></li>
+                    <li><a href="../../Mairie/Synthese/HTML_Synthese.php">SYNTHESE</a></li>
                 </ul>
                 <ul class="off-screen-menu-plus">
                     <li class="off-screen-menu-item-text"><a href="#">Paramètres&nbsp;&nbsp;</a><i class="fa-solid fa-gear"></i></li>
-                    <li class="off-screen-menu-item-text"><a href="../Log_Sign/HTML_Log_Sign.php">Se déconnecter&nbsp;&nbsp;</a><i class="fa-solid fa-right-from-bracket"></i></li>
+                    <li class="off-screen-menu-item-text"><a href="../../Login/HTML_Login.php">Se déconnecter&nbsp;&nbsp;</a><i class="fa-solid fa-right-from-bracket"></i></li>
                 </ul>
             </div>
             <nav>
@@ -46,8 +44,8 @@ if (!isset($_SESSION['csrf_menu_add']) || empty($_SESSION['csrf_menu_add'])){
     </header>
 
     <section class="crud_menu">
-        <form action = "PHP_MenuCreate.php" method = "POST">
-            <h2>AJOUTER UN MENU</h2>
+        <h1>AJOUTER UN MENU</h1>
+        <form action="PHP_MenuCreate.php" method="POST">
             <div class="textbox">
                 <div class="infos">
                     <div class="info_to">
@@ -56,15 +54,15 @@ if (!isset($_SESSION['csrf_menu_add']) || empty($_SESSION['csrf_menu_add'])){
                     </div>
                     <div class="info_to">
                         <label for="entree">Entrée</label>
-                        <input type="text" name="entree" id="entree" placeholder="Entrée" required>
+                        <input type="text" name="entree" id="entree" placeholder="Entrée" required oninput="mettreAJourValeurElement()">
                     </div>
                     <div class="info_to">
                         <label for="plat">Plat</label>
-                        <input type="text" name="plat" id="plat" placeholder="Plat" required>
+                        <input type="text" name="plat" id="plat" placeholder="Plat" required oninput="mettreAJourValeurElement()">
                     </div>
                     <div class="info_to">
                         <label for="garniture">Garniture</label>
-                        <input type="text" name="garniture" id="garniture" placeholder="Garniture" required>
+                        <input type="text" name="garniture" id="garniture" placeholder="Garniture" required oninput="mettreAJourValeurElement()">
                     </div>
                 </div>
                 <div class="infos">
@@ -74,23 +72,51 @@ if (!isset($_SESSION['csrf_menu_add']) || empty($_SESSION['csrf_menu_add'])){
                     </div>
                     <div class="info_to">
                         <label for="produit_laitier">Produit Laitier</label>
-                        <input type="text" name="produit_laitier" id="produit_laitier" placeholder="Produit laitier" required>
+                        <input type="text" name="produit_laitier" id="produit_laitier" placeholder="Produit laitier" required oninput="mettreAJourValeurElement()">
                     </div>
                     <div class="info_to">
                         <label for="dessert">Dessert</label>
-                        <input type="text" name="dessert" id="dessert" placeholder="Dessert" required>
+                        <input type="text" name="dessert" id="dessert" placeholder="Dessert" required oninput="mettreAJourValeurElement()">
                     </div>
                     <div class="info_to">
                         <label for="divers">Divers</label>
-                        <input type="text" name="divers" id="divers" placeholder="Divers" required>
+                        <input type="text" name="divers" id="divers" placeholder="Divers" required oninput="mettreAJourValeurElement()">
                     </div>
                 </div>
             </div>
+            <div class="choix">
+                <label for="element_vote">Choisir l'élément à voter aujourd'hui :</label>
+                <select id="element_vote" name="element_vote" onchange="mettreAJourValeurElement()">
+                    <option value="">--Choisir--</option>
+                    <option value="entree">Entrée</option>
+                    <option value="plat">Plat</option>
+                    <option value="garniture">Garniture</option>
+                    <option value="produit_laitier">Produit Laitier</option>
+                    <option value="dessert">Dessert</option>
+                    <option value="divers">Divers</option>
+                </select>
+            </div>
+
+            <input type="hidden" name="valeur_element" id="valeur_element">
             <input type="hidden" name="token" value="<?= $_SESSION['csrf_menu_add']; ?>">
-            <input type="submit" name="ajouter" value="Sauvegarder">
+            <button type="submit" name="ajouter" value="Sauvegarder">Sauvegarder</button>
         </form>
     </section>
-    
+
+    <script>
+    function mettreAJourValeurElement() {
+        let select = document.getElementById("element_vote").value;
+        let valeurElementInput = document.getElementById("valeur_element");
+
+        if (select) {
+            let champSelectionne = document.getElementById(select);
+            valeurElementInput.value = champSelectionne ? champSelectionne.value : "";
+        } else {
+            valeurElementInput.value = "";
+        }
+    }
+    </script>
+
     <script src="../../JS/nav.js"></script>
 </body>
 </html>

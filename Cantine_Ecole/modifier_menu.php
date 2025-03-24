@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-require_once '../bdd.php';
+require_once '../../bdd.php';
 
 if (!isset($_GET['id']) || empty($_GET['id'])) {
     header('Location: gestion_cantine.php');
@@ -96,7 +96,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Modifier un menu - Cantine</title>
-    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="../../style.css">
     <style>
         .form-container {
             background: white;

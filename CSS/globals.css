@@ -5,7 +5,7 @@
     /* Colors */
     --primary: #FFFFFF;
     --secondary: #335533;
-    --background: #000000;
+    --background: #F5F5F3;
     
     /* Typography */
     --font-family: 'Manrope', sans-serif;
@@ -50,6 +50,13 @@ header{
     padding: 0 50px;
 }
 
+.logo{
+    color: black;
+    font-size: 20px;
+    font-weight: bold;
+    font-style: italic;
+}
+
 /*-------------------------------- NAVIGATION BAR -------------------------------- */
 
 .off-screen-menu{
@@ -81,6 +88,10 @@ header{
 .off-screen-menu-plus {
     align-self: flex-end;
     padding-right: 50px;
+}
+
+.off-screen-menu-item li a, .off-screen-menu-plus li a{
+    color: black;
 }
 
 .off-screen-menu-item-text{

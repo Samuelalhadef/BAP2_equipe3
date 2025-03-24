@@ -1,21 +1,3 @@
-//document.getElementById("saveButton").addEventListener("click", function() {
-//    const dataToSend = { info: "Donnée à enregistrer" };
-//
-//    fetch("PHP_Element_Save.php", {
-//        method: "POST",
-//        headers: { "Content-Type": "application/json" },
-//        body: JSON.stringify(dataToSend)
-//    })
-//    .then(response => response.json())
-//    .then(data => {
-//        document.getElementById("message").textContent = data.message;
-//    })
-//    .catch(error => {
-//        console.error("Erreur:", error);
-//        document.getElementById("message").textContent = "Erreur lors de l'enregistrement";
-//    });
-//});
-
 document.addEventListener('DOMContentLoaded', function() {
     const voteButtons = document.querySelectorAll('.vote-button');
     const submitVoteButton = document.getElementById('submitVote');

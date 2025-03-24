@@ -28,7 +28,7 @@
         if ($current_menu) {
             $current_value = $current_menu[$field];
         } else {
-            header('Location: ../Mairie/HTML_Liste_Menu.php');
+            header('Location: ../../Mairie/HTML_Liste_Menu.php');
             exit();
         }
     }
@@ -59,19 +59,19 @@
 </head>
 <body>
     <header>
-        <p>EcoMiam</p>
+        <a class="logo" href="../../Mairie/HTML_Admin_Home.php">EcoMiam</a>
         <p id="date"></p>
         <div>
             <div class="off-screen-menu">
                 <ul class="off-screen-menu-item">
                     <li><a href="../../Mairie/HTML_Admin_Home.php">PAGE D'ACCUEIL</a></li>
-                    <li><a href="../Mairie/Menu/HTML_Liste_Menu.php">GESTION DES MENUS</a></li>
-                    <li><a href="../Mairie/Gestion_profils/HTML_Gestion_profils.php">GESTION DES PROFILS</a></li>
-                    <li><a href="../Mairie/Synthese/HTML_Synthese.php">SYNTHESE</a></li>
+                    <li><a href="../../Mairie/Menu/HTML_Liste_Menu.php">GESTION DES MENUS</a></li>
+                    <li><a href="../../Mairie/Users/HTML_Users.php">GESTION DES PROFILS</a></li>
+                    <li><a href="../../Mairie/Synthese/HTML_Synthese.php">SYNTHESE</a></li>
                 </ul>
                 <ul class="off-screen-menu-plus">
                     <li class="off-screen-menu-item-text"><a href="#">Paramètres&nbsp;&nbsp;</a><i class="fa-solid fa-gear"></i></li>
-                    <li class="off-screen-menu-item-text"><a href="../Log_Sign/HTML_Log_Sign.php">Se déconnecter&nbsp;&nbsp;</a><i class="fa-solid fa-right-from-bracket"></i></li>
+                    <li class="off-screen-menu-item-text"><a href="../../Login/HTML_Login.php">Se déconnecter&nbsp;&nbsp;</a><i class="fa-solid fa-right-from-bracket"></i></li>
                 </ul>
             </div>
             <nav>
@@ -86,7 +86,7 @@
     </header>
     
     <section class="crud_menu">
-        <form action="PHP_MenuUpdate.php" method="POST">
+        <form action="PHP_MenuUpdate.php" method="POST" class="update">
             <h2>MODIFIER <?= strtoupper($field_label) ?></h2>
             <div class="textbox">
                 <div class="infos">
@@ -103,8 +103,7 @@
             <input type="hidden" name="id_menu" value="<?= $id_menu ?>">
             <input type="hidden" name="field_name" value="<?= $field ?>">
             <input type="hidden" name="token" value="<?= $_SESSION['csrf_menu_add']; ?>">
-            <input type="submit" name="modifier" value="Modifier">
-            <a href="../../Mairie/Menu/HTML_menu_read.php?id=<?= $id_menu ?>" class="cancel-btn">Annuler</a>
+            <button type="submit" name="modifier" value="Modifier">Modifier</button>
         </form>
     </section>
     <script src="../../JS/nav.js"></script>

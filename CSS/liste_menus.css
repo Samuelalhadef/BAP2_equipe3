@@ -4,7 +4,7 @@
     padding: 0 50px;
 }
 
-.calendrier-container {
+.content_gestion_menu {
     display: flex;
     flex-direction: column;
     width: 100%;
@@ -18,15 +18,19 @@
     justify-content: space-between;
 }
 
+.content_calendrier input{
+    display: none;
+}
+
 .pagination{
     display: flex;
     flex-direction: row;
+    align-items: center;
 }
 
 .pagination span{
     margin: 0 10px;
 }
-
 
 .semaines-container {
     display: flex;
@@ -79,22 +83,39 @@
     border-radius: 3px;
 }
 
-button{
+.bouton_read{
     display: flex;
+    flex-direction: row;
     justify-content: end;
     align-items: end;
-    background: none;
-    border: none;
-    font-size: 20px;
+    margin-right: 20px;
 }
 
-.menu_details{
+.bouton_add{
+    margin-top: 20px;
+}
+    
+button{
+    background: none;
+    border: none;
+    font-size: 17px;
+}
+
+button a{
+    border: 2px solid black;
+    font-size: 20px;
+    padding: 10px 20px;
+    border-radius: 20px;
+    color: black;
+}
+
+.menu{
     display: flex;
-    flex-direction: column ;
+    flex-direction: column;
     gap: 20px;
 }
 
-.menu_details_item{
+.menu_item{
     display: flex;
 }
 

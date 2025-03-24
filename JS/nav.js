@@ -14,7 +14,13 @@ document.addEventListener('DOMContentLoaded', function() {
 
     const formattedDate = `${dayOfWeek} ${day} ${month} ${year}`;
 
-    document.getElementById('date').textContent = formattedDate;
+    // Sélectionner tous les éléments avec l'ID 'date'
+    const dateElements = document.querySelectorAll('#date');
+    
+    // Mettre à jour chaque élément trouvé
+    dateElements.forEach(element => {
+        element.textContent = formattedDate;
+    });
 });
 
 const hamMenu = document.querySelector('.ham-menu');
@@ -32,4 +38,3 @@ document.getElementById("open-calendar").addEventListener("click", function() {
 document.getElementById("date-picker").addEventListener("change", function() {
     document.getElementById("selected-date").innerText = "Date sélectionnée : " + this.value;
 });
-

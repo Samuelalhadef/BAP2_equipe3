@@ -9,7 +9,7 @@
 </head>
 <body>
     <header>
-        <p>EcoMiam</p>
+        <a class="logo" href="../../Cantine_Ecole/HTML_User_Home.php">EcoMiam</a>
         <p id="date"></p>
         <div>
             <div class="off-screen-menu">
@@ -22,7 +22,7 @@
                 </ul>
                 <ul class="off-screen-menu-plus">
                     <li class="off-screen-menu-item-text"><a href="#">Paramètres&nbsp;&nbsp;</a><i class="fa-solid fa-gear"></i></li>
-                    <li class="off-screen-menu-item-text"><a href="../Log_Sign/HTML_Log_Sign.php">Se déconnecter&nbsp;&nbsp;</a><i class="fa-solid fa-right-from-bracket"></i></li>
+                    <li class="off-screen-menu-item-text"><a href="../../Login/HTML_Login.php">Se déconnecter&nbsp;&nbsp;</a><i class="fa-solid fa-right-from-bracket"></i></li>
                 </ul>
             </div>
             <nav>
@@ -37,7 +37,7 @@
     </header>
 
     <section class="liste_menus">
-        <h2>Gestion des menus</h2>
+        <h1>GESTION DES MENUS</h1>
         
         <div>
             <?php
@@ -68,13 +68,11 @@
                 $pageActuelle = 1;
                 $totalPages = ceil($totalSemaines / $semainesParPage);
                 
-                echo '<div class="calendrier-container">';
+                echo '<div class="content_gestion_menu">';
                     echo '<div class="navigation-pagination">';
-                        echo '<div class="calendar-container">';
-                            echo '<button class="calendar" id="open-calendar">';
-                            echo '<i class="fa-solid fa-calendar-days"></i>&nbsp;Calendrier';
-                            echo '</button>';
-                            echo '<input type="date" id="date-picker" style="display: none;">';
+                        echo '<div class="content_calendrier">';
+                            echo '<button class="calendar" id="open-calendar"><i class="fa-solid fa-calendar-days"></i>&nbsp;Calendrier</button>';
+                            echo '<input type="date" id="date-picker">';
                             echo '<p id="selected-date"></p>';
                         echo '</div>';
                         echo '<div class="pagination">';
@@ -144,34 +142,36 @@
                                                 if (isset($menu['date_menu']) && $menu['date_menu'] == $dateStr) {
                                                     $menuTrouve = true;
                                                     echo "<div class='menu_bloc'>";
-                                                        echo "<div class='menu_details'>";
-                                                            echo "<div class='menu_details_item'>";
+                                                        echo "<div class='menu'>";
+                                                            echo "<div class='menu_item'>";
                                                                 echo "<p>Entrée:&nbsp;</p>";
                                                                 echo "<p>" . htmlspecialchars($menu['entree']) ."</p>";
                                                             echo "</div>";
-                                                            echo "<div class='menu_details_item'>";
+                                                            echo "<div class='menu_item'>";
                                                                 echo "<p>Plat: &nbsp;</p>";
                                                                 echo "<p>" . htmlspecialchars($menu['plat']) . "</p>";
                                                             echo "</div>";
-                                                            echo "<div class='menu_details_item'>";
+                                                            echo "<div class='menu_item'>";
                                                                 echo "<p>Garniture:&nbsp;</p>";
                                                                 echo "<p>" . htmlspecialchars($menu['garniture']) ."</p>";
                                                             echo "</div>";
-                                                            echo "<div class='menu_details_item'>";
+                                                            echo "<div class='menu_item'>";
                                                                 echo "<p>Produit laitier:&nbsp;</p>";
                                                                 echo "<p>" . htmlspecialchars($menu['produit_laitier']) ."</p>";
                                                             echo "</div>";
-                                                            echo "<div class='menu_details_item'>";
+                                                            echo "<div class='menu_item'>";
                                                                 echo "<p>Dessert:&nbsp;</p>";
                                                                 echo "<p>" . htmlspecialchars($menu['dessert']) ."</p>";
                                                             echo "</div>";
-                                                            echo "<div class='menu_details_item'>";
+                                                            echo "<div class='menu_item'>";
                                                                 echo "<p>Divers:&nbsp;</p>";
                                                                 echo "<p>" . htmlspecialchars($menu['divers']) ."</p>";
                                                             echo "</div>";
                                                         echo "</div>";
                                                     echo "</div>";
-                                                    echo "<button><a href='../../Cantine_Ecole/Menu/HTML_MenuEcole_read.php?id=" . $menu['id'] . "'>Voir le menu&nbsp;&nbsp;</a><i class='fa-solid fa-pencil'></i></button>";
+                                                    echo "<div class='bouton_read'>";
+                                                        echo "<button><a href='../../Cantine_Ecole/Menu/HTML_MenuEcole_read.php?id=" . $menu['id'] . "'>Voir le menu&nbsp;&nbsp;<i class='fa-solid fa-pencil'></i></a></button>";
+                                                    echo "</div>";
                                                     break;
                                                 }
                                             }
