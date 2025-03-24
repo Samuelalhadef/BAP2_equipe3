@@ -31,18 +31,18 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['vote'])) {
     <div class="vote-container">
         <h1>Comment as-tu faim aujourd'hui ?</h1>
 
-        <form method="POST" action="" class="vote-form">
+        <form method="POST" action="" >
             <div class="vote-options">
                 <div class="vote-card">
                     <button type="submit" name="vote" value="Petite Faim" class="vote-button green">
                         <p>Petite Faim</p>
-                        <img src="../image/Mask group (1).png" alt="Petite Faim">
+                        <img src="../images/PetiteFaim.svg" alt="Petite Faim">
                     </button>
                 </div>
                 <div class="vote-card">
                     <button type="submit" name="vote" value="Grande Faim" class="vote-button orange">
                         <p>Grande Faim</p>
-                        <img src="../image/Mask group.png" alt="Grande Faim">
+                        <img src="../images/GrandeFaim.svg" alt="Grande Faim">
                     </button>
                 </div>
             </div>

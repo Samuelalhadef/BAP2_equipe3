@@ -30,18 +30,18 @@ $votes = $result->fetchAll(PDO::FETCH_ASSOC);
 
 <body>
     <h1>Votez pour votre opinion sur le menu</h1>
-    <form method="POST" action="">
+    <form method="POST" action="" class="vote-form">
         <button class="green" type="submit" name="vote_option" value="J'aime bien">
             <p>J'aime bien</p>
-            <img src="../image/Group 81.png" alt="J'aime bien">
+            <img src="../images/Aime.svg" alt="J'aime bien">
         </button>
         <button class="orange" type="submit" name="vote_option" value="J'aime moyen">
             <p>J'aime moyen</p>
-            <img src="../image/Group 71.png" alt="J'aime moyen">
+            <img src="../images/Aime_moyen.svg" alt="J'aime moyen">
         </button>
         <button class="red" type="submit" name="vote_option" value="J'aime pas">
             <p>J'aime pas</p>
-            <img src="../image/Group 72.png" alt="J'aime pas">
+            <img src="../images/Aime_pas.svg" alt="J'aime pas">
         </button>
     </form>
 </body>

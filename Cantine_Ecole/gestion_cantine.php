@@ -27,11 +27,13 @@ $query->execute(['date_jour' => $date_today]);
 $donnees_journee = $query->fetch(PDO::FETCH_ASSOC);
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $poids_dechets = $_POST['poids_dechets'];
-    $poids_pain = $_POST['poids_pain'];
-    $nb_repas_prevues = $_POST['nb_repas_prevues'];
-    $nb_repas_adultes = $_POST['nb_repas_adultes'];
-    $nb_repas_non_consommes = $_POST['nb_repas_non_consommes'];
+    $poids_dechets = isset($_POST['poids_dechets']) && is_numeric($_POST['poids_dechets']) ? $_POST['poids_dechets'] : 0;
+    $poids_pain = isset($_POST['poids_pain']) && is_numeric($_POST['poids_pain']) ? $_POST['poids_pain'] : 0;
+    $nb_repas_prevues = isset($_POST['nb_repas_prevues']) && is_numeric($_POST['nb_repas_prevues']) ? $_POST['nb_repas_prevues'] : 0;
+    $nb_repas_adultes = isset($_POST['nb_repas_adultes']) && is_numeric($_POST['nb_repas_adultes']) ? $_POST['nb_repas_adultes'] : 0;
+    $nb_repas_non_consommes = isset($_POST['nb_repas_non_consommes']) && is_numeric($_POST['nb_repas_non_consommes']) ? $_POST['nb_repas_non_consommes'] : 0;
+
+    var_dump($poids_dechets, $poids_pain, $nb_repas_prevues, $nb_repas_adultes, $nb_repas_non_consommes);
 
     if ($donnees_journee) {
         // Mettre à jour les données existantes
@@ -65,6 +67,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 $query = $connexion->prepare("SELECT SUM(poids_dechets) AS total_dechets, SUM(poids_pain) AS total_pain, SUM(nb_repas_prevues) AS total_repas_prevues, SUM(nb_repas_adultes) AS total_repas_adultes, SUM(nb_repas_non_consommes) AS total_repas_non_consommes FROM donnees_journee WHERE MONTH(date_jour) = MONTH(CURDATE()) AND YEAR(date_jour) = YEAR(CURDATE())");
 $query->execute();
 $totals = $query->fetch(PDO::FETCH_ASSOC);
+print_r($totals);
 ?>
 
 <!DOCTYPE html>
