@@ -11,7 +11,7 @@
 
 <body>
     <header>
-        <a class="logo" href="../../Cantine_Ecole/HTML_User_Home.php">EcoMiam</a>
+        <a href="../../Cantine_Ecole/HTML_User_Home.php"><img class="logo" src="../images/logo.png"></a>
         <p id="date"></p>
         <div>
             <div class="off-screen-menu">

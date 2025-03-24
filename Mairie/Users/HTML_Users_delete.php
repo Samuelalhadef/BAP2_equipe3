@@ -18,7 +18,7 @@ if (!isset($_SESSION['csrf_users_add']) || empty($_SESSION['csrf_users_add'])){
 </head>
 <body>
     <header>
-        <a class="logo" href="../../Mairie/HTML_Admin_Home.php">EcoMiam</a>
+        <a href="../../Mairie/HTML_Admin_Home.php"><img class="logo" src="../images/logo.png"></a>
         <p id="date"></p>
         <div>
             <div class="off-screen-menu">
