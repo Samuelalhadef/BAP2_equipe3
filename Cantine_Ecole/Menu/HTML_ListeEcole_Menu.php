@@ -138,41 +138,48 @@
                                             
                                             // Chercher un menu pour cette date
                                             $menuTrouve = false;
+                                            $dateAujourdhui = date('Y-m-d');
                                             foreach ($menus as $menu) {
                                                 if (isset($menu['date_menu']) && $menu['date_menu'] == $dateStr) {
                                                     $menuTrouve = true;
                                                     echo "<div class='menu_bloc'>";
                                                         echo "<div class='menu'>";
+                                                        
+                                                        // Liste des catégories du menu
+                                                        $categories = [
+                                                            "entree" => "Entrée",
+                                                            "plat" => "Plat",
+                                                            "garniture" => "Garniture",
+                                                            "produit_laitier" => "Produit laitier",
+                                                            "dessert" => "Dessert",
+                                                            "divers" => "Divers"
+                                                        ];
+                                                        
+                                                        // Boucle sur chaque catégorie pour afficher dynamiquement le menu
+                                                        foreach ($categories as $cle => $label) {
                                                             echo "<div class='menu_item'>";
-                                                                echo "<p>Entrée:&nbsp;</p>";
-                                                                echo "<p>" . htmlspecialchars($menu['entree']) ."</p>";
+                                                            echo "<p>{$label}:&nbsp;</p>";
+                                                            echo "<p>" . htmlspecialchars($menu[$cle]) . "&nbsp;&nbsp;</p>";
+                                                            
+                                                            // Vérifier si cet élément est voté aujourd’hui
+                                                            if ($menu['date_menu'] == $dateAujourdhui && $menu['valeur_element'] == $menu[$cle]) {
+                                                                echo "<div class='vote-icon'>";
+                                                                echo "<i class='fa-solid fa-check-circle' style='color: green;'></i>";
+                                                                echo "</div>";
+                                                            }
+                                                            
                                                             echo "</div>";
-                                                            echo "<div class='menu_item'>";
-                                                                echo "<p>Plat: &nbsp;</p>";
-                                                                echo "<p>" . htmlspecialchars($menu['plat']) . "</p>";
-                                                            echo "</div>";
-                                                            echo "<div class='menu_item'>";
-                                                                echo "<p>Garniture:&nbsp;</p>";
-                                                                echo "<p>" . htmlspecialchars($menu['garniture']) ."</p>";
-                                                            echo "</div>";
-                                                            echo "<div class='menu_item'>";
-                                                                echo "<p>Produit laitier:&nbsp;</p>";
-                                                                echo "<p>" . htmlspecialchars($menu['produit_laitier']) ."</p>";
-                                                            echo "</div>";
-                                                            echo "<div class='menu_item'>";
-                                                                echo "<p>Dessert:&nbsp;</p>";
-                                                                echo "<p>" . htmlspecialchars($menu['dessert']) ."</p>";
-                                                            echo "</div>";
-                                                            echo "<div class='menu_item'>";
-                                                                echo "<p>Divers:&nbsp;</p>";
-                                                                echo "<p>" . htmlspecialchars($menu['divers']) ."</p>";
-                                                            echo "</div>";
+                                                        }
+                                            
                                                         echo "</div>";
-                                                    echo "</div>";
+                                                    echo "</div>"; 
+                                            
+                                                    // Bouton voir le menu
                                                     echo "<div class='bouton_read'>";
-                                                        echo "<button><a href='../../Cantine_Ecole/Menu/HTML_MenuEcole_read.php?id=" . $menu['id'] . "'>Voir le menu&nbsp;&nbsp;<i class='fa-solid fa-pencil'></i></a></button>";
+                                                    echo "<button><a href='../../Cantine_Ecole/Menu/HTML_MenuEcole_Read.php?id=" . $menu['id'] . "'>Voir le menu&nbsp;&nbsp;<i class='fa-solid fa-pencil'></i></a></button>";
                                                     echo "</div>";
-                                                    break;
+                                            
+                                                    break; // On sort de la boucle après avoir affiché un menu pour ce jour
                                                 }
                                             }
                                             if (!$menuTrouve) {
@@ -196,6 +203,3 @@
     
 </body>
 </html>
-
-
-

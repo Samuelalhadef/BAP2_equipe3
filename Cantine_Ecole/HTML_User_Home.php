@@ -75,41 +75,33 @@
 
             // Affichage du menu
             if ($req && $menu = $req->fetch(PDO::FETCH_ASSOC)) {
-                // Stocker les valeurs en session
-                $_SESSION['entree'] = $menu['entree'];
-                $_SESSION['plat'] = $menu['plat'];
-                $_SESSION['garniture'] = $menu['garniture'];
-                $_SESSION['produit_laitier'] = $menu['produit_laitier'];
-                $_SESSION['dessert'] = $menu['dessert'];
-                $_SESSION['divers'] = $menu['divers'];
+                echo "<div class='menu'>";
                 
-                echo "<div class='menu_container'>";
+                // Liste des catégories du menu
+                $categories = [
+                    'Entrée' => 'entree',
+                    'Plat' => 'plat',
+                    'Garniture' => 'garniture',
+                    'Produit laitier' => 'produit_laitier',
+                    'Dessert' => 'dessert',
+                    'Divers' => 'divers'
+                ];
+
+                // Affichage dynamique
+                foreach ($categories as $nom => $cle) {
+                    $valeur = $menu[$cle]; // Valeur non échappée pour la comparaison
+                    $valeurAffichage = htmlspecialchars($valeur); // Valeur échappée pour l'affichage
+                    
                     echo "<div class='menu_item'>";
-                        echo "<p>Entrée:&nbsp;</p>";
-                        echo "<p>" . htmlspecialchars($_SESSION['entree']) . "</p>";
+                        echo "<p>{$nom}:&nbsp;</p>";
+                        echo "<p>{$valeurAffichage} ";
+                        echo "</p>";
                     echo "</div>";
-                    echo "<div class='menu_item'>";
-                        echo "<p>Plat:&nbsp;</p>";
-                        echo "<p>" . htmlspecialchars($_SESSION['plat']) . "</p>";
-                    echo "</div>";
-                    echo "<div class='menu_item'>";
-                        echo "<p>Garniture:&nbsp;</p>";
-                        echo "<p>" . htmlspecialchars($_SESSION['garniture']) . "</p>";
-                    echo "</div>";
-                    echo "<div class='menu_item'>";
-                        echo "<p>Produit laitier:&nbsp;</p>";
-                        echo "<p>" . htmlspecialchars($_SESSION['produit_laitier']) . "</p>";
-                    echo "</div>";
-                    echo "<div class='menu_item'>";
-                        echo "<p>Dessert:&nbsp;</p>";
-                        echo "<p>" . htmlspecialchars($_SESSION['dessert']) . "</p>";
-                    echo "</div>";
-                    echo "<div class='menu_item'>";
-                        echo "<p>Divers:&nbsp;</p>";
-                        echo "<p>" . htmlspecialchars($_SESSION['divers']) . "</p>";
-                    echo "</div>";
+                }
+                
                 echo "</div>";
-            } else {
+            } 
+            else {
                 echo "<p>Pas de menu prévu pour aujourd'hui</p>";
             }
             ?>
@@ -157,7 +149,3 @@
     <script src="../../JS/nav.js"></script>
 </body>
 </html>
-
-
-
-

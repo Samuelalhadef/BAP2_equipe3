@@ -109,6 +109,24 @@ button{
     padding: 10px 20px;
 }
 
+.element_item{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border: 2px solid black;
+    border-radius: 20px;
+    padding: 20px;
+    width: 100%;
+}
+
+.element_item p{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    top: -40%;
+}
+
 /*------------------------------------------ CRUD UPDATE ------------------------------------------*/
 
 .update{
@@ -139,4 +157,8 @@ button{
 
 .update button{
     margin-top: 20px;
+}
+
+.vote-icon i{
+    font-size: 30px;
 }

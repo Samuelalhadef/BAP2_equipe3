@@ -60,47 +60,61 @@
             $getmenu->execute(['id' => $id_menu]);
             if ($getmenu->rowCount() === 1) {
                 $menu = $getmenu->fetch(PDO::FETCH_ASSOC);
-                echo '<div class="elements">';
-                    echo '<div class="element">';
-                        echo '<h3>Entrée:</h3>';
-                        echo '<p>' . htmlspecialchars($menu['entree']) . '</p>';
-                    echo '</div>';
-                    echo '<div class="element">';
-                        echo '<h3>Plat:</h3>';
-                        echo '<p>' . htmlspecialchars($menu['plat']) . '</p>';
-                    echo '</div>';
-                    echo '<div class="element">';
-                        echo '<h3>Garniture:</h3>';
-                        echo '<p>' . htmlspecialchars($menu['garniture']) . '</p>';
-                    echo '</div>';
-                echo '</div>';
-                
-                echo '<div class="elements">';
-                    echo '<div class="element">';
-                        echo '<h3>Produit laitier:</h3>';
-                        echo '<p>' . htmlspecialchars($menu['produit_laitier']) . '</p>';
-                    echo '</div>';
-                    echo '<div class="element">';
-                        echo '<h3>Dessert:</h3>';
-                        echo '<p>' . htmlspecialchars($menu['dessert']) . '</p>';
-                    echo '</div>';
-                    echo '<div class="element">';
-                        echo '<h3>Divers:</h3>';
-                        echo '<p>' . htmlspecialchars($menu['divers']) . '</p>';
-                    echo '</div>';
-                echo '</div>';
-                
-                echo '<div id="votePopup" class="popup">';
-            echo '<div class="popup-content">';
-                echo '<span class="close-popup">&times;</span>';
-                echo '<h2>Votre vote pour le menu du jour</h2>';
-                echo '<div id="selectedVote">Aucun élément sélectionné</div>';
-                echo '<button id="submitVote" class="vote-btn">Enregistrer mon vote</button>';
-                echo '<div id="voteStatus"></div>';
-            echo '</div>';
-        echo '</div>';
+                $dateAujourdhui = date('Y-m-d');
 
-        echo '<button id="openVotePopup" class="open-popup-btn">Voter pour le menu</button>';
+                echo '<div class="elements">';
+                    echo '<div class="element_item">';
+                        echo '<h3>Entrée:</h3>';
+                        echo '<p>' . htmlspecialchars($menu['entree']) . '&nbsp;&nbsp;';
+                        if ($menu['date_menu'] == $dateAujourdhui && $menu['valeur_element'] == $menu['entree']) {
+                            echo '<i class="fa-solid fa-check-circle" style="color: green;"></i>';
+                        }
+                        echo '</p>';
+                    echo '</div>';
+                    echo '<div class="element_item">';
+                        echo '<h3>Plat:</h3>';
+                        echo '<p>' . htmlspecialchars($menu['plat']) . '&nbsp;&nbsp;';
+                        if ($menu['date_menu'] == $dateAujourdhui && $menu['valeur_element'] == $menu['plat']) {
+                            echo '<i class="fa-solid fa-check-circle" style="color: green;"></i>';
+                        }
+                        echo '</p>';
+                    echo '</div>';
+                    echo '<div class="element_item">';
+                        echo '<h3>Garniture:</h3>';
+                        echo '<p>' . htmlspecialchars($menu['garniture']) . '&nbsp;&nbsp;';
+                        if ($menu['date_menu'] == $dateAujourdhui && $menu['valeur_element'] == $menu['garniture']) {
+                            echo '<i class="fa-solid fa-check-circle" style="color: green;"></i>';
+                        }
+                        echo '</p>';
+                    echo '</div>';
+                echo '</div>';
+                
+                echo '<div class="elements">';
+                    echo '<div class="element_item">';
+                        echo '<h3>Produit laitier:</h3>';
+                        echo '<p class="element_readecole">' . htmlspecialchars($menu['produit_laitier']) . '&nbsp;&nbsp;';
+                        if ($menu['date_menu'] == $dateAujourdhui && $menu['valeur_element'] == $menu['produit_laitier']) {
+                            echo '<i class="fa-solid fa-check-circle" style="color: green;"></i>';
+                        }
+                        echo '</p>';
+                    echo '</div>';
+                    echo '<div class="element_item">';
+                        echo '<h3>Dessert:</h3>';
+                        echo '<p>' . htmlspecialchars($menu['dessert']) . '&nbsp;&nbsp;';
+                        if ($menu['date_menu'] == $dateAujourdhui && $menu['valeur_element'] == $menu['dessert']) {
+                            echo '<i class="fa-solid fa-check-circle" style="color: green;"></i>';
+                        }
+                        echo '</p>';
+                    echo '</div>';
+                    echo '<div class="element_item">';
+                        echo '<h3>Divers:</h3>';
+                        echo '<p>' . htmlspecialchars($menu['divers']) . '&nbsp;&nbsp;';
+                        if ($menu['date_menu'] == $dateAujourdhui && $menu['valeur_element'] == $menu['divers']) {
+                            echo '<i class="fa-solid fa-check-circle" style="color: green;"></i>';
+                        }
+                        echo '</p>';
+                    echo '</div>';
+                echo '</div>';
             }
             else {
                 echo '<p>Menu introuvable en base de données</p>';
