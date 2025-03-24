@@ -1,16 +1,30 @@
 <?php
 session_start();
 
-// Traitement du vote
-if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['vote'])) {
-    $vote = $_POST['vote'];
-    $nom = $_POST['nom'];
-    $classe = $_POST['classe'];
-    
-    // TODO: Ajouter la logique pour sauvegarder le vote dans la base de données
-    // Pour l'instant, on simule un succès
-    $message = "Merci $nom ! Ton vote a été enregistré.";
+if (!isset($_SESSION['csrf_vote_add']) || empty($_SESSION['csrf_vote_add'])){
+    $_SESSION['csrf_vote_add'] = bin2hex(random_bytes(32));
 }
+
+// Connexion à la base de données
+try {
+    $connexion = new PDO("mysql:host=127.0.0.1; dbname=test_bap", "root", "");
+} catch (Exception $e){
+    die("Erreur SQL :" . $e->getMessage());
+}
+
+// Récupérer l'élément du jour (valeur_element)
+// Pour cet exemple, on récupère depuis la première ligne de la table vote
+$stmt = $connexion->query("SELECT valeur_element FROM vote WHERE id = ");
+$element = $stmt->fetch(PDO::FETCH_ASSOC);
+$valeur_element = $element['valeur_element'] ?? 'Plat du jour';
+
+// Si valeur_element est NULL, on utilise une valeur par défaut
+if (!$valeur_element) {
+    $valeur_element = 'Plat du jour';
+}
+
+// Stocker la valeur pour les étapes suivantes
+$_SESSION['valeur_element'] = $valeur_element;
 ?>
 
 <!DOCTYPE html>
@@ -19,49 +33,31 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['vote'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vote - Faim du Jour</title>
-    <link rel="stylesheet" href="../../style.css">
+    <link rel="stylesheet" href="../../CSS/vote.css">
 </head>
 <body>
-    <div class="vote-container">
-        <h1>Comment as-tu faim aujourd'hui ?</h1>
-        
-        <?php if (isset($message)): ?>
-            <div class="message-success">
-                <?php echo $message; ?>
-            </div>
-        <?php endif; ?>
-
-        <form method="POST" action="" class="vote-form">
-
-            <div class="vote-options">
-                <button type="submit" name="vote" value="petite" class="vote-button petite-faim">
-                    <span class="emoji">🙂</span>
-                    <span class="text">Petite faim</span>
+    <section class="vote_faim">
+        <h1>C'est l'heure du vote !</h1>
+        <h2>Aujourd'hui, j'avais une:</h2>
+        <div class="faim">
+            <form method="post" action="PHP_Vote_Faim.php">
+                <input type="hidden" name="vote_type" value="grande_faim">
+                <input type="hidden" name="token" value="<?= $_SESSION['csrf_vote_add']; ?>">
+                <button class="faim_item" type="submit">
+                    <h3>Grande faim !</h3>
+                    <img src="../../images/GrandeFaim.svg">
                 </button>
-
-                <button type="submit" name="vote" value="grande" class="vote-button grande-faim">
-                    <span class="emoji">😋</span>
-                    <span class="text">Grande faim</span>
+            </form>
+            
+            <form method="post" action="PHP_Vote_Faim.php">
+                <input type="hidden" name="vote_type" value="petite_faim">
+                <input type="hidden" name="token" value="<?= $_SESSION['csrf_vote_add']; ?>">
+                <button class="faim_item" type="submit">
+                    <h3>Petite faim !</h3>
+                    <img src="../../images/PetiteFaim.svg">
                 </button>
-            </div>
-        </form>
-
-        <div class="resultats">
-            <h2>Résultats du jour</h2>
-            <?php
-            // TODO: Récupérer et afficher les vrais résultats depuis la base de données
-            ?>
-            <div class="resultats-graph">
-                <div class="barre petite" style="width: 40%;">
-                    <span>Petite faim: 40%</span>
-                </div>
-                <div class="barre grande" style="width: 60%;">
-                    <span>Grande faim: 60%</span>
-                </div>
-            </div>
+            </form>
         </div>
-
-        <a href="menu_cantine.php" class="back-link">← Retour au menu</a>
-    </div>
+    </section>
 </body>
-</html> 
+</html>
