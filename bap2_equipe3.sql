@@ -1,91 +1,91 @@
 
 
-CREATE TABLE `connexion` (
-  `id` int NOT NULL,
-  `email` varchar(255) DEFAULT NULL,
-  `mdp` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+-- CREATE TABLE `connexion` (
+--   `id` int NOT NULL,
+--   `email` varchar(255) DEFAULT NULL,
+--   `mdp` varchar(255) DEFAULT NULL
+-- ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
---
--- Dumping data for table `connexion`
---
+-- --
+-- -- Dumping data for table `connexion`
+-- --
 
-INSERT INTO `connexion` (`id`, `email`, `mdp`) VALUES
-(1, 'aaa', 'aaa'),
-(2, 'aa', 'aa'),
-(3, 'aa', 'aa'),
-(4, 'admin', 'admin'),
-(5, 'aaaa', 'aaaa'),
-(7, 'test@gmail.com', 'test');
+-- INSERT INTO `connexion` (`id`, `email`, `mdp`) VALUES
+-- (1, 'aaa', 'aaa'),
+-- (2, 'aa', 'aa'),
+-- (3, 'aa', 'aa'),
+-- (4, 'admin', 'admin'),
+-- (5, 'aaaa', 'aaaa'),
+-- (7, 'test@gmail.com', 'test');
 
--- --------------------------------------------------------
+-- -- --------------------------------------------------------
 
---
--- Table structure for table `donnees_journee`
---
+-- --
+-- -- Table structure for table `donnees_journee`
+-- --
 
-CREATE TABLE `donnees_journee` (
-  `id` int NOT NULL,
-  `date_jour` date NOT NULL,
-  `poids_dechets` int NOT NULL,
-  `poids_pain` int NOT NULL,
-  `nb_repas_prevues` int NOT NULL,
-  `nb_repas_adultes` int NOT NULL,
-  `nb_repas_non_consommes` int NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+-- CREATE TABLE `donnees_journee` (
+--   `id` int NOT NULL,
+--   `date_jour` date NOT NULL,
+--   `poids_dechets` int NOT NULL,
+--   `poids_pain` int NOT NULL,
+--   `nb_repas_prevues` int NOT NULL,
+--   `nb_repas_adultes` int NOT NULL,
+--   `nb_repas_non_consommes` int NOT NULL
+-- ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
-CREATE TABLE vote (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    option_name VARCHAR(50) NOT NULL,
-    date_vote DATE NOT NULL,
-    choix ENUM('petite faim', 'grande faim') NOT NULL,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-);
+-- CREATE TABLE vote (
+--     id INT AUTO_INCREMENT PRIMARY KEY,
+--     option_name VARCHAR(50) NOT NULL,
+--     date_vote DATE NOT NULL,
+--     choix ENUM('petite faim', 'grande faim') NOT NULL,
+--     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+-- );
 
--- Insert initial vote options
-INSERT INTO vote (option_name, vote_count) VALUES
-('J\'aime bien', 0),
-('J\'aime moyen', 0),
-('J\'aime pas', 0);
+-- -- Insert initial vote options
+-- INSERT INTO vote (option_name, vote_count) VALUES
+-- ('J\'aime bien', 0),
+-- ('J\'aime moyen', 0),
+-- ('J\'aime pas', 0);
 
-CREATE TABLE vote_faim (
-  option_name VARCHAR(50) NOT NULL PRIMARY KEY,
-  vote_count INT DEFAULT 0
-);
+-- CREATE TABLE vote_faim (
+--   option_name VARCHAR(50) NOT NULL PRIMARY KEY,
+--   vote_count INT DEFAULT 0
+-- );
 
--- Insert initial vote options
-INSERT INTO vote_faim (option_name, vote_count)
-VALUES ('Petite Faim', 0),
-  ('Grande Faim', 0);
+-- -- Insert initial vote options
+-- INSERT INTO vote_faim (option_name, vote_count)
+-- VALUES ('Petite Faim', 0),
+--   ('Grande Faim', 0);
 
 
---
--- Table structure for table `menu`
---
+-- --
+-- -- Table structure for table `menu`
+-- --
 
-CREATE TABLE `menu` (
-  `id` int NOT NULL,
-  `entree` varchar(50) NOT NULL,
-  `plat` varchar(50) NOT NULL,
-  `garniture` varchar(50) NOT NULL,
-  `produit_laitier` varchar(50) NOT NULL,
-  `dessert` varchar(50) NOT NULL,
-  `divers` varchar(50) NOT NULL,
-  `date_menu` date DEFAULT NULL,
-  `nom_menu` varchar(50) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+-- CREATE TABLE `menu` (
+--   `id` int NOT NULL,
+--   `entree` varchar(50) NOT NULL,
+--   `plat` varchar(50) NOT NULL,
+--   `garniture` varchar(50) NOT NULL,
+--   `produit_laitier` varchar(50) NOT NULL,
+--   `dessert` varchar(50) NOT NULL,
+--   `divers` varchar(50) NOT NULL,
+--   `date_menu` date DEFAULT NULL,
+--   `nom_menu` varchar(50) DEFAULT NULL
+-- ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
---
+-- --
 
-CREATE TABLE donnees_journee (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    date_jour DATE NOT NULL,
-    poids_dechets INT NOT NULL,
-    poids_pain INT NOT NULL,
-    nb_repas_prevues INT NOT NULL,
-    nb_repas_adultes INT NOT NULL,
-    nb_repas_non_consommes INT NOT NULL
-);
+-- CREATE TABLE donnees_journee (
+--     id INT AUTO_INCREMENT PRIMARY KEY,
+--     date_jour DATE NOT NULL,
+--     poids_dechets INT NOT NULL,
+--     poids_pain INT NOT NULL,
+--     nb_repas_prevues INT NOT NULL,
+--     nb_repas_adultes INT NOT NULL,
+--     nb_repas_non_consommes INT NOT NULL
+-- );
 
 
 
@@ -151,21 +151,6 @@ INSERT INTO `menu` (`id`, `date_menu`, `entree`, `plat`, `garniture`, `produit_l
 -- --------------------------------------------------------
 
 --
--- Table structure for table `pesee`
---
-
-CREATE TABLE `pesee` (
-  `id` int NOT NULL,
-  `pesee_restes` int NOT NULL,
-  `pesee_pain` int NOT NULL,
-  `nb_repasprevus` int NOT NULL,
-  `nb_repasconsommes` int NOT NULL,
-  `nb_repasconsommesadultes` int NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `users`
 --
 
@@ -220,6 +205,15 @@ VALUES ('Petite Faim', 0),
   ('Grande Faim', 0);
 
 -- --------------------------------------------------------
+
+CREATE TABLE aliments (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nom VARCHAR(255) NOT NULL,
+    categorie VARCHAR(100) NOT NULL,
+    quantite INT NOT NULL,
+    unite VARCHAR(50) NOT NULL,
+    date_ajout TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
 
 --
 -- Table structure for table `donnees_journee`

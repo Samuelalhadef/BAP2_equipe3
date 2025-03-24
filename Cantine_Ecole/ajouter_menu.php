@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-require_once '../../bdd.php';
+require_once '../bdd.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $date_menu = $_POST['date_menu'];
