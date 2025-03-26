@@ -26,11 +26,13 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    background-color: #63eebb;
     width: 100%;
 }
 
 .menu{
     line-height: 2rem;
+    
 }
 
 .menu_item{
@@ -43,6 +45,14 @@
     flex-direction: column;
     justify-content: space-between;
     width: 50%;
+}
+
+.gestion_vote{
+    background-color: #ff7070;
+}
+
+.pesee{
+    background-color: #FFC65D;
 }
 
 button{

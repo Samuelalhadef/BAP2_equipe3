@@ -125,10 +125,15 @@
                                         $dateStr = $date->format('Y-m-d');
                                         $jourNom = ['Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi'][$jour-1];
                                         
+                                        $todayStyle = ($dateStr === date('Y-m-d')) 
+                                            ? "style='background-color: #63eebb;'" 
+                                            : "";
+                                        
                                         // Définir une classe spéciale pour aujourd'hui
                                         $isToday = ($dateStr === date('Y-m-d')) ? ' today' : '';
                                         
-                                        echo "<div class='jour{$isToday}' data-date='{$dateStr}'>";
+                                        
+                                        echo "<div class='jour{$isToday}' data-date='{$dateStr}'{$todayStyle}>";
                                             echo "<h3>{$jourNom} " . $date->format('d/m') . "</h3>";
                                             
                                             // Chercher un menu pour cette date

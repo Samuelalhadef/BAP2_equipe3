@@ -180,3 +180,7 @@ button{
 .vote-icon i{
     font-size: 30px;
 }
+
+.element.voted-today {
+    background-color: #63eebb;
+}

@@ -80,15 +80,17 @@
             ?>
         </div>
     </section>
-    <!-- Modal de confirmation de suppression -->
     <div id="deleteModal" class="modal">
         <div class="modal-content">
-            <h3>Confirmation de suppression</h3>
-            <p>Êtes-vous sûr de vouloir supprimer ce profil ?</p>
-            <p>Cette action est irréversible.</p>
+            <div class="close">
+                <button class="cancel-delete" onclick="closeDeleteModal()">fermer&nbsp;<i class="fa-solid fa-close"></i></button>
+            </div>
+            <div class="text">
+                <p>Êtes-vous sûr de vouloir supprimer ce profil ?</p>
+                <p><strong>Cette action est irréversible.</strong></p>
+            </div>
             <div class="modal-buttons">
-                <button class="cancel-delete" onclick="closeDeleteModal()">Annuler</button>
-                <button class="confirm-delete" id="confirmDelete">Supprimer</button>
+                <button class="confirm-delete" id="confirmDelete">Confirmer la suppression</button>
             </div>
         </div>
     </div>
