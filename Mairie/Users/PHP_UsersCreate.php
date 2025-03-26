@@ -26,20 +26,6 @@ if (isset($_POST["adresse"]) && !empty($_POST["adresse"])){
     $errors[] = "L'adresse est obligatoire";
 }
 
-// Validation du code postal
-if (isset($_POST["code_postal"]) && !empty($_POST["code_postal"])){
-    $code_postal = htmlspecialchars($_POST["code_postal"]);
-} else {
-    $errors[] = "Le code postal est obligatoire";
-}
-
-// Validation de la ville
-if (isset($_POST["ville"]) && !empty($_POST["ville"])){
-    $ville = htmlspecialchars($_POST["ville"]);
-} else {
-    $errors[] = "Le nom de la ville est obligatoire";
-}
-
 // Validation de l'identifiant
 if (isset($_POST["identifiant"]) && !empty($_POST["identifiant"])){
     $identifiant = htmlspecialchars($_POST["identifiant"]);
@@ -80,14 +66,12 @@ if (empty($errors)){
         }
         
         // Insérer une seule fois avec tous les champs
-        $sauvegarde = $connexion->prepare("INSERT INTO users (nom, adresse, code_postal, ville, identifiant, mdp, role_profil)
-                                         VALUES (:nom, :adresse, :code_postal, :ville, :identifiant, :mdp, :role_profil)");
+        $sauvegarde = $connexion->prepare("INSERT INTO users (nom, adresse, identifiant, mdp, role_profil)
+                                         VALUES (:nom, :adresse, :identifiant, :mdp, :role_profil)");
         
         $sauvegarde->execute([
             "nom" => $nom, 
-            "adresse" => $adresse, 
-            "code_postal" => $code_postal, 
-            "ville" => $ville, 
+            "adresse" => $adresse,
             "identifiant" => $identifiant, 
             "mdp" => $mdp,
             "role_profil" => $role_profil

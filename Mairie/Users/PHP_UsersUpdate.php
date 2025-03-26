@@ -13,8 +13,6 @@ if (
     !isset($_POST['id_users']) || empty($_POST['id_users']) || 
     !isset($_POST['nom']) || empty($_POST['nom']) ||
     !isset($_POST['adresse']) || empty($_POST['adresse']) ||
-    !isset($_POST['code_postal']) || empty($_POST['code_postal']) ||
-    !isset($_POST['ville']) || empty($_POST['ville']) ||
     !isset($_POST['identifiant']) || empty($_POST['identifiant']) ||
     !isset($_POST['role_profil']) || empty($_POST['role_profil'])
 ) {
@@ -25,16 +23,12 @@ if (
 $id_users = intval($_POST['id_users']);
 $nom = htmlspecialchars(trim($_POST['nom']), ENT_QUOTES, 'UTF-8');
 $adresse = htmlspecialchars(trim($_POST['adresse']), ENT_QUOTES, 'UTF-8');
-$code_postal = intval($_POST['code_postal']);
-$ville = htmlspecialchars(trim($_POST['ville']), ENT_QUOTES, 'UTF-8');
 $identifiant = htmlspecialchars(trim($_POST['identifiant']), ENT_QUOTES, 'UTF-8');
 $role_profil = htmlspecialchars(trim($_POST['role_profil']), ENT_QUOTES, 'UTF-8');
 
 $params = [
     'nom' => $nom,
     'adresse' => $adresse,
-    'code_postal' => $code_postal,
-    'ville' => $ville,
     'identifiant' => $identifiant,
     'role_profil' => $role_profil,
     'id' => $id_users
@@ -52,16 +46,14 @@ if (!empty($_POST['mdp'])) {
     
     if ($check->fetchColumn() == 0) {
         // Insérer l'identifiant et le mot de passe non haché dans users
-        $sql_insert = "INSERT INTO users (identifiant, mdp, nom, adresse, code_postal, ville, role_profil) 
-               VALUES (:identifiant, :mdp, :nom, :adresse, :code_postal, :ville, :role_profil)";
+        $sql_insert = "INSERT INTO users (identifiant, mdp, nom, adresse, role_profil) 
+               VALUES (:identifiant, :mdp, :nom, :adresse, :role_profil)";
         $insert = $connexion->prepare($sql_insert);
         $insert->execute([
             'identifiant' => $identifiant, 
             'mdp' => $mdp,
             'nom' => $nom,
             'adresse' => $adresse,
-            'code_postal' => $code_postal,
-            'ville' => $ville,
             'role_profil' => $role_profil
         ]);
     } else {
@@ -73,13 +65,13 @@ if (!empty($_POST['mdp'])) {
     
     // Ajouter le mot de passe à la mise à jour de users
     $sql = "UPDATE users SET 
-            nom = :nom, adresse = :adresse, code_postal = :code_postal, ville = :ville,
+            nom = :nom, adresse = :adresse,
             identifiant = :identifiant, mdp = :mdp, role_profil = :role_profil
             WHERE id = :id";
     $params['mdp'] = $mdp; // Utiliser le même mot de passe non haché
 } else {
     $sql = "UPDATE users SET 
-            nom = :nom, adresse = :adresse, code_postal = :code_postal, ville = :ville,
+            nom = :nom, adresse = :adresse,
             identifiant = :identifiant, role_profil = :role_profil
             WHERE id = :id";
 }
