@@ -33,7 +33,7 @@ $menu = $req->fetch(PDO::FETCH_ASSOC);
     <div class="image-container" style="position: relative;">
         <img class="aaa" src="../../images/Anim_aimemoyen.gif" alt="Animation">
         <div class="texte">
-            <p>Trop bon
+            <p>Bon mais sans plus
             <?php 
             if ($menu) {
                 $_SESSION['valeur_element'] = $menu['valeur_element'];
@@ -41,7 +41,7 @@ $menu = $req->fetch(PDO::FETCH_ASSOC);
             } else {
                 echo "Pas de menu disponible aujourd'hui";
             }
-            ?> !
+            ?>
         </h2></p>
         </div>
     </div>

@@ -80,14 +80,75 @@
             </div>
 
             <div class="vote_percent">
-                <p>J'aime bien</p>
-                <p>J'aime moyennement</p>
-                <p>J'aime pas</p>
-            </div>
-    </div>
+                <div id="element-titre"></div>
+                <div id="graph-container">
+                    <div class="bar-wrapper">
+                        <div id="like-bar" class="bar"></div>
+                        <div class="bar-label">J'aime bien</div>
+                    </div>
+                    <div class="bar-wrapper">
+                        <div id="medium-bar" class="bar"></div>
+                        <div class="bar-label">J'aime moyennement</div>
+                    </div>
+                    <div class="bar-wrapper">
+                        <div id="dislike-bar" class="bar"></div>
+                        <div class="bar-label">J'aime pas</div>
+                    </div>
+                </div>
+    <style>
+        .vote_percent {
+            display: flex;
+            flex-direction: column;
+            justify-content: end;
+            align-items: center;
+            width: 100%;
+        }
+        #element-titre {
+            margin-bottom: 10px;
+            font-size: 18px;
+            font-weight: bold;
+            color: #333;
+            display: none;
+        }
+        #graph-container {
+            width: 100%;
+            height: 200px;
+            display: flex;
+            justify-content: space-around;
+            align-items: flex-end;
+            gap: 10px;
+        }
+        .bar-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 30%;
+        }
+        .bar {
+                position: relative;
+                display: flex;
+                justify-content: center;
+                align-items: flex-end;
+                padding-bottom: 5px;
+            }
 
-    </section>
-
+            .bar-percentage {
+                color: white;
+                font-size: 0.8em;
+                font-weight: bold;
+            }
+        .bar-label {
+            text-align: center;
+            margin-top: 5px;
+            font-size: 0.8em;
+        }
+        #like-bar { background-color: #2ecc71; }
+        #medium-bar { background-color: #f39c12; }
+        #dislike-bar { background-color: #e74c3c; }
+    </style>
     <script src="../../JS/nav.js"></script>
-</body>
-</html>
+    <script src="../../JS/pourcentage_vote.js"></script>
+</div>
+
+
+
