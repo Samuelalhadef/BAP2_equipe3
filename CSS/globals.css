@@ -74,13 +74,13 @@ header{
     background-color: #F5F5F3;
     gap: 30px;
     padding: 0 0 0 20px;
-    z-index: 2;
+    z-index: 19;
 }
 
 .off-screen-menu-item{
     margin-top: 25px;
     line-height: 5rem;
-    z-index: 3;
+    z-index: 20;
 }
 
 .off-screen-menu-plus {
@@ -118,7 +118,7 @@ nav{
     width: 50px;
     margin-left: auto;
     position: relative;
-    z-index: 3;
+    z-index: 20;
 }
 
 .ham-menu span{

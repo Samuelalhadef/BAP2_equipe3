@@ -42,9 +42,15 @@ form{
 }
 
 button{
+    background: none;
     font-size: 20px;
     padding: 10px 20px;
     border-radius: 30px;
+}
+
+.add:hover{
+    background-color: black;
+    color: #ebebeb;
 }
 
 .choix{
@@ -53,6 +59,18 @@ button{
 
 .back{
     padding: 0 35px;
+}
+
+.choix label{
+    font-size: 20px;
+}
+
+select{
+    border-radius: 20px;
+    background: none;
+    padding: 10px 20px;
+    font-size: 20px;
+    border: 2px solid black;
 }
 
 

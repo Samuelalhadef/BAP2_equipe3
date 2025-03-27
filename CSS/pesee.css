@@ -1,5 +1,9 @@
 @import url('./globals.css');
 
+body{
+    overflow: hidden;
+}
+
 .interface_pesee{
     padding: 0 50px;
 }
@@ -46,7 +50,7 @@ form{
 .pesee_item{
     display: flex;
     flex-direction: column;
-    height: 55vh;
+    height: 60vh;
     width: 35%;
     gap: 10px;
 }
@@ -58,7 +62,7 @@ form{
     text-align: center;
     align-items: center;
     gap: 20px;
-    height: 25vh;
+    height: 23vh;
     background-color: #30b785;
 }
 
@@ -76,7 +80,7 @@ form{
 
 .pesee_repas{
     display: flex;
-    height: 52vh;
+    height: 48vh;
     width: 70%;
     background-color: #63eebb;
 }
@@ -108,7 +112,7 @@ input[type="number"]::-webkit-inner-spin-button {
     border: none;
     background: none;
     text-align: center;
-    font-size: 150px;
+    font-size: 120px;
 }
 
 button{

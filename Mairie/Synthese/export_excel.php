@@ -25,6 +25,8 @@ try {
         p.nb_repasconsommes,
         p.nb_repasconsommesadultes,
         p.pesee_restes,
+        p.pesee_pain,
+        p.moyenne_reste_enfant,
         v.grande_faim,
         v.petite_faim,
         v.aime,
@@ -62,11 +64,13 @@ try {
         'E' => 'Repas Consommés',
         'F' => 'Repas Consommés Adultes',
         'G' => 'Restes (kg)',
-        'H' => 'Grande Faim',
-        'I' => 'Petite Faim',
-        'J' => 'Aime',
-        'K' => 'Aime Moyen',
-        'L' => 'N\'Aime Pas'
+        'H' => 'Restes Pain (kg)',
+        'I' => 'Moyenne Reste Enfant (g)',
+        'J' => 'Grande Faim',
+        'K' => 'Petite Faim',
+        'L' => 'Aime',
+        'M' => 'Aime Moyen',
+        'N' => 'N\'Aime Pas'
     ];
 
     // Ajouter les en-têtes
@@ -84,11 +88,13 @@ try {
         $sheet->setCellValue('E' . $rowIndex, $ligne['nb_repasconsommes'] ?? 'N/A');
         $sheet->setCellValue('F' . $rowIndex, $ligne['nb_repasconsommesadultes'] ?? 'N/A');
         $sheet->setCellValue('G' . $rowIndex, $ligne['pesee_restes'] ?? 'N/A');
-        $sheet->setCellValue('H' . $rowIndex, $ligne['grande_faim'] ?? 'N/A');
-        $sheet->setCellValue('I' . $rowIndex, $ligne['petite_faim'] ?? 'N/A');
-        $sheet->setCellValue('J' . $rowIndex, $ligne['aime'] ?? 'N/A');
-        $sheet->setCellValue('K' . $rowIndex, $ligne['aime_moyen'] ?? 'N/A');
-        $sheet->setCellValue('L' . $rowIndex, $ligne['aime_pas'] ?? 'N/A');
+        $sheet->setCellValue('H' . $rowIndex, $ligne['pesee_pain'] ?? 'N/A');
+        $sheet->setCellValue('I' . $rowIndex, $ligne['moyenne_reste_enfant'] ?? 'N/A');
+        $sheet->setCellValue('J' . $rowIndex, $ligne['grande_faim'] ?? 'N/A');
+        $sheet->setCellValue('K' . $rowIndex, $ligne['petite_faim'] ?? 'N/A');
+        $sheet->setCellValue('L' . $rowIndex, $ligne['aime'] ?? 'N/A');
+        $sheet->setCellValue('M' . $rowIndex, $ligne['aime_moyen'] ?? 'N/A');
+        $sheet->setCellValue('N' . $rowIndex, $ligne['aime_pas'] ?? 'N/A');
         
         $rowIndex++;
     }
