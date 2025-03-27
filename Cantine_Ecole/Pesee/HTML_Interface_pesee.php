@@ -20,6 +20,7 @@ try {
         $pesee = [
             'pesee_restes' => 0,
             'pesee_pain' => 0,
+            'moyenne_reste_enfant' => 0,
             'nb_repasprevus' => 0,
             'nb_repasconsommes' => 0,
             'nb_repasconsommesadultes' => 0
@@ -33,7 +34,8 @@ try {
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $champsAVerifier = [
             'pesee_restes', 
-            'pesee_pain', 
+            'pesee_pain',
+            'moyenne_reste_enfant',
             'nb_repasprevus', 
             'nb_repasconsommes', 
             'nb_repasconsommesadultes'
