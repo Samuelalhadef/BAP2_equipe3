@@ -47,12 +47,8 @@
     width: 50%;
 }
 
-.gestion_vote{
+.gestion_vote, .pesee{
     background-color: #ff7070;
-}
-
-.pesee{
-    background-color: #FFC65D;
 }
 
 button{

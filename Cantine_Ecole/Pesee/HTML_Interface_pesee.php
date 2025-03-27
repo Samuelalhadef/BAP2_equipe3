@@ -101,24 +101,30 @@ try {
             <input type="hidden" name="csrf_token" value="<?php echo $_SESSION['csrf_pesee_add'];?>">
             <div class="pesee_RestesRepas">
                 <div class="moyenne">
-                    <input type="number" name="pesee_restes" value="<?php echo $pesee['pesee_restes']; ?>">
-                    <h3>Kg</h3>
-                    <h3>Pesée des restes jetés</h3>
+                    <div class="chiffres">
+                        <input type="number" name="moyenne_reste_enfant" value="<?php echo $pesee['moyenne_reste_enfant']; ?>">
+                        <h3>g</h3>
+                    </div>
+                    <h3>Moyenne du poids des restes jetés (par élève)</h3>
                 </div>
                 <div class="valeurs">
-                    <button type="submit">Modifier la pesée</button>
+                    <button type="submit">Modifier les valeurs&nbsp;&nbsp;<i class="fa-solid fa-pencil"></i></button>
                 </div>
             </div>
             <div class="pesee_RestesRepas">
                 <div class="pesee_item">
                     <div class="pesee_restes">
-                        <input type="number" name="pesee_restes" value="<?php echo $pesee['pesee_restes']; ?>">
-                        <h3>Kg</h3>
+                        <div class="chiffres">
+                            <input type="number" name="pesee_restes" value="<?php echo $pesee['pesee_restes']; ?>">
+                            <h3>Kg</h3>
+                        </div>
                         <h3>Pesée des restes jetés</h3>
                     </div>
                     <div class="pesee_restes">
-                        <input type="number" name="pesee_pain" value="<?php echo $pesee['pesee_pain']; ?>">
-                        <h3>Kg</h3>
+                        <div class="chiffres">
+                            <input type="number" name="pesee_pain" value="<?php echo $pesee['pesee_pain']; ?>">
+                            <h3>Kg</h3>
+                        </div>
                         <h3>Pesée du pain jetés</h3>
                     </div>
                 </div>

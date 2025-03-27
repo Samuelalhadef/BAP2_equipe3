@@ -31,6 +31,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // Récupération et validation des données
     $inputData = [
+        'moyenne_reste_enfant' => $_POST['moyenne_reste_enfant'] ?? null,
         'pesee_restes' => $_POST['pesee_restes'] ?? null,
         'pesee_pain' => $_POST['pesee_pain'] ?? null,
         'nb_repasprevus' => $_POST['nb_repasprevus'] ?? null,
@@ -49,6 +50,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     // Préparation des données
+    $moyenne_reste_enfant = floatval($inputData['moyenne_reste_enfant']);
     $pesee_restes = floatval($inputData['pesee_restes']);
     $pesee_pain = floatval($inputData['pesee_pain']);
     $nb_repasprevus = intval($inputData['nb_repasprevus']);
@@ -76,6 +78,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if ($existingPesee) {
             // Mise à jour de la ligne existante
             $updatePeseeSql = "UPDATE pesee SET 
+                moyenne_reste_enfant = :moyenne_reste_enfant,
                 pesee_restes = :pesee_restes, 
                 pesee_pain = :pesee_pain, 
                 nb_repasprevus = :nb_repasprevus, 
@@ -85,6 +88,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             $updatePeseeReq = $connexion->prepare($updatePeseeSql);
             
+            $updatePeseeReq->bindParam(':moyenne_reste_enfant', $pesee_restes, PDO::PARAM_STR);
             $updatePeseeReq->bindParam(':pesee_restes', $pesee_restes, PDO::PARAM_STR);
             $updatePeseeReq->bindParam(':pesee_pain', $pesee_pain, PDO::PARAM_STR);
             $updatePeseeReq->bindParam(':nb_repasprevus', $nb_repasprevus, PDO::PARAM_INT);
@@ -106,11 +110,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         } else {
             // Insertion d'une nouvelle ligne
             $insertPeseeSql = "INSERT INTO pesee (
-                pesee_restes, pesee_pain, nb_repasprevus, 
+                moyenne_reste_enfant, pesee_restes, pesee_pain, nb_repasprevus, 
                 nb_repasconsommes, nb_repasconsommesadultes, 
                 date_menu, identifiant
             ) VALUES (
-                :pesee_restes, :pesee_pain, :nb_repasprevus, 
+                :moyenne_reste_enfant, :pesee_restes, :pesee_pain, :nb_repasprevus, 
                 :nb_repasconsommes, :nb_repasconsommesadultes, 
                 :date_menu, :identifiant
             )";
@@ -118,6 +122,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $insertPeseeReq = $connexion->prepare($insertPeseeSql);
 
             $insertPeseeReq->bindParam(':pesee_restes', $pesee_restes, PDO::PARAM_STR);
+            $insertPeseeReq->bindParam(':moyenne_reste_enfant', $pesee_restes, PDO::PARAM_STR);
             $insertPeseeReq->bindParam(':pesee_pain', $pesee_pain, PDO::PARAM_STR);
             $insertPeseeReq->bindParam(':nb_repasprevus', $nb_repasprevus, PDO::PARAM_INT);
             $insertPeseeReq->bindParam(':nb_repasconsommes', $nb_repasconsommes, PDO::PARAM_INT);

@@ -53,16 +53,25 @@ form{
 
 .pesee_restes{
     display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
     align-items: center;
     gap: 20px;
     height: 25vh;
     background-color: #30b785;
 }
 
+.chiffres{
+    display: flex;
+    justify-content: center;
+    align-items: end;
+}
+
 .moyenne{
     display: flex;
-    width: 100%;
-    background-color: #ff7070;
+    width: 65%;
+    background-color: #ebebeb;
 }
 
 .pesee_repas{
@@ -109,5 +118,8 @@ button{
 }
 
 .valeurs{
-    background-color: #FFC65D;;
+    display: flex;
+    justify-content: center;
+    width: 35%;
+    background-color:#ebebeb;
 }

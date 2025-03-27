@@ -73,6 +73,10 @@ try {
             <div class="textbox">
                 <div class="infos">
                     <div class="info_to">
+                        <label for="moyenne_reste_enfant">Moyenne des restes jetés par enfant</label>
+                        <input type="number" name="moyenne_reste_enfant" id="moyenne_reste_enfant" value="<?= $pesee['moyenne_reste_enfant'] ?? 0 ?>">
+                    </div>
+                    <div class="info_to">
                         <label for="nb_repasprevus">Nombre de repas prévu:</label>
                         <input type="number" name="nb_repasprevus" id="nb_repasprevus" value="<?= $pesee['nb_repasprevus'] ?? 0 ?>">
                     </div>

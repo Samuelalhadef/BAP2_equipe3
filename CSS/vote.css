@@ -61,10 +61,63 @@
     width: 100%;
 }
 
-.vote_percent p{
-    border-top: 2px solid black;
-
+.vote_percent {
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    align-items: center;
+    width: 100%;
 }
+#element-titre {
+    margin-bottom: 10px;
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+    display: none;
+}
+#graph-container {
+    width: 100%;
+    height: 200px;
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-end;
+    gap: 10px;
+    font-size: 60px;
+    color: black;
+}
+.bar-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 30%;
+}
+
+.bar-wrapper p{
+    font-size: 20px;
+}
+.bar {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    padding-bottom: 5px;
+    width: 100%;
+}
+
+.bar-percentage {
+    color: white;
+    font-size: 0.8em;
+    font-weight: bold;
+}
+
+.bar-label {
+    text-align: center;
+    margin-top: 5px;
+    font-size: 0.8em;
+}
+#like-bar { background-color: #2ecc71; }
+#medium-bar { background-color: #f39c12; }
+#dislike-bar { background-color: #e74c3c; }
 
 /*---------------------------------------- VOTE FAIM ----------------------------------------*/
 

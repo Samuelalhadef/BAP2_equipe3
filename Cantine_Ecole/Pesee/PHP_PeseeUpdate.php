@@ -26,6 +26,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $peseeExistante = $requeteExistante->fetch(PDO::FETCH_ASSOC);
 
         // Préparer les données du formulaire
+        $moyenne_reste_enfant = intval($_POST['moyenne_reste_enfant']);
         $nb_repasprevus = intval($_POST['nb_repasprevus']);
         $nb_repasconsommes = intval($_POST['nb_repasconsommes']);
         $nb_repasconsommesadultes = intval($_POST['nb_repasconsommesadultes']);
@@ -34,7 +35,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         if ($peseeExistante) {
             // Mise à jour de l'entrée existante
-            $requete = $connexion->prepare("UPDATE pesee SET 
+            $requete = $connexion->prepare("UPDATE pesee SET
+                moyenne_reste_enfant = :moyenne_reste_enfant,
                 nb_repasprevus = :nb_repasprevus,
                 nb_repasconsommes = :nb_repasconsommes,
                 nb_repasconsommesadultes = :nb_repasconsommesadultes,
@@ -43,6 +45,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 WHERE id = :id");
             
             $requete->execute([
+                ':moyenne_reste_enfant' => $moyenne_reste_enfant,
                 ':nb_repasprevus' => $nb_repasprevus,
                 ':nb_repasconsommes' => $nb_repasconsommes,
                 ':nb_repasconsommesadultes' => $nb_repasconsommesadultes,
@@ -54,12 +57,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             // Insertion d'une nouvelle entrée
             $requete = $connexion->prepare("INSERT INTO pesee (
                 identifiant, 
-                date_menu, 
+                date_menu,
                 nb_repasprevus, 
                 nb_repasconsommes, 
                 nb_repasconsommesadultes, 
                 pesee_restes, 
-                pesee_pain
+                pesee_pain,
+                moyenne_reste_enfant
             ) VALUES (
                 :identifiant, 
                 :date_menu, 
@@ -67,7 +71,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 :nb_repasconsommes, 
                 :nb_repasconsommesadultes, 
                 :pesee_restes, 
-                :pesee_pain
+                :pesee_pain,
+                :moyenne_reste_enfant
             )");
             
             $requete->execute([
@@ -77,7 +82,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 ':nb_repasconsommes' => $nb_repasconsommes,
                 ':nb_repasconsommesadultes' => $nb_repasconsommesadultes,
                 ':pesee_restes' => $pesee_restes,
-                ':pesee_pain' => $pesee_pain
+                ':pesee_pain' => $pesee_pain,
+                ':moyenne_reste_enfant' => $moyenne_reste_enfant
             ]);
         }
 

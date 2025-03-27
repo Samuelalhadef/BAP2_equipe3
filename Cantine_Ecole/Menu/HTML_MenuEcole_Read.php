@@ -62,7 +62,7 @@
                 $dateAujourdhui = date('Y-m-d');
 
                 echo '<div class="elements">';
-                    echo '<div class="element_item">';
+                    echo '<div class="element_item' . ($menu['date_menu'] == $dateAujourdhui && $menu['valeur_element'] == $menu['entree'] ? ' voted-today' : '') . '">';
                         echo '<h3>Entrée:</h3>';
                         echo '<p>' . htmlspecialchars($menu['entree']) . '&nbsp;&nbsp;';
                         if ($menu['date_menu'] == $dateAujourdhui && $menu['valeur_element'] == $menu['entree']) {
@@ -70,7 +70,7 @@
                         }
                         echo '</p>';
                     echo '</div>';
-                    echo '<div class="element_item">';
+                    echo '<div class="element_item' . ($menu['date_menu'] == $dateAujourdhui && $menu['valeur_element'] == $menu['plat'] ? ' voted-today' : '') . '">';
                         echo '<h3>Plat:</h3>';
                         echo '<p>' . htmlspecialchars($menu['plat']) . '&nbsp;&nbsp;';
                         if ($menu['date_menu'] == $dateAujourdhui && $menu['valeur_element'] == $menu['plat']) {
@@ -78,7 +78,7 @@
                         }
                         echo '</p>';
                     echo '</div>';
-                    echo '<div class="element_item">';
+                    echo '<div class="element_item' . ($menu['date_menu'] == $dateAujourdhui && $menu['valeur_element'] == $menu['garniture'] ? ' voted-today' : '') . '">';
                         echo '<h3>Garniture:</h3>';
                         echo '<p>' . htmlspecialchars($menu['garniture']) . '&nbsp;&nbsp;';
                         if ($menu['date_menu'] == $dateAujourdhui && $menu['valeur_element'] == $menu['garniture']) {
@@ -89,7 +89,7 @@
                 echo '</div>';
                 
                 echo '<div class="elements">';
-                    echo '<div class="element_item">';
+                    echo '<div class="element_item' . ($menu['date_menu'] == $dateAujourdhui && $menu['valeur_element'] == $menu['produit_laitier'] ? ' voted-today' : '') . '">';
                         echo '<h3>Produit laitier:</h3>';
                         echo '<p class="element_readecole">' . htmlspecialchars($menu['produit_laitier']) . '&nbsp;&nbsp;';
                         if ($menu['date_menu'] == $dateAujourdhui && $menu['valeur_element'] == $menu['produit_laitier']) {
@@ -97,7 +97,7 @@
                         }
                         echo '</p>';
                     echo '</div>';
-                    echo '<div class="element_item">';
+                    echo '<div class="element_item' . ($menu['date_menu'] == $dateAujourdhui && $menu['valeur_element'] == $menu['dessert'] ? ' voted-today' : '') . '">';
                         echo '<h3>Dessert:</h3>';
                         echo '<p>' . htmlspecialchars($menu['dessert']) . '&nbsp;&nbsp;';
                         if ($menu['date_menu'] == $dateAujourdhui && $menu['valeur_element'] == $menu['dessert']) {
@@ -105,7 +105,7 @@
                         }
                         echo '</p>';
                     echo '</div>';
-                    echo '<div class="element_item">';
+                    echo '<div class="element_item' . ($menu['date_menu'] == $dateAujourdhui && $menu['valeur_element'] == $menu['divers'] ? ' voted-today' : '') . '">';
                         echo '<h3>Divers:</h3>';
                         echo '<p>' . htmlspecialchars($menu['divers']) . '&nbsp;&nbsp;';
                         if ($menu['date_menu'] == $dateAujourdhui && $menu['valeur_element'] == $menu['divers']) {
