@@ -100,6 +100,16 @@ try {
         <form action="PHP_Pesee_Insertion.php" method="POST">
             <input type="hidden" name="csrf_token" value="<?php echo $_SESSION['csrf_pesee_add'];?>">
             <div class="pesee_RestesRepas">
+                <div class="moyenne">
+                    <input type="number" name="pesee_restes" value="<?php echo $pesee['pesee_restes']; ?>">
+                    <h3>Kg</h3>
+                    <h3>Pesée des restes jetés</h3>
+                </div>
+                <div class="valeurs">
+                    <button type="submit">Modifier la pesée</button>
+                </div>
+            </div>
+            <div class="pesee_RestesRepas">
                 <div class="pesee_item">
                     <div class="pesee_restes">
                         <input type="number" name="pesee_restes" value="<?php echo $pesee['pesee_restes']; ?>">
@@ -127,10 +137,6 @@ try {
                         <h3>Repas consommés par les adultes</h3>
                     </div>
                 </div>
-            </div>
-
-            <div class="valeurs">
-                <button type="submit">Modifier la pesée</button>
             </div>
         </form>
     </section>

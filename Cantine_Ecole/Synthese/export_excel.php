@@ -4,6 +4,16 @@ require '../../vendor/autoload.php';
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
+session_start();
+
+// Vérifier si l'utilisateur est connecté
+if (!isset($_SESSION['identifiant'])) {
+    http_response_code(401);
+    die(json_encode(['error' => 'Utilisateur non authentifié']));
+}
+
+$identifiant = $_SESSION['identifiant'];
+
 // Configuration de la connexion à la base de données
 $host = 'localhost';
 $dbname = 'beta';
@@ -15,7 +25,7 @@ try {
     $pdo = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8", $username, $password);
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-    // Requête pour récupérer les données de synthèse
+    // Requête pour récupérer uniquement les données de l'utilisateur connecté
     $query = "
     SELECT 
         u.identifiant,
@@ -35,25 +45,32 @@ try {
     LEFT JOIN 
         pesee p ON m.date_menu = p.date_menu
     LEFT JOIN 
-        vote v ON m.date_menu = v.date_menu
+        vote v ON m.date_menu = v.date_menu AND v.identifiant = :identifiant
     LEFT JOIN 
         users u ON v.identifiant = u.identifiant
+    WHERE 
+        u.identifiant = :identifiant
     ORDER BY 
-        u.identifiant ASC,
         m.date_menu DESC
     ";
 
     $stmt = $pdo->prepare($query);
+    $stmt->bindParam(':identifiant', $identifiant, PDO::PARAM_STR);
     $stmt->execute();
 
     // Récupérer les résultats
     $resultats = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
+    // Vérifier si des résultats existent
+    if (!$resultats) {
+        die(json_encode(['message' => 'Aucune donnée trouvée pour cet utilisateur.']));
+    }
+
     // Créer un nouveau tableur
     $spreadsheet = new Spreadsheet();
     $sheet = $spreadsheet->getActiveSheet();
 
-    // En-têtes
+    // En-têtes du fichier Excel
     $headers = [
         'A' => 'Identifiant',
         'B' => 'Date Menu',
@@ -95,16 +112,16 @@ try {
 
     // Définir les en-têtes pour le téléchargement
     header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-    header('Content-Disposition: attachment;filename="synthese_donnees.xlsx"');
+    header('Content-Disposition: attachment;filename="synthese_donnees_user.xlsx"');
     header('Cache-Control: max-age=0');
 
-    // Créer le fichier Excel
+    // Créer le fichier Excel et l'envoyer au téléchargement
     $writer = new Xlsx($spreadsheet);
     $writer->save('php://output');
     exit;
 
 } catch(PDOException $e) {
     // Gestion des erreurs
-    die("Erreur : " . $e->getMessage());
+    die(json_encode(['error' => $e->getMessage()]));
 }
 ?>
